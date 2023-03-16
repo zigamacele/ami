@@ -1,14 +1,12 @@
-import { getCookie } from 'cookies-next';
-import React from 'react';
+import { hasCookie } from 'cookies-next';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
-export default function Home() {
-  const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID;
-  console.log(getCookie('access_token', ['path', 'expires_in']));
-  return (
-    <a
-      href={`https://anilist.co/api/v2/oauth/authorize?client_id=${CLIENT_ID}&response_type=token`}
-    >
-      Login with AniList
-    </a>
-  );
+export default function Index() {
+  const router = useRouter();
+  const checkCookies = hasCookie('access_token');
+
+  useEffect(() => {
+    checkCookies ? router.push('/Home') : router.push('/LoginScreen');
+  }, []);
 }
