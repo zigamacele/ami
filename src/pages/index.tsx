@@ -7,6 +7,6 @@ export default function Index() {
   const checkCookies = hasCookie('access_token');
 
   useEffect(() => {
-    checkCookies ? router.push('/Home') : router.push('/LoginScreen');
+    checkCookies ? router.push('/home') : router.push('/login');
   }, []);
 }

@@ -1,4 +1,4 @@
-import { client } from '@/lib/graphql';
+import { client } from '@/lib/graphql/client';
 import '@/styles/globals.css';
 import type { AppProps } from 'next/app';
 import { Provider } from 'urql';
