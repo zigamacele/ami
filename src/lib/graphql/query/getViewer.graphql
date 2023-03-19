@@ -1,4 +1,4 @@
-query GetViewer {
+query getViewer {
   Viewer {
     id
     name
