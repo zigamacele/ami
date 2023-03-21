@@ -3,6 +3,9 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { gql, useQuery } from 'urql';
 import { update } from '../redux/viewerSlice';
+import AnimeMangaSwitch from './Home/AnimeMangaSwitch';
+
+import { ArrowsRightLeftIcon } from '@heroicons/react/24/solid';
 
 const getViewer = gql`
   query {
@@ -17,7 +20,7 @@ const getViewer = gql`
   }
 `;
 
-export const GetViewer = () => {
+export const GetBannerImage = () => {
   // const dispatch = useDispatch();
   const [result] = useQuery({
     query: getViewer,
@@ -25,21 +28,17 @@ export const GetViewer = () => {
 
   const { data, fetching, error } = result;
   if (fetching)
-    return (
-      <span className="w-10 h-10 bg-neutral-700 rounded-full animate-pulse"></span>
-    );
+    return <span className="w-screen h-32 bg-neutral-700 animate-pulse"></span>;
 
   // dispatch(update(data.Viewer));
-  console.log(data.Viewer);
 
   return (
     <header className="flex w-screen bg-neutral-900 h-32 justify-end items-end relative">
-      <div className="absolute opacity-30 w-full h-32 z-1 bg-gradient-to-t from-neutral-900 via-neutral-900 top-0"></div>
-      <Image
+      <AnimeMangaSwitch />
+      <div className="absolute opacity-30 w-full h-32 bg-gradient-to-t from-neutral-900 via-neutral-900 top-0"></div>
+      <img
         src={data.Viewer.bannerImage}
         alt="Picture of the author"
-        width={500}
-        height={500}
         className="w-screen object-cover"
       />
 
