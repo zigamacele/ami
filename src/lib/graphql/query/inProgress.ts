@@ -17,6 +17,7 @@ export const inProgress = gql`
         perPage
       }
       mediaList(userId: $userId, status: $status, type: $type) {
+        status
         media {
           title {
             romaji

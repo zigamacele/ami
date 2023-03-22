@@ -3,7 +3,7 @@ import { gql } from 'urql';
 export const allTimePopular = gql`
   query ($type: MediaType) {
     Page(page: 1, perPage: 5) {
-      media(sort: [SCORE_DESC, ID], isAdult: false, type: $type) {
+      media(sort: [POPULARITY_DESC, ID], isAdult: false, type: $type) {
         id
         title {
           english

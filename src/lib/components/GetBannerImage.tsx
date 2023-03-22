@@ -3,9 +3,6 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { gql, useQuery } from 'urql';
 import { update } from '../redux/viewerSlice';
-import AnimeMangaSwitch from './Home/AnimeMangaSwitch';
-
-import { ArrowsRightLeftIcon } from '@heroicons/react/24/solid';
 
 const getViewer = gql`
   query {
@@ -34,7 +31,6 @@ export const GetBannerImage = () => {
 
   return (
     <header className="flex w-screen bg-neutral-900 h-32 justify-end items-end relative">
-      <AnimeMangaSwitch />
       <div className="absolute opacity-30 w-full h-32 bg-gradient-to-t from-neutral-900 via-neutral-900 top-0"></div>
       <img
         src={data.Viewer.bannerImage}

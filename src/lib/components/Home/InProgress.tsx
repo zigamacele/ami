@@ -15,7 +15,6 @@ export default function InProgress({
     userId: viewerId,
     status: 'CURRENT',
     page: 1,
-    perPage: 20,
     type: type,
   };
 
@@ -31,14 +30,17 @@ export default function InProgress({
     <div className="flex flex-col gap-2 mt-4">
       <span className="font-semibold text-sm text-right">IN PROGRESS</span>
       <div className="flex flex-col gap-2">
-        {data.Page.mediaList.map((anime) => (
-          <div key={anime.media.title.romaji}>
-            <img
-              src={anime.media.bannerImage}
-              className="w-52 rounded h-14 object-cover"
-            />
-          </div>
-        ))}
+        {data.Page.mediaList.map((media: any) => {
+          if (media.status === 'CURRENT')
+            return (
+              <div key={media.media.title.romaji}>
+                <img
+                  src={media.media.bannerImage}
+                  className="w-52 rounded h-14 object-cover"
+                />
+              </div>
+            );
+        })}
       </div>
     </div>
   );
