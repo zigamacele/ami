@@ -2,6 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
+.fade-in-fast {
+  animation: fade-in-fast 1s ease;
+}
+
+@keyframes fade-in-fast {
+  0% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+}
+
+.fade-in-slow {
+  animation: fade-in-slow 2s ease;
+}
+
+@keyframes fade-in-slow {
+  0% {
+    opacity: 0;
+  }
+  80% {
+    opacity: 1;
+  }
+}
+
 :root {
   --max-width: 1100px;
   --border-radius: 12px;

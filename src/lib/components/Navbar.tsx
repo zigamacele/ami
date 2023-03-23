@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { gql, useQuery } from 'urql';
@@ -6,11 +7,11 @@ import { RootState } from '../store';
 
 import {
   BellIcon,
-  BookOpenIcon,
   Cog8ToothIcon,
+  HomeIcon,
   MagnifyingGlassIcon,
   NewspaperIcon,
-  PlayIcon,
+  QueueListIcon,
 } from '@heroicons/react/24/solid';
 
 const getViewer = gql`
@@ -27,6 +28,8 @@ const getViewer = gql`
 `;
 
 export default function Navbar() {
+  const router = useRouter();
+
   // const viewer = useSelector((state: RootState) => state.viewer.value);
   // console.log(viewer);
 
@@ -58,8 +61,14 @@ export default function Navbar() {
 
       <div className="flex flex-col items-center justify-between h-96 pb-2 text-neutral-700">
         <div className="flex flex-col gap-2 ">
-          <PlayIcon className="h-6 w-6  text-neural-700" />
-          <BookOpenIcon className="h-6 w-6 text-neural-700" />
+          <HomeIcon
+            onClick={() => router.push('/home')}
+            className="h-6 w-6  text-neural-700 cursor-pointer hover:text-neutral-500"
+          />
+          <QueueListIcon
+            className="h-6 w-6  text-neural-700 cursor-pointer hover:text-neutral-500"
+            onClick={() => router.push('/list')}
+          />
           <NewspaperIcon className="h-6 w-6  text-neural-700" />
           <MagnifyingGlassIcon className="h-6 w-6  text-neural-700" />
         </div>

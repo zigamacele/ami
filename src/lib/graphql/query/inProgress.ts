@@ -10,15 +10,23 @@ export const inProgress = gql`
   ) {
     Page(page: $page, perPage: $perPage) {
       pageInfo {
-        total
         currentPage
-        lastPage
-        hasNextPage
         perPage
       }
-      mediaList(userId: $userId, status: $status, type: $type) {
+      mediaList(
+        sort: [UPDATED_TIME_DESC, MEDIA_ID]
+        userId: $userId
+        status: $status
+        type: $type
+      ) {
+        progress
+        score
+        progressVolumes
         status
         media {
+          format
+          episodes
+          chapters
           title {
             romaji
           }
