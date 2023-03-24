@@ -9,6 +9,8 @@ import { useState } from 'react';
 export default function List() {
   const [type, setType] = useState('ANIME');
   const [status, setStatus] = useState('ALL');
+  const [hoverBackground, setHoverBackground] = useState('');
+
   return (
     <div>
       <AnimeMangaSwitch type={type} setType={setType} />
@@ -16,7 +18,7 @@ export default function List() {
 
       <div className="flex flex-col mb-5">
         <Navbar />
-        <GetBannerImage />
+        <GetBannerImage hoverBackground={hoverBackground} />
         <div className="flex flex-col ml-24 mr-4 mt-2">
           {status === 'ALL' || status === 'CURRENT' ? (
             <ListCategory
@@ -24,6 +26,7 @@ export default function List() {
               type={type}
               status="CURRENT"
               title={type === 'ANIME' ? 'WATCHING' : 'READING'}
+              setHoverBackground={setHoverBackground}
             />
           ) : null}
           {status === 'ALL' || status === 'PAUSED' ? (
@@ -32,6 +35,7 @@ export default function List() {
               type={type}
               status="PAUSED"
               title="PAUSED"
+              setHoverBackground={setHoverBackground}
             />
           ) : null}
           {status === 'ALL' || status === 'DROPPED' ? (
@@ -40,6 +44,7 @@ export default function List() {
               type={type}
               status="DROPPED"
               title="DROPPED"
+              setHoverBackground={setHoverBackground}
             />
           ) : null}
           {status === 'ALL' || status === 'PLANNING' ? (
@@ -48,6 +53,7 @@ export default function List() {
               type={type}
               status="PLANNING"
               title="PLANNING"
+              setHoverBackground={setHoverBackground}
             />
           ) : null}
           {status === 'ALL' || status === 'COMPLETED' ? (
@@ -56,6 +62,7 @@ export default function List() {
               type={type}
               status="COMPLETED"
               title="COMPLETED"
+              setHoverBackground={setHoverBackground}
             />
           ) : null}
         </div>

@@ -17,23 +17,39 @@ import { useState } from 'react';
 
 export default function Home() {
   const [type, setType] = useState('ANIME');
+  const [hoverBackground, setHoverBackground] = useState('');
 
   return (
     <div className="flex flex-col mb-5">
       <AnimeMangaSwitch type={type} setType={setType} />
       <Navbar />
-      <GetBannerImage />
+      <GetBannerImage hoverBackground={hoverBackground} />
       <div className="flex gap-4">
         <div className="flex flex-col gap-2">
-          <Trending type={type} query={trendingNow} title="TRENDING NOW" />
+          <Trending
+            type={type}
+            query={trendingNow}
+            title="TRENDING NOW"
+            setHoverBackground={setHoverBackground}
+          />
           <Trending
             type={type}
             query={allTimePopular}
             title="ALL TIME POPULAR"
+            setHoverBackground={setHoverBackground}
           />
-          <Top100 type={type} query={top100} title={`TOP 100 ${type}`} />
+          <Top100
+            type={type}
+            query={top100}
+            title={`TOP 100 ${type}`}
+            setHoverBackground={setHoverBackground}
+          />
         </div>
-        <InProgress type={type} query={inProgress} />
+        <InProgress
+          type={type}
+          query={inProgress}
+          setHoverBackground={setHoverBackground}
+        />
       </div>
     </div>
   );

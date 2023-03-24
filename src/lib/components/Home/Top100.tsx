@@ -7,10 +7,12 @@ export default function Top100({
   type,
   query,
   title,
+  setHoverBackground,
 }: {
   type: string;
   query: any;
   title: string;
+  setHoverBackground: Function;
 }) {
   const variables = {
     type: type,
@@ -35,7 +37,12 @@ export default function Top100({
 
       <div className="flex flex-col gap-2 text-xs">
         {data.Page.media.map((media, index) => (
-          <div key={index} className="flex gap-4">
+          <div
+            key={index}
+            className="flex gap-4"
+            onMouseEnter={() => setHoverBackground(media.bannerImage)}
+            onMouseLeave={() => setHoverBackground('')}
+          >
             <div className="flex font-bold justify-center items-center w-8">
               <span className="text-sm opacity-20">#</span>
               <span className="text-xl opacity-60">{index + 1}</span>

@@ -5,10 +5,12 @@ export default function Trending({
   type,
   query,
   title,
+  setHoverBackground,
 }: {
   type: string;
   query: any;
   title: string;
+  setHoverBackground: Function;
 }) {
   const variables = {
     type: type,
@@ -33,7 +35,11 @@ export default function Trending({
 
       <div className="flex gap-2">
         {data.Page.media.map((media, index) => (
-          <div key={index}>
+          <div
+            key={index}
+            onMouseEnter={() => setHoverBackground(media.bannerImage)}
+            onMouseLeave={() => setHoverBackground('')}
+          >
             <img
               src={media.coverImage.large}
               alt={media.title.romaji}

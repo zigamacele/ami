@@ -11,6 +11,7 @@ export const trendingNow = gql`
           native
           romaji
         }
+        bannerImage
         coverImage {
           large
         }

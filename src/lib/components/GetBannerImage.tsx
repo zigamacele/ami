@@ -17,7 +17,11 @@ const getViewer = gql`
   }
 `;
 
-export const GetBannerImage = () => {
+export const GetBannerImage = ({
+  hoverBackground,
+}: {
+  hoverBackground: string;
+}) => {
   // const dispatch = useDispatch();
   const [result] = useQuery({
     query: getViewer,
@@ -32,11 +36,19 @@ export const GetBannerImage = () => {
   return (
     <header className="flex w-screen bg-neutral-900 h-32 justify-end items-end relative">
       <div className="absolute opacity-30 w-full h-32 bg-gradient-to-t from-neutral-900 via-neutral-900 top-0"></div>
-      <img
-        src={data.Viewer.bannerImage}
-        alt="Picture of the author"
-        className="w-screen object-cover"
-      />
+      {hoverBackground === '' ? (
+        <img
+          src={data.Viewer.bannerImage}
+          alt="Picture of the author"
+          className="w-screen object-cover"
+        />
+      ) : (
+        <img
+          src={hoverBackground ? hoverBackground : data.Viewer.bannerImage}
+          alt="Picture of the author"
+          className="w-screen object-cover"
+        />
+      )}
 
       {/* <div className="absolute flex items-center gap-2 bottom-1 right-2">
         <Image

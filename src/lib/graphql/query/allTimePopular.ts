@@ -10,6 +10,7 @@ export const allTimePopular = gql`
           native
           romaji
         }
+        bannerImage
         coverImage {
           medium
           large

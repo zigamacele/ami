@@ -22,6 +22,7 @@ export const top100 = gql`
         title {
           romaji
         }
+        bannerImage
         coverImage {
           color
           large

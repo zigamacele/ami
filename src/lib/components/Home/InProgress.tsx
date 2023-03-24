@@ -4,7 +4,9 @@ import { gql, useQuery } from 'urql';
 export default function InProgress({
   type,
   query,
+  setHoverBackground,
 }: {
+  setHoverBackground: Function;
   type: string;
   query: any;
 }) {
@@ -33,7 +35,11 @@ export default function InProgress({
         {data.Page.mediaList.map((media: any) => {
           if (media.status === 'CURRENT')
             return (
-              <div key={media.media.title.romaji}>
+              <div
+                key={media.media.title.romaji}
+                onMouseEnter={() => setHoverBackground(media.media.bannerImage)}
+                onMouseLeave={() => setHoverBackground('')}
+              >
                 <img
                   src={media.media.bannerImage}
                   className="w-52 rounded h-14 object-cover"
