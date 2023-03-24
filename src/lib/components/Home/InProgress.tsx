@@ -41,7 +41,11 @@ export default function InProgress({
                 onMouseLeave={() => setHoverBackground('')}
               >
                 <img
-                  src={media.media.bannerImage}
+                  src={
+                    media.media.bannerImage
+                      ? media.media.bannerImage
+                      : media.media.coverImage.large
+                  }
                   className="w-52 rounded h-14 object-cover"
                 />
               </div>

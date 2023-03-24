@@ -66,11 +66,14 @@ export default function Navbar() {
             className="h-6 w-6  text-neural-700 cursor-pointer hover:text-neutral-500"
           />
           <QueueListIcon
-            className="h-6 w-6  text-neural-700 cursor-pointer hover:text-neutral-500"
             onClick={() => router.push('/list')}
+            className="h-6 w-6  text-neural-700 cursor-pointer hover:text-neutral-500"
           />
-          <NewspaperIcon className="h-6 w-6  text-neural-700" />
-          <MagnifyingGlassIcon className="h-6 w-6  text-neural-700" />
+          <NewspaperIcon className="h-6 w-6  text-neural-700 " />
+          <MagnifyingGlassIcon
+            onClick={() => router.push('/browse')}
+            className="h-6 w-6  text-neural-700 cursor-pointer hover:text-neutral-500"
+          />
         </div>
         <div className="flex flex-col gap-4 items-center">
           <BellIcon className="h-6 w-6 text-neural-700" />
