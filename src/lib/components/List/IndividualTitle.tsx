@@ -46,6 +46,8 @@ export default function IndividualTitle({
           {media.progress}/
           {type === 'ANIME'
             ? media.media.episodes
+              ? media.media.episodes
+              : '?'
             : media.media.chapters
             ? media.media.chapters
             : '?'}
