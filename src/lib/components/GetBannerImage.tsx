@@ -37,11 +37,15 @@ export const GetBannerImage = ({
     <header className="flex w-screen bg-neutral-900 h-32 justify-end items-end relative">
       <div className="absolute opacity-30 w-full h-32 bg-gradient-to-t from-neutral-900 via-neutral-900 top-0"></div>
       {hoverBackground === '' ? (
-        <img
-          src={data.Viewer.bannerImage}
-          alt="Picture of the author"
-          className="w-screen object-cover"
-        />
+        <div>
+          {data.Viewer.bannerImage ? (
+            <img
+              src={data.Viewer.bannerImage}
+              alt="Picture of the author"
+              className="w-screen object-cover"
+            />
+          ) : null}
+        </div>
       ) : (
         <img
           src={hoverBackground ? hoverBackground : data.Viewer.bannerImage}

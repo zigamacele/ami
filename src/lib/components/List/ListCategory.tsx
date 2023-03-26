@@ -32,7 +32,6 @@ export default function ListCategory({
   const { data, fetching, error } = result;
   if (fetching) return <div>fetching</div>;
   if (error) return <div>error</div>;
-  console.log(data.Page.mediaList);
   return (
     <div className="flex flex-col gap-2 mt-4 w-full">
       <span className="font-semibold text-sm text-left ml-8">{title}</span>

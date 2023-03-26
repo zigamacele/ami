@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import React from 'react';
 import { gql, useQuery } from 'urql';
 
@@ -10,6 +11,8 @@ export default function InProgress({
   type: string;
   query: any;
 }) {
+  const router = useRouter();
+
   const viewerId =
     typeof window !== 'undefined' ? localStorage.getItem('viewerId') : null;
 
@@ -41,12 +44,13 @@ export default function InProgress({
                 onMouseLeave={() => setHoverBackground('')}
               >
                 <img
+                  onClick={() => router.push(`/${media.media.id}`)}
                   src={
                     media.media.bannerImage
                       ? media.media.bannerImage
                       : media.media.coverImage.large
                   }
-                  className="w-52 rounded h-14 object-cover"
+                  className="w-52 rounded h-14 object-cover cursor-pointer"
                 />
               </div>
             );

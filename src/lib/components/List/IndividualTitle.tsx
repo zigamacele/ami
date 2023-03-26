@@ -1,4 +1,5 @@
 import { EllipsisHorizontalIcon } from '@heroicons/react/24/solid';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 export default function IndividualTitle({
@@ -10,6 +11,7 @@ export default function IndividualTitle({
   type: string;
   setHoverBackground: Function;
 }) {
+  const router = useRouter();
   const [isHovering, setIsHovering] = useState(false);
   return (
     <div
@@ -34,7 +36,10 @@ export default function IndividualTitle({
             <EllipsisHorizontalIcon className="h-8 w-8" />
           </div>
         )}
-        <span className="truncate w-64 text-base">
+        <span
+          onClick={() => router.push(`/${media.media.id}`)}
+          className="truncate w-64 text-base cursor-pointer"
+        >
           {media.media.title.romaji}
         </span>
       </div>

@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 export default function IndividualMedia({
@@ -7,10 +8,12 @@ export default function IndividualMedia({
   media: any;
   setHoverBackground: Function;
 }) {
+  const router = useRouter();
   const [isHovering, setIsHovering] = useState(false);
 
   return (
     <div
+      onClick={() => router.push(`/${media.id}`)}
       onMouseEnter={() => {
         setIsHovering(true);
         setHoverBackground(media.bannerImage);
@@ -19,7 +22,7 @@ export default function IndividualMedia({
         setIsHovering(false);
         setHoverBackground('');
       }}
-      className="flex flex-col gap-1"
+      className="flex flex-col gap-1 cursor-pointer"
     >
       <img
         src={media.coverImage.large}

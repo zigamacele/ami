@@ -19,6 +19,7 @@ const getViewer = gql`
     Viewer {
       id
       name
+      unreadNotificationCount
       bannerImage
       avatar {
         large
@@ -76,7 +77,14 @@ export default function Navbar() {
           />
         </div>
         <div className="flex flex-col gap-4 items-center">
-          <BellIcon className="h-6 w-6 text-neural-700" />
+          <div className="relative">
+            {data.Viewer.unreadNotificationCount === 0 ? null : (
+              <div className="absolute top-[-5px] right-[-5px] bg-rose-600 w-4 h-4 rounded-full flex justify-center items-center text-white text-xs">
+                {data.Viewer.unreadNotificationCount}
+              </div>
+            )}
+            <BellIcon className="h-6 w-6 text-neural-700" />
+          </div>
           <Cog8ToothIcon className="h-6 w-6 text-neural-700" />
         </div>
       </div>

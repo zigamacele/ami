@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import React from 'react';
 import { gql, useQuery } from 'urql';
 
@@ -12,6 +13,8 @@ export default function Trending({
   title: string;
   setHoverBackground: Function;
 }) {
+  const router = useRouter();
+
   const variables = {
     type: type,
   };
@@ -30,7 +33,9 @@ export default function Trending({
     <div className="flex flex-col ml-24 mt-4 gap-2">
       <div className="flex justify-between items-center">
         <span className="font-semibold text-sm">{title}</span>
-        <span className="font-medium text-xs opacity-50">View All</span>
+        <span className="font-medium text-xs opacity-50 cursor-not-allowed">
+          View All
+        </span>
       </div>
 
       <div className="flex gap-2">
@@ -41,9 +46,10 @@ export default function Trending({
             onMouseLeave={() => setHoverBackground('')}
           >
             <img
+              onClick={() => router.push(`/${media.id}`)}
               src={media.coverImage.large}
               alt={media.title.romaji}
-              className="h-32 w-24 object-cover rounded"
+              className="h-32 w-24 object-cover rounded cursor-pointer"
             />
           </div>
         ))}
