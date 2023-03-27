@@ -1,4 +1,8 @@
 import { GetBannerImage } from '@/lib/components/GetBannerImage';
+import Characters from '@/lib/components/Id/Characters';
+import RelatedInfo from '@/lib/components/Id/RelatedInfo';
+import Staff from '@/lib/components/Id/Staff';
+import Stats from '@/lib/components/Id/Stats';
 import Navbar from '@/lib/components/Navbar';
 import { singleMediaInfo } from '@/lib/graphql/query/singleMediaInfo';
 import { Markup } from 'interweave';
@@ -10,7 +14,6 @@ import { ChevronDownIcon, HeartIcon } from '@heroicons/react/24/solid';
 
 export default function Id() {
   const router = useRouter();
-  console.log('ROUTER', router.query.id);
   const [readMore, setReadMode] = useState(false);
 
   const variables = {
@@ -30,41 +33,64 @@ export default function Id() {
 
   return (
     <div>
-      <div className="flex flex-col mb-5">
+      <div className="flex flex-col">
         <Navbar />
         <GetBannerImage hoverBackground={data.Media.bannerImage} />
-        <div className="flex absolute left-[6em] top-10 gap-4">
-          <div className="flex flex-col gap-2">
-            <img
-              src={data.Media.coverImage.large}
-              alt="Picture of the author"
-              className="w-40 object-cover rounded"
-            />
-            <div className="flex items-center justify-between">
-              <div className="flex items-center justify-center w-[7.5em] gap-2 bg-neutral-600 rounded py-1 ">
-                <span className="text-sm ">
-                  {data.Media.mediaListEntry
-                    ? data.Media.mediaListEntry.status
-                    : 'Add to List'}
-                </span>
-                <ChevronDownIcon className="w-4 h-4" />
+        <div className="flex flex-col absolute left-[6em] top-10 gap-3 mb-10 ">
+          <div className="flex gap-4">
+            <div className="flex flex-col gap-2">
+              <img
+                src={data.Media.coverImage.large}
+                alt="Picture of the author"
+                className="w-40 object-cover rounded"
+              />
+              <div className="flex items-center justify-between">
+                <div className="flex items-center justify-center w-[7.5em] gap-2 bg-neutral-600 rounded py-1 ">
+                  <span className="text-sm ">
+                    {data.Media.mediaListEntry
+                      ? data.Media.mediaListEntry.status
+                      : 'Add to List'}
+                  </span>
+                  <ChevronDownIcon className="w-4 h-4" />
+                </div>
+                <HeartIcon className=" w-7 h-7 bg-rose-600 rounded p-1.5" />
               </div>
-              <HeartIcon className=" w-7 h-7 bg-rose-600 rounded p-1.5" />
+            </div>
+            <div className="self-end flex flex-col gap-4">
+              <span className="opacity-80 text-lg">
+                {data.Media.title.romaji}
+              </span>
+              <Markup
+                content={
+                  !readMore
+                    ? data.Media.description.slice(0, 250)
+                    : data.Media.description
+                }
+                className="text-xs opacity-50 w-[40em]"
+              />
+              {/* <span className="text-xs">{data.Media.description}</span> */}
             </div>
           </div>
-          <div className="self-end flex flex-col gap-4">
-            <span className="opacity-80 text-lg">
-              {data.Media.title.romaji}
-            </span>
-            <Markup
-              content={
-                !readMore
-                  ? data.Media.description.slice(0, 300)
-                  : data.Media.description
-              }
-              className="text-xs opacity-50 w-[40em] break-normal"
-            />
-            {/* <span className="text-xs">{data.Media.description}</span> */}
+          <div className="flex gap-4">
+            <Stats data={data.Media} />
+            <div className="flex flex-col gap-4">
+              <RelatedInfo data={data.Media.relations} />
+              <Staff data={data.Media.staff} />
+              <Characters data={data.Media.characters} />
+              {data.Media.trailer ? (
+                <div className="flex flex-col gap-2 text-xs font-medium mt-48 mb-5">
+                  <div className="opacity-80">Trailer</div>
+                  <iframe
+                    width="525"
+                    height="295"
+                    src={`https://www.youtube.com/embed/${data.Media.trailer.id}`}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    title="Embedded youtube"
+                  />
+                </div>
+              ) : null}
+            </div>
           </div>
         </div>
       </div>

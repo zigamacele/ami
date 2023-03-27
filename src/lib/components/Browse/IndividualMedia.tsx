@@ -28,7 +28,9 @@ export default function IndividualMedia({
         src={media.coverImage.large}
         className="h-52 w-36 object-cover rounded"
       />
-      <div className="w-36 truncate opacity-70">{media.title.romaji}</div>
+      <div className="w-36 truncate opacity-70 text-sm">
+        {media.title.romaji}
+      </div>
     </div>
   );
 }

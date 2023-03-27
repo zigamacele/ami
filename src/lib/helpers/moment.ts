@@ -1,7 +1,6 @@
 import moment from 'moment';
 
 const currentMonth = moment().month();
-console.log(currentMonth);
 const currentYear = moment().year();
 
 const currentAnimeSeason = (currentMonth: number) => {
@@ -13,4 +12,10 @@ const currentAnimeSeason = (currentMonth: number) => {
   if (SPRING.includes(currentMonth)) return 'SPRING';
   if (SUMMER.includes(currentMonth)) return 'SUMMER';
   if (FALL.includes(currentMonth)) return 'FALL';
+};
+
+export const convertToMonth = (number: number) => {
+  return moment()
+    .month(number - 1)
+    .format('MMMM');
 };

@@ -9,10 +9,22 @@ export const singleMediaInfo = gql`
       mediaListEntry {
         status
       }
+      endDate {
+        day
+        month
+        year
+      }
+      startDate {
+        day
+        month
+        year
+      }
       format
       season
       seasonYear
+      favourites
       episodes
+      status
       chapters
       volumes
       genres
@@ -20,6 +32,11 @@ export const singleMediaInfo = gql`
       averageScore
       popularity
       type
+      trailer {
+        id
+        site
+        thumbnail
+      }
       mediaListEntry {
         status
       }
@@ -30,6 +47,74 @@ export const singleMediaInfo = gql`
       coverImage {
         color
         large
+      }
+      relations {
+        nodes {
+          id
+          coverImage {
+            large
+          }
+          title {
+            romaji
+          }
+          type
+          status
+        }
+        edges {
+          relationType
+        }
+      }
+      staff(sort: [RELEVANCE, ID]) {
+        edges {
+          node {
+            image {
+              large
+            }
+            name {
+              full
+            }
+          }
+          role
+        }
+      }
+      recommendations {
+        edges {
+          node {
+            media {
+              id
+              coverImage {
+                large
+              }
+              title {
+                romaji
+              }
+            }
+          }
+        }
+      }
+      characters(sort: [RELEVANCE, ID]) {
+        edges {
+          role
+          node {
+            image {
+              large
+            }
+          }
+          voiceActors {
+            name {
+              full
+            }
+            image {
+              large
+            }
+            languageV2
+          }
+        }
+        nodes {
+          name {
+            full
+          }
+        }
       }
     }
   }

@@ -12,6 +12,7 @@ import {
   MagnifyingGlassIcon,
   NewspaperIcon,
   QueueListIcon,
+  UsersIcon,
 } from '@heroicons/react/24/solid';
 
 const getViewer = gql`
@@ -70,7 +71,7 @@ export default function Navbar() {
             onClick={() => router.push('/list')}
             className="h-6 w-6  text-neural-700 cursor-pointer hover:text-neutral-500"
           />
-          <NewspaperIcon className="h-6 w-6  text-neural-700 " />
+          <UsersIcon className="h-5 w-5  text-neural-700 cursor-not-allowed" />
           <MagnifyingGlassIcon
             onClick={() => router.push('/browse')}
             className="h-6 w-6  text-neural-700 cursor-pointer hover:text-neutral-500"
