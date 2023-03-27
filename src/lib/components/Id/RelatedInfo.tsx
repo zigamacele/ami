@@ -12,7 +12,7 @@ export default function RelatedInfo({ data }: { data: any }) {
             <img
               onClick={() => router.push(`/${media.id}`)}
               src={media.coverImage.large}
-              className="h-20 object-cover rounded-l cursor-pointer"
+              className="h-20 w-14 object-cover rounded-l cursor-pointer"
             />
             <div className="flex flex-col justify-between p-2">
               <div className="flex flex-col gap-1">

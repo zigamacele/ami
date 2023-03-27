@@ -6,10 +6,14 @@ export default function IndividualTitle({
   media,
   type,
   setHoverBackground,
+  setShowPopup,
+  setPopupMedia,
 }: {
   media: any;
   type: string;
   setHoverBackground: Function;
+  setShowPopup: Function;
+  setPopupMedia: Function;
 }) {
   const router = useRouter();
   const [isHovering, setIsHovering] = useState(false);
@@ -30,9 +34,16 @@ export default function IndividualTitle({
           <img
             src={media.media.coverImage.large}
             className="w-12 rounded h-12 object-cover"
+            alt={media.media.title.romaji}
           />
         ) : (
-          <div className="w-12 h-12 rounded bg-neutral-900/30 flex justify-center items-center cursor-pointer">
+          <div
+            onClick={() => {
+              setShowPopup(true);
+              setPopupMedia(media.media);
+            }}
+            className="w-12 h-12 rounded bg-neutral-900/30 flex justify-center items-center cursor-pointer"
+          >
             <EllipsisHorizontalIcon className="h-8 w-8" />
           </div>
         )}

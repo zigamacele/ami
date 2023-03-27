@@ -8,12 +8,16 @@ export default function ListCategory({
   title,
   status,
   setHoverBackground,
+  setShowPopup,
+  setPopupMedia,
 }: {
   title: string;
   status: string;
   type: string;
   query: any;
   setHoverBackground: Function;
+  setShowPopup: Function;
+  setPopupMedia: Function;
 }) {
   const viewerId =
     typeof window !== 'undefined' ? localStorage.getItem('viewerId') : null;
@@ -56,6 +60,8 @@ export default function ListCategory({
             media={media}
             type={type}
             setHoverBackground={setHoverBackground}
+            setShowPopup={setShowPopup}
+            setPopupMedia={setPopupMedia}
           />
         ))}
         {data.Page.mediaList.length !== 0 ? null : (

@@ -14,7 +14,7 @@ export default function Staff({ data }: { data: any }) {
           >
             <img
               src={media.node.image.large}
-              className="h-20 object-cover rounded-l cursor-not-allowed"
+              className="h-20 w-14 object-cover rounded-l cursor-not-allowed"
             />
             <div className="flex flex-col justify-between p-2">
               <div className="flex flex-col gap-1">

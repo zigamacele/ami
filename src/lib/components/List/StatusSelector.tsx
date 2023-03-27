@@ -10,7 +10,7 @@ export default function StatusSelector({
   setStatus: Function;
 }) {
   return (
-    <div className="flex items-center absolute right-36 top-1 text-xs z-50 bg-neutral-900/80 backdrop-blur-md px-2 py-1 rounded-full gap-2 fade-in-fast">
+    <div className="flex items-center absolute right-36 top-1 text-xs z-10 bg-neutral-900/80 backdrop-blur-md px-2 py-1 rounded-full gap-2 fade-in-fast">
       <span
         onClick={() => setStatus('ALL')}
         className={`${status === 'ALL' ? null : 'opacity-30'} cursor-pointer`}

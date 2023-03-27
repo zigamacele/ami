@@ -46,7 +46,7 @@ export default function Navbar() {
     );
 
   return (
-    <nav className="fixed z-50 rounded-3xl mx-3 my-2 bg-neutral-900/80 backdrop-blur-lg p-4 w-18 flex flex-col gap-4 items-center">
+    <nav className="fixed z-10 rounded-3xl mx-3 my-2 bg-neutral-900/80 backdrop-blur-lg p-4 w-18 flex flex-col gap-4 items-center">
       {/* <span className="text-4xl bg-neutral-800 rounded-full p-1 text-center hover:animate-spin">
         🐶
       </span> */}
@@ -86,7 +86,10 @@ export default function Navbar() {
             )}
             <BellIcon className="h-6 w-6 text-neural-700" />
           </div>
-          <Cog8ToothIcon className="h-6 w-6 text-neural-700" />
+          <Cog8ToothIcon
+            onClick={() => router.push('/settings')}
+            className="h-6 w-6 text-neural-700 cursor-pointer hover:text-neutral-500"
+          />
         </div>
       </div>
     </nav>

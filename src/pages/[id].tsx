@@ -1,3 +1,4 @@
+import EditMedia from '@/lib/components/EditMedia';
 import { GetBannerImage } from '@/lib/components/GetBannerImage';
 import Characters from '@/lib/components/Id/Characters';
 import RelatedInfo from '@/lib/components/Id/RelatedInfo';
@@ -15,6 +16,8 @@ import { ChevronDownIcon, HeartIcon } from '@heroicons/react/24/solid';
 export default function Id() {
   const router = useRouter();
   const [readMore, setReadMode] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
+  const [popupMedia, setPopupMedia] = useState({});
 
   const variables = {
     mediaId: router.query.id,
@@ -36,6 +39,9 @@ export default function Id() {
       <div className="flex flex-col">
         <Navbar />
         <GetBannerImage hoverBackground={data.Media.bannerImage} />
+        {showPopup ? (
+          <EditMedia setShowPopup={setShowPopup} popupMedia={data.Media} />
+        ) : null}
         <div className="flex flex-col absolute left-[6em] top-10 gap-3 mb-10 ">
           <div className="flex gap-4">
             <div className="flex flex-col gap-2">
@@ -45,7 +51,12 @@ export default function Id() {
                 className="w-40 object-cover rounded"
               />
               <div className="flex items-center justify-between">
-                <div className="flex items-center justify-center w-[7.5em] gap-2 bg-neutral-600 rounded py-1 ">
+                <div
+                  onClick={() => {
+                    setShowPopup(true);
+                  }}
+                  className="flex items-center justify-center w-[7.5em] gap-2 bg-neutral-600 rounded py-1 cursor-pointer"
+                >
                   <span className="text-sm ">
                     {data.Media.mediaListEntry
                       ? data.Media.mediaListEntry.status
@@ -53,7 +64,7 @@ export default function Id() {
                   </span>
                   <ChevronDownIcon className="w-4 h-4" />
                 </div>
-                <HeartIcon className=" w-7 h-7 bg-rose-600 rounded p-1.5" />
+                <HeartIcon className=" w-7 h-7 bg-rose-600 rounded p-1.5 cursor-pointer" />
               </div>
             </div>
             <div className="self-end flex flex-col gap-4">
