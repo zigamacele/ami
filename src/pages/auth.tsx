@@ -15,6 +15,4 @@ export default function Auth() {
 
     router.push('/');
   }, []);
-
-  return <div>auth</div>;
 }
