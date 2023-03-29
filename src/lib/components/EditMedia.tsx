@@ -1,6 +1,7 @@
 import React from 'react';
+import Inputs from './EditMedia/Inputs';
 
-import { HeartIcon, TagIcon, XMarkIcon } from '@heroicons/react/24/solid';
+import { HeartIcon, XMarkIcon } from '@heroicons/react/24/solid';
 
 export default function EditMedia({
   setShowPopup,
@@ -36,20 +37,27 @@ export default function EditMedia({
         </div>
         <div>
           <div className="absolute opacity-30 w-full h-40 bg-gradient-to-t from-neutral-900 via-neutral-900 top-0"></div>
-          <img
-            src={popupMedia.bannerImage}
-            className="w-full rounded-t h-40 opacity-70 object-cover"
-            alt={popupMedia.title.romaji}
-          />
+          {popupMedia.bannerImage ? (
+            <img
+              src={popupMedia.bannerImage}
+              className="w-full rounded-t h-40 opacity-70 object-cover"
+              alt={popupMedia.title.romaji}
+            />
+          ) : (
+            <div className="w-full h-40"></div>
+          )}
         </div>
 
-        <div className="absolute top-24 left-5 flex items-center gap-2 text-sm">
+        <div className="absolute top-20 left-8 flex items-center gap-2 text-sm">
           <img
             src={popupMedia.coverImage.large}
-            className="w-28 h-40 rounded object-cover"
+            className="w-24 h-32 rounded object-cover"
             alt={popupMedia.title.romaji}
           />
-          <span>{popupMedia.title.romaji}</span>
+          <span className="mt-16">{popupMedia.title.romaji}</span>
+        </div>
+        <div className="mt-16 ml-8 text-xs">
+          <Inputs media={popupMedia} />
         </div>
       </div>
     </div>

@@ -2,7 +2,7 @@ import { gql } from 'urql';
 
 export const Notification = gql`
   query {
-    Page(page: 1, perPage: 20) {
+    Page(page: 1, perPage: 50) {
       notifications {
         ... on AiringNotification {
           type

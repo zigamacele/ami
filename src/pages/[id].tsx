@@ -39,6 +39,7 @@ export default function Id() {
       <div className="flex flex-col">
         <Navbar />
         <GetBannerImage hoverBackground={data.Media.bannerImage} />
+        {/* <div className="w-full ml-[6em] h-[10.75em] bg-neutral-900 rounded-b"></div> */}
         {showPopup ? (
           <EditMedia setShowPopup={setShowPopup} popupMedia={data.Media} />
         ) : null}
@@ -77,7 +78,7 @@ export default function Id() {
                     ? data.Media.description.slice(0, 250)
                     : data.Media.description
                 }
-                className="text-xs opacity-50 w-[40em]"
+                className="text-xs opacity-50 w-[40em] mb-1"
               />
               {/* <span className="text-xs">{data.Media.description}</span> */}
             </div>

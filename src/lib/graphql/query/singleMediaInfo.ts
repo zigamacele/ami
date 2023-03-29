@@ -38,7 +38,21 @@ export const singleMediaInfo = gql`
         thumbnail
       }
       mediaListEntry {
-        status
+        score
+        progress
+        progressVolumes
+        repeat
+        notes
+        startedAt {
+          year
+          month
+          day
+        }
+        completedAt {
+          year
+          month
+          day
+        }
       }
       title {
         romaji

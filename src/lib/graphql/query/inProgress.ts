@@ -25,16 +25,24 @@ export const inProgress = gql`
         status
         media {
           id
+          status
           format
           episodes
           chapters
           title {
             romaji
+            english
           }
           bannerImage
           coverImage {
             medium
             large
+          }
+          nextAiringEpisode {
+            airingAt
+            timeUntilAiring
+            episode
+            mediaId
           }
         }
       }

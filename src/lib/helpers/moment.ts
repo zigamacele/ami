@@ -1,5 +1,6 @@
 import moment from 'moment';
 
+const currentTime = moment();
 const currentMonth = moment().month();
 const currentYear = moment().year();
 
@@ -18,4 +19,9 @@ export const convertToMonth = (number: number) => {
   return moment()
     .month(number - 1)
     .format('MMMM');
+};
+
+export const timeFromNow = (eventTime: number) => {
+  const convertToMomentObject = moment.unix(eventTime);
+  return convertToMomentObject.fromNow();
 };
