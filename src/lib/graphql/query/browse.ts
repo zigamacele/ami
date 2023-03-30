@@ -12,7 +12,21 @@ export const browse = gql`
         id
         status
         mediaListEntry {
-          status
+          score
+          progress
+          progressVolumes
+          repeat
+          notes
+          startedAt {
+            year
+            month
+            day
+          }
+          completedAt {
+            year
+            month
+            day
+          }
         }
         format
         season

@@ -1,4 +1,6 @@
 import React from 'react';
+import { useMutation } from 'urql';
+import { addToFavorites } from '../graphql/query/mutations/addToFavorites';
 import Inputs from './EditMedia/Inputs';
 
 import { HeartIcon, XMarkIcon } from '@heroicons/react/24/solid';
@@ -10,12 +12,23 @@ export default function EditMedia({
   setShowPopup: Function;
   popupMedia: any;
 }) {
+  // const [favoriteResult, updateResult] = useMutation(addToFavorites);
+
+  // const submitFavorite = () => {
+  //   const variables =
+  //     popupMedia.type === 'ANIME'
+  //       ? { animeId: popupMedia.id }
+  //       : { mangaId: popupMedia.id };
+  //   updateResult(variables).then((result) => console.log(result));
+  // };
+
+  console.log('POPUP', popupMedia);
   return (
     <div
       onClick={() => {
         setShowPopup(false);
       }}
-      className="h-full w-full fixed bg-neutral-900/90 z-50 flex justify-center items-center"
+      className="h-full w-full fixed bg-neutral-900/90 z-50 flex justify-center items-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
     >
       <div
         onClick={(e) => {
@@ -29,7 +42,12 @@ export default function EditMedia({
             className="h-5 w-5 cursor-pointer hover:text-neutral-500 self-end"
           />
           <div className="flex items-center gap-4">
-            <HeartIcon className="w-5 h-5 cursor-pointer" />
+            {/* <HeartIcon
+              onClick={submitFavorite}
+              className={`${
+                popupMedia.isFavourite ? 'text-red-200/60' : 'text-neutral-200'
+              } w-5 h-5 cursor-pointer`}
+            /> */}
             <span className="text-sm bg-neutral-600 px-2 py-1 rounded cursor-pointer">
               Done
             </span>
@@ -57,7 +75,7 @@ export default function EditMedia({
           <span className="mt-16">{popupMedia.title.romaji}</span>
         </div>
         <div className="mt-16 ml-8 text-xs">
-          <Inputs media={popupMedia} />
+          {/* <Inputs media={popupMedia} /> */}
         </div>
       </div>
     </div>

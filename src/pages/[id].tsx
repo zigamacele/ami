@@ -5,11 +5,12 @@ import RelatedInfo from '@/lib/components/Id/RelatedInfo';
 import Staff from '@/lib/components/Id/Staff';
 import Stats from '@/lib/components/Id/Stats';
 import Navbar from '@/lib/components/Navbar';
+import { addToFavorites } from '@/lib/graphql/query/mutations/addToFavorites';
 import { singleMediaInfo } from '@/lib/graphql/query/singleMediaInfo';
 import { Markup } from 'interweave';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { useQuery } from 'urql';
+import { useMutation, useQuery } from 'urql';
 
 import { ChevronDownIcon, HeartIcon } from '@heroicons/react/24/solid';
 
@@ -18,6 +19,7 @@ export default function Id() {
   const [readMore, setReadMode] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const [popupMedia, setPopupMedia] = useState({});
+  const [favoriteResult, updateResult] = useMutation(addToFavorites);
 
   const variables = {
     mediaId: router.query.id,
@@ -33,6 +35,14 @@ export default function Id() {
   if (error) return <div>error</div>;
 
   console.log(data);
+
+  const submitFavorite = () => {
+    const variables =
+      data.Media.type === 'ANIME'
+        ? { animeId: data.Media.id }
+        : { mangaId: data.Media.id };
+    updateResult(variables).then((result) => console.log(result));
+  };
 
   return (
     <div>
@@ -65,7 +75,14 @@ export default function Id() {
                   </span>
                   <ChevronDownIcon className="w-4 h-4" />
                 </div>
-                <HeartIcon className=" w-7 h-7 bg-rose-600 rounded p-1.5 cursor-pointer" />
+                <HeartIcon
+                  onClick={submitFavorite}
+                  className={`w-7 h-7 ${
+                    data.Media.isFavourite
+                      ? 'text-neutral-200/60'
+                      : 'text-neutral-200'
+                  } rounded p-1.5 cursor-pointer bg-rose-600`}
+                />
               </div>
             </div>
             <div className="self-end flex flex-col gap-4">

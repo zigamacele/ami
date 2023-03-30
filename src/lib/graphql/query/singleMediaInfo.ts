@@ -6,9 +6,7 @@ export const singleMediaInfo = gql`
       id
       description
       status
-      mediaListEntry {
-        status
-      }
+      isFavourite
       endDate {
         day
         month
@@ -43,6 +41,7 @@ export const singleMediaInfo = gql`
         progressVolumes
         repeat
         notes
+        status
         startedAt {
           year
           month

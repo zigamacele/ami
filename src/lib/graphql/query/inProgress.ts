@@ -26,6 +26,8 @@ export const inProgress = gql`
         media {
           id
           status
+          type
+          isFavourite
           format
           episodes
           chapters
