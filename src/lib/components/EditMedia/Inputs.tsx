@@ -1,36 +1,57 @@
+import MenuItem from '@mui/material/MenuItem';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import TextField from '@mui/material/TextField';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import React from 'react';
 import TextInput from './Inputs/TextInput';
 
 export default function Inputs({ media }: { media: any }) {
+  const [age, setAge] = React.useState('');
+
+  const handleChange = (event: SelectChangeEvent) => {
+    setAge(event.target.value as string);
+  };
   return (
     <section className="flex flex-wrap gap-3">
-      <button className="btn btn-sm bg-neutral-900 border-none absolute bottom-2 right-2 text-xs px-3 rounded">
-        Delete
-      </button>
-      <div className="flex flex-col gap-1">
-        <span className="opacity-60">Status</span>
-        <select className="select select-bordered text-xs bg-neutral-900 w-44 h-12 rounded">
-          <option disabled selected>
-            {media.status}
-          </option>
-          <option>Plan to watch</option>
-          <option>Completed</option>
-          <option>Rewatching</option>
-          <option>Paused</option>
-          <option>Dropped</option>
-        </select>
-      </div>
-      <TextInput media={media} title="Score" />
-      <TextInput media={media} title="Episode Progress" />
-      <TextInput media={media} title="Start Date" />
-      <TextInput media={media} title="Finished Date" />
-      <TextInput media={media} title="Total Rewatches" />
-      <div className="flex flex-col gap-1">
-        <span className="opacity-60">Notes</span>
-        <textarea
-          className="textarea textarea-bordered bg-neutral-900 h-9 w-[39.5em] mr-8 rounded"
-          placeholder=""
-        ></textarea>
+      <div className="flex flex-col gap-5 mt-5 text-xs">
+        <div className="flex gap-4">
+          <div className="flex flex-col w-48 gap-1">
+            <span className="opacity-60">Status</span>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={age}
+              label="Age"
+              onChange={handleChange}
+            >
+              <MenuItem value={10}>Ten</MenuItem>
+              <MenuItem value={20}>Twenty</MenuItem>
+              <MenuItem value={30}>Thirty</MenuItem>
+            </Select>
+          </div>
+          <div className="flex flex-col w-48 gap-1">
+            <span className="opacity-60">Score</span>
+            <TextField id="outlined-basic" type="number" variant="outlined" />
+          </div>
+          <div className="flex flex-col w-48 gap-1">
+            <span className="opacity-60">Episode Progress</span>
+            <TextField id="outlined-basic" type="number" variant="outlined" />
+          </div>
+        </div>
+        <div className="flex gap-4">
+          <div className="flex flex-col w-48 gap-1">
+            <span className="opacity-60">Start Date</span>
+            <DatePicker />
+          </div>
+          <div className="flex flex-col w-48 gap-1">
+            <span className="opacity-60">End Date</span>
+            <DatePicker />
+          </div>
+          <div className="flex flex-col w-48 gap-1">
+            <span className="opacity-60">Total Rewatches</span>
+            <TextField id="outlined-basic" type="number" variant="outlined" />
+          </div>
+        </div>
       </div>
     </section>
   );

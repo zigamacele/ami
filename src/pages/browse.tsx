@@ -4,11 +4,10 @@ import { GetBannerImage } from '@/lib/components/GetBannerImage';
 import AnimeMangaSwitch from '@/lib/components/Home/AnimeMangaSwitch';
 import Navbar from '@/lib/components/Navbar';
 import { browse } from '@/lib/graphql/query/browse';
-import { AdjustmentsHorizontalIcon } from '@heroicons/react/24/solid';
-import { useEffect, useState } from 'react';
-import { useQuery } from 'urql';
-
 import { TagIcon, XMarkIcon } from '@heroicons/react/24/solid';
+import MuiAlert, { AlertProps } from '@mui/material/Alert';
+import React, { useState } from 'react';
+import { useQuery } from 'urql';
 
 export default function Browse() {
   const [userInput, setUserInput] = useState('');
@@ -31,8 +30,6 @@ export default function Browse() {
 
   console.log('ZIGA DATA', data);
 
-  // useEffect(() => {}, [userInput]);
-
   return (
     <section className="flex flex-col">
       <AnimeMangaSwitch type={type} setType={setType} />
@@ -42,7 +39,6 @@ export default function Browse() {
       <div className="flex flex-col items-center justify-center ml-20">
         <div className="flex flex-col gap-3 mt-4">
           <SearchComponent userInput={userInput} setUserInput={setUserInput} />
-          {/* <AdjustmentsHorizontalIcon className="h-9 self-end w-9 rounded bg-zinc-700 text-zinc-400 p-2 cursor-not-allowed" /> */}
           {userInput === '' ? null : (
             <div className="flex items-center gap-2">
               <TagIcon className="h-5 w-5 text-zinc-400" />
@@ -62,9 +58,8 @@ export default function Browse() {
             </div>
           )}
         </div>
-
         {data ? (
-          <div className="flex flex-wrap gap-6  my-4 px-4 items-center justify-center">
+          <div className="flex flex-wrap gap-6  my-4 px-4 items-start justify-start ml-10">
             {data.Page.media.map((media: any) => (
               <IndividualMedia
                 key={media.id}

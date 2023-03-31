@@ -21,7 +21,6 @@ export default function EditMedia({
   //       : { mangaId: popupMedia.id };
   //   updateResult(variables).then((result) => console.log(result));
   // };
-
   console.log('POPUP', popupMedia);
   return (
     <div
@@ -48,7 +47,7 @@ export default function EditMedia({
                 popupMedia.isFavourite ? 'text-red-200/60' : 'text-neutral-200'
               } w-5 h-5 cursor-pointer`}
             /> */}
-            <span className="text-sm bg-neutral-600 px-2 py-1 rounded cursor-pointer">
+            <span className="text-xs bg-neutral-600 px-3 py-1.5 rounded cursor-pointer">
               Done
             </span>
           </div>
@@ -65,7 +64,6 @@ export default function EditMedia({
             <div className="w-full h-40"></div>
           )}
         </div>
-
         <div className="absolute top-20 left-8 flex items-center gap-2 text-sm">
           <img
             src={popupMedia.coverImage.large}
@@ -75,7 +73,12 @@ export default function EditMedia({
           <span className="mt-16">{popupMedia.title.romaji}</span>
         </div>
         <div className="mt-16 ml-8 text-xs">
-          {/* <Inputs media={popupMedia} /> */}
+          <Inputs media={popupMedia} />
+        </div>
+        <div className="absolute bottom-4 right-4">
+          <span className="text-xs bg-neutral-900 px-3 py-1.5 rounded cursor-pointer">
+            Delete
+          </span>
         </div>
       </div>
     </div>

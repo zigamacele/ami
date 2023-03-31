@@ -7,9 +7,11 @@ import Stats from '@/lib/components/Id/Stats';
 import Navbar from '@/lib/components/Navbar';
 import { addToFavorites } from '@/lib/graphql/query/mutations/addToFavorites';
 import { singleMediaInfo } from '@/lib/graphql/query/singleMediaInfo';
+import { addedToFavorites } from '@/lib/helpers/anilistResponse';
 import { Markup } from 'interweave';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 import { useMutation, useQuery } from 'urql';
 
 import { ChevronDownIcon, HeartIcon } from '@heroicons/react/24/solid';
@@ -41,7 +43,11 @@ export default function Id() {
       data.Media.type === 'ANIME'
         ? { animeId: data.Media.id }
         : { mangaId: data.Media.id };
-    updateResult(variables).then((result) => console.log(result));
+    updateResult(variables).then((result) =>
+      toast.success(
+        addedToFavorites(data.Media.title.romaji, data.Media.isFavourite)
+      )
+    );
   };
 
   return (

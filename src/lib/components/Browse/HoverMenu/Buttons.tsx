@@ -1,6 +1,7 @@
 import { addToList } from '@/lib/graphql/query/mutations/addToList';
+import { addedToList } from '@/lib/helpers/anilistResponse';
 import { CalendarIcon, CheckIcon, PlayIcon } from '@heroicons/react/24/solid';
-import React from 'react';
+import { toast } from 'react-toastify';
 import { useMutation } from 'urql';
 
 export default function Buttons({ media }: { media: any }) {
@@ -8,15 +9,18 @@ export default function Buttons({ media }: { media: any }) {
 
   const submit = (status: string) => {
     const variables = { mediaId: media.id, status: status };
-    update(variables).then((result) => console.log(result));
+    update(variables).then((result) =>
+      toast.success(
+        `${
+          result.data.SaveMediaListEntry.media.title.romaji
+        } added to ${addedToList(
+          result.data.SaveMediaListEntry.media.type,
+          result.data.SaveMediaListEntry.status
+        )}`
+      )
+    );
   };
 
-  // CURRENT
-  // PLANNING
-  // COMPLETED
-  // DROPPED
-  // PAUSED
-  // REPEATING
   return (
     <div>
       <div className="flex flex-col gap-0.5">
