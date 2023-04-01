@@ -26,7 +26,6 @@ export default function Top100({
     variables: variables,
   });
   const { data, fetching, error } = result;
-  console.log(data);
 
   if (fetching) return <div>fetching</div>;
   if (error) return <div>error</div>;

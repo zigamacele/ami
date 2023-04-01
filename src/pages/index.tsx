@@ -12,6 +12,9 @@ const getViewer = gql`
       avatar {
         large
       }
+      mediaListOptions {
+        scoreFormat
+      }
     }
   }
 `;
@@ -26,16 +29,18 @@ export default function Index() {
 
   const { data, fetching, error } = result;
 
-  console.log('RESULT', result);
-
   useEffect(() => {
-    console.log('DATA', data);
     if (!checkCookies) router.push('/login');
     if (checkCookies && data) {
+      console.log('VIEWER UPDATED');
       localStorage.setItem('viewerName', data.Viewer.name);
       localStorage.setItem('viewerId', data.Viewer.id);
       localStorage.setItem('viewerAvatar', data.Viewer.avatar.large);
       localStorage.setItem('viewerBanner', data.Viewer.bannerImage);
+      localStorage.setItem(
+        'viewerScoreFormat',
+        data.Viewer.mediaListOptions.scoreFormat
+      );
       router.push('/home');
     }
   }, [data]);

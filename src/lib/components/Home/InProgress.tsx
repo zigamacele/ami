@@ -31,7 +31,6 @@ export default function InProgress({
   const { data, fetching, error } = result;
   if (fetching) return <div>fetching</div>;
   if (error) return <div>error</div>;
-  console.log(data.Page.mediaList);
   return (
     <div className="flex flex-col gap-2 mt-4">
       <span className="font-semibold text-sm text-right">IN PROGRESS</span>

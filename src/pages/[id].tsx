@@ -7,7 +7,7 @@ import Stats from '@/lib/components/Id/Stats';
 import Navbar from '@/lib/components/Navbar';
 import { addToFavorites } from '@/lib/graphql/query/mutations/addToFavorites';
 import { singleMediaInfo } from '@/lib/graphql/query/singleMediaInfo';
-import { addedToFavorites } from '@/lib/helpers/anilistResponse';
+import { addedToFavorites, humanStatus } from '@/lib/helpers/anilistResponse';
 import { Markup } from 'interweave';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -23,8 +23,15 @@ export default function Id() {
   const [popupMedia, setPopupMedia] = useState({});
   const [favoriteResult, updateResult] = useMutation(addToFavorites);
 
+  const viewerScoreFormat =
+    typeof window !== 'undefined'
+      ? localStorage.getItem('viewerScoreFormat')
+      : null;
+
   const variables = {
-    mediaId: router.query.id,
+    mediaId: 1,
+    // mediaId: router.query.id,
+    format: viewerScoreFormat,
   };
 
   const [result] = useQuery({
@@ -76,7 +83,10 @@ export default function Id() {
                 >
                   <span className="text-sm ">
                     {data.Media.mediaListEntry
-                      ? data.Media.mediaListEntry.status
+                      ? humanStatus(
+                          data.Media.mediaListEntry.status,
+                          data.Media.type
+                        )
                       : 'Add to List'}
                   </span>
                   <ChevronDownIcon className="w-4 h-4" />

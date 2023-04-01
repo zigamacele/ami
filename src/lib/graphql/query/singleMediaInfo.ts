@@ -1,7 +1,7 @@
 import { gql } from 'urql';
 
 export const singleMediaInfo = gql`
-  query ($mediaId: Int) {
+  query ($mediaId: Int, $format: ScoreFormat) {
     Media(id: $mediaId) {
       id
       description
@@ -36,7 +36,7 @@ export const singleMediaInfo = gql`
         thumbnail
       }
       mediaListEntry {
-        score
+        score(format: $format)
         progress
         progressVolumes
         repeat
