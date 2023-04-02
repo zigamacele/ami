@@ -67,7 +67,10 @@ export default function Id() {
       <div className="flex flex-col">
         <Navbar />
         <GetBannerImage hoverBackground={data.Media.bannerImage} />
-        {/* <div className="w-full ml-[6em] h-[10.75em] bg-neutral-900 rounded-b"></div> */}
+        <div
+          style={{ zIndex: '-1' }}
+          className="absolute w-full top-0 h-[20em] bg-neutral-900/60 rounded-b z-0"
+        ></div>
         {showPopup ? (
           <EditMedia
             setShowPopup={setShowPopup}
@@ -75,7 +78,7 @@ export default function Id() {
             refresh={refresh}
           />
         ) : null}
-        <div className="flex flex-col absolute left-[6em] top-10 gap-3 mb-10 ">
+        <div className="flex flex-col absolute left-[6em] top-10 gap-3 mb-10">
           <div className="flex gap-4">
             <div className="flex flex-col gap-2">
               <img
@@ -107,7 +110,7 @@ export default function Id() {
                     data.Media.isFavourite
                       ? 'text-neutral-200/60'
                       : 'text-neutral-200'
-                  } rounded p-1.5 cursor-pointer bg-rose-600`}
+                  } rounded p-1.5 cursor-pointer bg-red-500`}
                 />
               </div>
             </div>
@@ -126,7 +129,7 @@ export default function Id() {
               {/* <span className="text-xs">{data.Media.description}</span> */}
             </div>
           </div>
-          <div className="flex gap-4">
+          <div className="flex gap-4 mt-4">
             <Stats data={data.Media} />
             <div className="flex flex-col gap-4">
               <RelatedInfo data={data.Media.relations} />

@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { gql, useQuery } from 'urql';
+import EditMedia from '../EditMedia';
 import IndividualTitle from './IndividualTitle';
 
 export default function ListCategory({
@@ -8,36 +9,53 @@ export default function ListCategory({
   title,
   status,
   setHoverBackground,
-  setShowPopup,
-  setPopupMedia,
 }: {
   title: string;
   status: string;
   type: string;
   query: any;
   setHoverBackground: Function;
-  setShowPopup: Function;
-  setPopupMedia: Function;
 }) {
+  const [showPopup, setShowPopup] = useState(false);
+  const [popupMedia, setPopupMedia] = useState({});
+
   const viewerId =
     typeof window !== 'undefined' ? localStorage.getItem('viewerId') : null;
+
+  const viewerScoreFormat =
+    typeof window !== 'undefined'
+      ? localStorage.getItem('viewerScoreFormat')
+      : null;
 
   const variables = {
     userId: viewerId,
     status: status,
     page: 1,
     type: type,
+    format: viewerScoreFormat,
   };
 
-  const [result] = useQuery({
+  const [result, reexecuteQuery] = useQuery({
     query: query,
     variables: variables,
   });
+
+  const refresh = () => {
+    reexecuteQuery({ requestPolicy: 'cache-and-network' });
+  };
+
   const { data, fetching, error } = result;
   if (fetching) return <div>fetching</div>;
   if (error) return <div>error</div>;
   return (
     <div className="flex flex-col gap-2 mt-4 w-full">
+      {showPopup ? (
+        <EditMedia
+          setShowPopup={setShowPopup}
+          popupMedia={popupMedia}
+          refresh={refresh}
+        />
+      ) : null}
       <span className="font-semibold text-sm text-left ml-8">{title}</span>
       <div className="flex flex-col bg-neutral-900 p-2 rounded">
         <div className="flex justify-between p-2 font-medium text-sm">

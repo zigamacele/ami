@@ -1,3 +1,4 @@
+import { humanFormat } from '@/lib/helpers/anilistResponse';
 import { EllipsisHorizontalIcon } from '@heroicons/react/24/solid';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -71,7 +72,9 @@ export default function IndividualTitle({
         {type !== 'MANGA' ? null : (
           <span className="w-20 text-center">{media.progressVolumes}</span>
         )}
-        <span className="w-20 text-center">{media.media.format}</span>
+        <span className="w-20 text-center">
+          {humanFormat(media.media.format)}
+        </span>
       </div>
     </div>
   );

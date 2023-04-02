@@ -1,9 +1,7 @@
 import React from 'react';
-import { useMutation } from 'urql';
-import { addToFavorites } from '../graphql/query/mutations/addToFavorites';
 import Inputs from './EditMedia/Inputs';
 
-import { HeartIcon, XMarkIcon } from '@heroicons/react/24/solid';
+import { XMarkIcon } from '@heroicons/react/24/solid';
 
 export default function EditMedia({
   setShowPopup,
@@ -14,15 +12,6 @@ export default function EditMedia({
   setShowPopup: Function;
   popupMedia: any;
 }) {
-  // const [favoriteResult, updateResult] = useMutation(addToFavorites);
-
-  // const submitFavorite = () => {
-  //   const variables =
-  //     popupMedia.type === 'ANIME'
-  //       ? { animeId: popupMedia.id }
-  //       : { mangaId: popupMedia.id };
-  //   updateResult(variables).then((result) => console.log(result));
-  // };
   console.log('POPUP', popupMedia);
   return (
     <div
@@ -42,14 +31,6 @@ export default function EditMedia({
             onClick={() => setShowPopup(false)}
             className="h-5 w-5 cursor-pointer hover:text-neutral-500 self-end"
           />
-          <div className="flex items-center gap-4">
-            {/* <HeartIcon
-              onClick={submitFavorite}
-              className={`${
-                popupMedia.isFavourite ? 'text-red-200/60' : 'text-neutral-200'
-              } w-5 h-5 cursor-pointer`}
-            /> */}
-          </div>
         </div>
         <div>
           <div className="absolute opacity-30 w-full h-40 bg-gradient-to-t from-neutral-900 via-neutral-900 top-0"></div>

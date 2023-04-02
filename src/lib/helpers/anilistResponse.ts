@@ -11,9 +11,9 @@ export const humanStatus = (status: string, type: string) => {
 
 export const addedToList = (type: string, status: string) => {
   const mediaType = type === 'ANIME' ? 'watch' : 'read';
-  if (status === 'CURRENT') return `${mediaType}ing`;
-  if (status === 'PLANNING') return `planning to ${mediaType}`;
-  if (status === 'COMPLETED') return 'completed';
+  if (status === 'CURRENT') return `${mediaType}ing list`;
+  if (status === 'PLANNING') return `planning list`;
+  if (status === 'COMPLETED') return 'completed list';
 };
 
 export const addedToFavorites = (title: string, favorite: boolean) => {
@@ -61,4 +61,15 @@ export const scoreFormat: Record<ScoreFormat, number> = {
   POINT_10: 10,
   POINT_5: 5,
   POINT_3: 3,
+};
+
+export const humanFormat = (format: string) => {
+  if (format === 'TV_SHORT') return 'TV Short';
+  if (format === 'MOVIE') return 'Movie';
+  if (format === 'SPECIAL') return 'Special';
+  if (format === 'MUSIC') return 'Music';
+  if (format === 'MANGA') return 'Manga';
+  if (format === 'NOVEL') return 'Novel';
+  if (format === 'ONE_SHOT') return 'One Shot';
+  return format;
 };

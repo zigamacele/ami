@@ -7,6 +7,7 @@ export const inProgress = gql`
     $perPage: Int
     $status: MediaListStatus
     $type: MediaType
+    $format: ScoreFormat
   ) {
     Page(page: $page, perPage: $perPage) {
       pageInfo {
@@ -25,26 +26,63 @@ export const inProgress = gql`
         status
         media {
           id
+          description
           status
-          type
           isFavourite
+          endDate {
+            day
+            month
+            year
+          }
+          startDate {
+            day
+            month
+            year
+          }
           format
+          season
+          seasonYear
+          favourites
           episodes
+          status
           chapters
+          volumes
+          genres
+          duration
+          averageScore
+          popularity
+          type
+          trailer {
+            id
+            site
+            thumbnail
+          }
+          mediaListEntry {
+            score(format: $format)
+            id
+            progress
+            progressVolumes
+            repeat
+            notes
+            status
+            startedAt {
+              year
+              month
+              day
+            }
+            completedAt {
+              year
+              month
+              day
+            }
+          }
           title {
             romaji
-            english
           }
           bannerImage
           coverImage {
-            medium
+            color
             large
-          }
-          nextAiringEpisode {
-            airingAt
-            timeUntilAiring
-            episode
-            mediaId
           }
         }
       }

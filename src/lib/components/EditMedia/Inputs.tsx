@@ -8,6 +8,8 @@ import {
   scoreFormat,
   ScoreFormat,
 } from '@/lib/helpers/anilistResponse';
+import { inputsTheme } from '@/lib/theme/MUI';
+import { ThemeProvider } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
@@ -134,98 +136,105 @@ export default function Inputs({
       >
         Delete
       </span>
-      <div className="flex flex-col gap-5 mt-5 text-xs">
-        <div className="flex gap-4">
-          <div className="flex flex-col w-48 gap-1">
-            <span className="opacity-60">Status</span>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={status}
-              label="Age"
-              onChange={(e) => setStatus(e.target.value as string)}
-            >
-              {mediaStatus.map((status) => (
-                <MenuItem value={status} key={status}>
-                  {humanStatus(status, media.type)}
-                </MenuItem>
-              ))}
-            </Select>
+      <ThemeProvider theme={inputsTheme}>
+        <div className="flex flex-col gap-5 mt-5 text-xs">
+          <div className="flex gap-4">
+            <div className="flex flex-col w-48 gap-1">
+              <span className="opacity-60">Status</span>
+              <Select
+                className="bg-neutral-900/80 rounded"
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={status}
+                onChange={(e) => setStatus(e.target.value as string)}
+              >
+                {mediaStatus.map((status) => (
+                  <MenuItem value={status} key={status}>
+                    {humanStatus(status, media.type)}
+                  </MenuItem>
+                ))}
+              </Select>
+            </div>
+            <div className="flex flex-col w-48 gap-1">
+              <span className="opacity-60">Score</span>
+              <TextField
+                className="bg-neutral-900/80 rounded"
+                id="outlined-basic"
+                type="number"
+                variant="outlined"
+                value={score.toString()}
+                onChange={(e) => {
+                  let value = Number(e.target.value);
+                  if (value < 0) value = 0;
+                  // if (value > 100) value = 100;
+                  // limits max value depending on users scoreformat prefrance
+                  if (
+                    viewerScoreFormat !== null &&
+                    value > scoreFormat[viewerScoreFormat as ScoreFormat]
+                  )
+                    value = scoreFormat[viewerScoreFormat as ScoreFormat];
+                  setScore(value);
+                }}
+              />
+            </div>
+            <div className="flex flex-col w-48 gap-1">
+              <span className="opacity-60">Progress</span>
+              <TextField
+                className="bg-neutral-900/80 rounded"
+                id="outlined-basic"
+                type="number"
+                value={progress.toString()}
+                variant="outlined"
+                onChange={(e) => {
+                  let value = Number(e.target.value);
+                  if (value < 0) value = 0;
+                  if (
+                    media[progressType(media.type)] &&
+                    value > media[progressType(media.type)]
+                  )
+                    value = media[progressType(media.type)];
+                  setProgress(value);
+                }}
+              />
+            </div>
           </div>
-          <div className="flex flex-col w-48 gap-1">
-            <span className="opacity-60">Score</span>
-            <TextField
-              id="outlined-basic"
-              type="number"
-              variant="outlined"
-              value={score.toString()}
-              onChange={(e) => {
-                let value = Number(e.target.value);
-                if (value < 0) value = 0;
-                // if (value > 100) value = 100;
-                // limits max value depending on users scoreformat prefrance
-                if (
-                  viewerScoreFormat !== null &&
-                  value > scoreFormat[viewerScoreFormat as ScoreFormat]
-                )
-                  value = scoreFormat[viewerScoreFormat as ScoreFormat];
-                setScore(value);
-              }}
-            />
-          </div>
-          <div className="flex flex-col w-48 gap-1">
-            <span className="opacity-60">Progress</span>
-            <TextField
-              id="outlined-basic"
-              type="number"
-              value={progress.toString()}
-              variant="outlined"
-              onChange={(e) => {
-                let value = Number(e.target.value);
-                if (value < 0) value = 0;
-                if (
-                  media[progressType(media.type)] &&
-                  value > media[progressType(media.type)]
-                )
-                  value = media[progressType(media.type)];
-                setProgress(value);
-              }}
-            />
+          <div className="flex gap-4">
+            <div className="flex flex-col w-48 gap-1">
+              <span className="opacity-60">Start Date</span>
+              <DatePicker
+                className="bg-neutral-900/80 rounded"
+                value={startDate}
+                onChange={(date) => setStartDate(date)}
+              />
+            </div>
+            <div className="flex flex-col w-48 gap-1">
+              <span className="opacity-60">End Date</span>
+              <DatePicker
+                className="bg-neutral-900/80 rounded"
+                value={endDate}
+                onChange={(date) => {
+                  setEndDate(date);
+                }}
+              />
+            </div>
+            <div className="flex flex-col w-48 gap-1">
+              <span className="opacity-60">Total Rewatches</span>
+              <TextField
+                className="bg-neutral-900/80 rounded"
+                id="outlined-basic"
+                value={rewatch.toString()}
+                type="number"
+                variant="outlined"
+                onChange={(e) => {
+                  let value = Number(e.target.value);
+                  if (value < 0) value = 0;
+                  setRewatch(value);
+                }}
+              />
+            </div>
           </div>
         </div>
-        <div className="flex gap-4">
-          <div className="flex flex-col w-48 gap-1">
-            <span className="opacity-60">Start Date</span>
-            <DatePicker
-              value={startDate}
-              onChange={(date) => setStartDate(date)}
-            />
-          </div>
-          <div className="flex flex-col w-48 gap-1">
-            <span className="opacity-60">End Date</span>
-            <DatePicker
-              value={endDate}
-              onChange={(date) => {
-                setEndDate(date);
-              }}
-            />
-          </div>
-          <div className="flex flex-col w-48 gap-1">
-            <span className="opacity-60">Total Rewatches</span>
-            <TextField
-              id="outlined-basic"
-              value={rewatch.toString()}
-              type="number"
-              variant="outlined"
-              onChange={(e) => {
-                let value = Number(e.target.value);
-                if (value < 0) value = 0;
-                setRewatch(value);
-              }}
-            />
-          </div>
-        </div>
-      </div>
+      </ThemeProvider>
     </section>
   );
 }
