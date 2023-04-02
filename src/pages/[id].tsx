@@ -29,15 +29,20 @@ export default function Id() {
       : null;
 
   const variables = {
-    mediaId: 1,
+    mediaId: router.query.id,
     // mediaId: router.query.id,
     format: viewerScoreFormat,
   };
 
-  const [result] = useQuery({
+  const [result, reexecuteQuery] = useQuery({
     query: singleMediaInfo,
     variables: variables,
   });
+
+  const refresh = () => {
+    reexecuteQuery({ requestPolicy: 'cache-and-network' });
+  };
+
   const { data, fetching, error } = result;
 
   if (fetching) return <div>fetching</div>;
@@ -64,12 +69,17 @@ export default function Id() {
         <GetBannerImage hoverBackground={data.Media.bannerImage} />
         {/* <div className="w-full ml-[6em] h-[10.75em] bg-neutral-900 rounded-b"></div> */}
         {showPopup ? (
-          <EditMedia setShowPopup={setShowPopup} popupMedia={data.Media} />
+          <EditMedia
+            setShowPopup={setShowPopup}
+            popupMedia={data.Media}
+            refresh={refresh}
+          />
         ) : null}
         <div className="flex flex-col absolute left-[6em] top-10 gap-3 mb-10 ">
           <div className="flex gap-4">
             <div className="flex flex-col gap-2">
               <img
+                onClick={refresh}
                 src={data.Media.coverImage.large}
                 alt="Picture of the author"
                 className="w-40 object-cover rounded"

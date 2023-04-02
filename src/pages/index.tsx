@@ -23,15 +23,20 @@ export default function Index() {
   const router = useRouter();
   const checkCookies = getCookie('access_token');
 
-  const [result] = useQuery({
+  const [result, reexecuteQuery] = useQuery({
     query: getViewer,
   });
+
+  const refresh = () => {
+    reexecuteQuery({ requestPolicy: 'cache-and-network' });
+  };
 
   const { data, fetching, error } = result;
 
   useEffect(() => {
     if (!checkCookies) router.push('/login');
     if (checkCookies && data) {
+      refresh();
       console.log('VIEWER UPDATED');
       localStorage.setItem('viewerName', data.Viewer.name);
       localStorage.setItem('viewerId', data.Viewer.id);

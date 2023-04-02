@@ -37,6 +37,7 @@ export const singleMediaInfo = gql`
       }
       mediaListEntry {
         score(format: $format)
+        id
         progress
         progressVolumes
         repeat

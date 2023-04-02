@@ -19,8 +19,8 @@ export default function Characters({ data }: { data: any }) {
               />
               <div className="flex flex-col justify-between p-2">
                 <div className="flex flex-col gap-1">
-                  <span className="opacity-80 text-xs w-10 cursor-not-allowed">
-                    {data.nodes[index].name.full}
+                  <span className="opacity-80 text-xs w-10 h-10 cursor-not-allowed">
+                    {data.nodes[index].name.full.slice(0, 15)}
                   </span>
                 </div>
                 <div className="flex opacity-60 w-12">
@@ -32,7 +32,7 @@ export default function Characters({ data }: { data: any }) {
               <div className="flex gap-2">
                 <div className="flex flex-col justify-between items-end py-2">
                   <div className="flex flex-col gap-1">
-                    <span className="opacity-80 text-xs w-14 text-right cursor-not-allowed">
+                    <span className="opacity-80 text-xs w-16 text-right cursor-not-allowed">
                       {media.voiceActors[0].name.full}
                     </span>
                   </div>

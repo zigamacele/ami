@@ -8,7 +8,9 @@ import { HeartIcon, XMarkIcon } from '@heroicons/react/24/solid';
 export default function EditMedia({
   setShowPopup,
   popupMedia,
+  refresh,
 }: {
+  refresh: Function;
   setShowPopup: Function;
   popupMedia: any;
 }) {
@@ -47,9 +49,6 @@ export default function EditMedia({
                 popupMedia.isFavourite ? 'text-red-200/60' : 'text-neutral-200'
               } w-5 h-5 cursor-pointer`}
             /> */}
-            <span className="text-xs bg-neutral-600 px-3 py-1.5 rounded cursor-pointer">
-              Done
-            </span>
           </div>
         </div>
         <div>
@@ -73,13 +72,13 @@ export default function EditMedia({
           <span className="mt-16">{popupMedia.title.romaji}</span>
         </div>
         <div className="mt-16 ml-8 text-xs">
-          <Inputs media={popupMedia} />
+          <Inputs
+            media={popupMedia}
+            setShowPopup={setShowPopup}
+            refresh={refresh}
+          />
         </div>
-        <div className="absolute bottom-4 right-4">
-          <span className="text-xs bg-neutral-900 px-3 py-1.5 rounded cursor-pointer">
-            Delete
-          </span>
-        </div>
+        <div className="absolute bottom-4 right-4"></div>
       </div>
     </div>
   );

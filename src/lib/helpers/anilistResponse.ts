@@ -1,4 +1,4 @@
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 export const humanStatus = (status: string, type: string) => {
   if (status === 'CURRENT') return type === 'ANIME' ? 'Watching' : 'Reading';
@@ -20,6 +20,10 @@ export const addedToFavorites = (title: string, favorite: boolean) => {
   return `${title} ${!favorite ? 'added to' : 'removed from'} favorites`;
 };
 
+export const progressType = (type: string) => {
+  return type === 'ANIME' ? 'episodes' : 'chapters';
+};
+
 interface mediaDate {
   day: number;
   month: number;
@@ -27,7 +31,10 @@ interface mediaDate {
 }
 
 export const mediaDate = (data: mediaDate) => {
-  return moment(`${data.year}-${data.month}-${data.day}`);
+  if (!data.day) return null;
+  if (!data.month) return null;
+  if (!data.year) return null;
+  return dayjs(`${data.year}-${data.month}-${data.day}`);
 };
 
 export const mediaStatus = [

@@ -2,7 +2,7 @@ import { client } from '@/lib/graphql/client';
 import { store } from '@/lib/store';
 import '@/styles/globals.css';
 import { LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import type { AppProps } from 'next/app';
 import { Provider as ProviderRedux } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
@@ -11,7 +11,7 @@ import { Provider as ProviderURQL } from 'urql';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <LocalizationProvider dateAdapter={AdapterMoment}>
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
       <ProviderRedux store={store}>
         <ProviderURQL value={client}>
           <Component {...pageProps} />
