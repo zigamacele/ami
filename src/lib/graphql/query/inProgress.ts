@@ -52,6 +52,12 @@ export const inProgress = gql`
           averageScore
           popularity
           type
+          nextAiringEpisode {
+            airingAt
+            timeUntilAiring
+            episode
+            mediaId
+          }
           trailer {
             id
             site

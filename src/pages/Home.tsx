@@ -1,7 +1,7 @@
 import { GetBannerImage } from '@/lib/components/GetBannerImage';
 import AnimeMangaSwitch from '@/lib/components/Home/AnimeMangaSwitch';
 import InProgress from '@/lib/components/Home/InProgress';
-import Top100 from '@/lib/components/Home/top100';
+import Top100 from '@/lib/components/Home/Top100';
 import Trending from '@/lib/components/Home/Trending';
 import Navbar from '@/lib/components/Navbar';
 import { allTimePopular } from '@/lib/graphql/query/allTimePopular';

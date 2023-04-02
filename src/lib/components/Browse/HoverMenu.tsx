@@ -35,7 +35,7 @@ export default function HoverMenu({
         onMouseLeave={() => {
           setShowMenu(false);
         }}
-        className="flex flex-col gap-0.5"
+        className="flex flex-col gap-1"
       >
         {showMenu ? <Buttons media={media} /> : null}
         <div

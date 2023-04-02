@@ -4,6 +4,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { gql, useQuery } from 'urql';
 import { RootState } from '../store';
+import ToolTip from './Navbar/Tooltip';
 
 import {
   BellIcon,
@@ -63,36 +64,48 @@ export default function Navbar() {
 
       <div className="flex flex-col items-center justify-between h-96 pb-2 text-neutral-700">
         <div className="flex flex-col gap-2 ">
-          <HomeIcon
-            onClick={() => router.push('/home')}
-            className="h-6 w-6  text-neural-700 cursor-pointer hover:text-neutral-500"
-          />
-          <QueueListIcon
-            onClick={() => router.push('/list')}
-            className="h-6 w-6  text-neural-700 cursor-pointer hover:text-neutral-500"
-          />
-          <UsersIcon className="h-5 w-5  text-neural-700 cursor-not-allowed" />
-          <MagnifyingGlassIcon
-            onClick={() => router.push('/browse')}
-            className="h-6 w-6  text-neural-700 cursor-pointer hover:text-neutral-500"
-          />
+          <ToolTip title="Home" position="right-start">
+            <HomeIcon
+              onClick={() => router.push('/home')}
+              className="h-6 w-6  text-neural-700 cursor-pointer hover:text-neutral-500"
+            />
+          </ToolTip>
+          <ToolTip title="List" position="right-start">
+            <QueueListIcon
+              onClick={() => router.push('/list')}
+              className="h-6 w-6  text-neural-700 cursor-pointer hover:text-neutral-500"
+            />
+          </ToolTip>
+          <ToolTip title="Social" position="right-start">
+            <UsersIcon className="h-5 w-5  text-neural-700 cursor-not-allowed" />
+          </ToolTip>
+          <ToolTip title="Search" position="right-start">
+            <MagnifyingGlassIcon
+              onClick={() => router.push('/browse')}
+              className="h-6 w-6  text-neural-700 cursor-pointer hover:text-neutral-500"
+            />
+          </ToolTip>
         </div>
         <div className="flex flex-col gap-4 items-center">
-          <div
-            onClick={() => router.push('/notifications')}
-            className="relative"
-          >
-            {data.Viewer.unreadNotificationCount === 0 ? null : (
-              <div className="absolute top-[-5px] right-[-5px] bg-rose-600 border border-neutral-900 hover:bg-rose-500 cursor-pointer w-4 h-4 rounded-full flex justify-center items-center text-white text-xs">
-                {data.Viewer.unreadNotificationCount}
-              </div>
-            )}
-            <BellIcon className="h-6 w-6 text-neural-700 cursor-pointer hover:text-neutral-500" />
-          </div>
-          <Cog8ToothIcon
-            onClick={() => router.push('/settings')}
-            className="h-6 w-6 text-neural-700 cursor-pointer hover:text-neutral-500"
-          />
+          <ToolTip title="Notifications" position="right-start">
+            <div
+              onClick={() => router.push('/notifications')}
+              className="relative"
+            >
+              {data.Viewer.unreadNotificationCount === 0 ? null : (
+                <div className="absolute top-[-5px] right-[-5px] bg-rose-600 border border-neutral-900 hover:bg-rose-500 cursor-pointer w-4 h-4 rounded-full flex justify-center items-center text-white text-xs">
+                  {data.Viewer.unreadNotificationCount}
+                </div>
+              )}
+              <BellIcon className="h-6 w-6 text-neural-700 cursor-pointer hover:text-neutral-500" />
+            </div>
+          </ToolTip>
+          <ToolTip title="Settings" position="right-start">
+            <Cog8ToothIcon
+              onClick={() => router.push('/settings')}
+              className="h-6 w-6 text-neural-700 cursor-pointer hover:text-neutral-500"
+            />
+          </ToolTip>
         </div>
       </div>
     </nav>

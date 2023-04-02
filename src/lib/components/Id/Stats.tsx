@@ -1,4 +1,8 @@
-import { humanFormat } from '@/lib/helpers/anilistResponse';
+import {
+  humanFormat,
+  humanMediaStatus,
+  humanSeason,
+} from '@/lib/helpers/anilistResponse';
 import { convertToMonth } from '@/lib/helpers/moment';
 import React from 'react';
 import IndividualStat from './IndividualStat';
@@ -8,12 +12,9 @@ export default function Stats({ data }: { data: any }) {
     <div className="bg-neutral-900 w-40 h-full rounded flex flex-col text-sm p-4 gap-2">
       <IndividualStat data={humanFormat(data.format)} title="Format" />
       {data.type === 'ANIME' ? (
-        <IndividualStat data={data.episodes} title="Episodes" />
+        <IndividualStat data={data.episodes ?? '?'} title="Episodes" />
       ) : (
-        <IndividualStat
-          data={data.chapters ? data.chapters : '?'}
-          title="Chapters"
-        />
+        <IndividualStat data={data.chapters ?? '?'} title="Chapters" />
       )}
       {data.type === 'ANIME' ? (
         <IndividualStat data={`${data.duration} mins`} title="Duration" />
@@ -23,7 +24,7 @@ export default function Stats({ data }: { data: any }) {
           title="Volumes"
         />
       )}
-      <IndividualStat data={data.status} title="Status" />
+      <IndividualStat data={humanMediaStatus(data.status)} title="Status" />
       <IndividualStat
         data={`${convertToMonth(data.startDate.month).slice(0, 3)} ${
           data.startDate.day
@@ -38,7 +39,7 @@ export default function Stats({ data }: { data: any }) {
       />
       {data.type === 'ANIME' ? (
         <div className="flex flex-col gap-2">
-          <IndividualStat data={data.season} title="Season" />
+          <IndividualStat data={humanSeason(data.season)} title="Season" />
           <IndividualStat data={data.seasonYear} title="Year" />
         </div>
       ) : null}

@@ -5,6 +5,7 @@ export const allTimePopular = gql`
     Page(page: 1, perPage: 5) {
       media(sort: [POPULARITY_DESC, ID], isAdult: false, type: $type) {
         id
+        status
         title {
           english
           native

@@ -1,12 +1,9 @@
 import dayjs from 'dayjs';
+import _ from 'lodash';
 
 export const humanStatus = (status: string, type: string) => {
   if (status === 'CURRENT') return type === 'ANIME' ? 'Watching' : 'Reading';
-  if (status === 'PLANNING') return 'Planning';
-  if (status === 'COMPLETED') return 'Completed';
-  if (status === 'DROPPED') return 'Dropped';
-  if (status === 'PAUSED') return 'Paused';
-  if (status === 'REPEATING') return 'Repeating';
+  return _.startCase(status.toLocaleLowerCase());
 };
 
 export const addedToList = (type: string, status: string) => {
@@ -31,9 +28,7 @@ interface mediaDate {
 }
 
 export const mediaDate = (data: mediaDate) => {
-  if (!data.day) return null;
-  if (!data.month) return null;
-  if (!data.year) return null;
+  if (!data.day || !data.month || !data.year) return null;
   return dayjs(`${data.year}-${data.month}-${data.day}`);
 };
 
@@ -72,4 +67,13 @@ export const humanFormat = (format: string) => {
   if (format === 'NOVEL') return 'Novel';
   if (format === 'ONE_SHOT') return 'One Shot';
   return format;
+};
+
+export const humanMediaStatus = (status: string) => {
+  if (status === 'NOT_YET_RELEASED') return 'Not Yet Released';
+  return _.startCase(status.toLocaleLowerCase());
+};
+
+export const humanSeason = (season: string) => {
+  return _.startCase(season.toLocaleLowerCase());
 };

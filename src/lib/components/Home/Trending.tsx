@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useState } from 'react';
 import { gql, useQuery } from 'urql';
+import StatusDropdown from '../StatusDropdown';
 
 export default function Trending({
   type,
@@ -13,6 +14,7 @@ export default function Trending({
   title: string;
   setHoverBackground: Function;
 }) {
+  const [hoverTitle, setHoverTitle] = useState('');
   const router = useRouter();
 
   const variables = {
@@ -42,9 +44,21 @@ export default function Trending({
         {data.Page.media.map((media, index) => (
           <div
             key={index}
-            onMouseEnter={() => setHoverBackground(media.bannerImage)}
-            onMouseLeave={() => setHoverBackground('')}
+            onMouseEnter={() => {
+              setHoverBackground(media.bannerImage);
+              setHoverTitle(media.title.romaji);
+            }}
+            onMouseLeave={() => {
+              setHoverBackground('');
+              setHoverTitle('');
+            }}
+            className="relative"
           >
+            {hoverTitle === media.title.romaji ? (
+              <div className="absolute top-[-0.1em] left-[-1.2em] fade-in-fast">
+                <StatusDropdown media={media} />
+              </div>
+            ) : null}
             <img
               onClick={() => router.push(`/${media.id}`)}
               src={media.coverImage.large}
