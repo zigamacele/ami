@@ -6,6 +6,11 @@ export const humanStatus = (status: string, type: string) => {
   return _.startCase(status.toLocaleLowerCase());
 };
 
+export const humanType = (type: string) => {
+  if (type === 'ANIME') return 'Watch';
+  return 'Read';
+};
+
 export const addedToList = (type: string, status: string) => {
   const mediaType = type === 'ANIME' ? 'watch' : 'read';
   if (status === 'CURRENT') return `${mediaType}ing list`;

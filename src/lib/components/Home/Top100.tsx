@@ -70,7 +70,11 @@ export default function Top100({
                     {media.genres.slice(0, 3).map((genre: string) => (
                       <div
                         key={genre}
-                        style={{ backgroundColor: media.coverImage.color }}
+                        style={{
+                          backgroundColor: media.coverImage.color
+                            ? media.coverImage.color
+                            : '#737373',
+                        }}
                         className={`px-2 rounded-full text-neutral-900 font-medium `}
                       >
                         {genre.toLowerCase()}

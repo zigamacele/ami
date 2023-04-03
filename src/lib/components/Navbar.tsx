@@ -8,10 +8,10 @@ import ToolTip from './Navbar/Tooltip';
 
 import {
   BellIcon,
+  CalendarDaysIcon,
   Cog8ToothIcon,
   HomeIcon,
   MagnifyingGlassIcon,
-  NewspaperIcon,
   QueueListIcon,
   UsersIcon,
 } from '@heroicons/react/24/solid';
@@ -76,6 +76,12 @@ export default function Navbar() {
               className="h-6 w-6  text-neural-700 cursor-pointer hover:text-neutral-500"
             />
           </ToolTip>
+          <ToolTip title="Seasonal" position="right-start">
+            <CalendarDaysIcon
+              onClick={() => router.push('/list')}
+              className="h-6 w-6  text-neural-700 cursor-pointer hover:text-neutral-500"
+            />
+          </ToolTip>
           <ToolTip title="Social" position="right-start">
             <UsersIcon className="h-5 w-5  text-neural-700 cursor-not-allowed" />
           </ToolTip>
@@ -90,14 +96,14 @@ export default function Navbar() {
           <ToolTip title="Notifications" position="right-start">
             <div
               onClick={() => router.push('/notifications')}
-              className="relative"
+              className="relative hover:text-neutral-500"
             >
               {data.Viewer.unreadNotificationCount === 0 ? null : (
-                <div className="absolute top-[-5px] right-[-5px] bg-rose-600 border border-neutral-900 hover:bg-rose-500 cursor-pointer w-4 h-4 rounded-full flex justify-center items-center text-white text-xs">
+                <div className="absolute top-[-5px] right-[-5px] bg-rose-600 border border-neutral-900 cursor-pointer w-4 h-4 rounded-full flex justify-center items-center text-white text-xs pb-0.5">
                   {data.Viewer.unreadNotificationCount}
                 </div>
               )}
-              <BellIcon className="h-6 w-6 text-neural-700 cursor-pointer hover:text-neutral-500" />
+              <BellIcon className="h-6 w-6 text-neural-700 cursor-pointer" />
             </div>
           </ToolTip>
           <ToolTip title="Settings" position="right-start">

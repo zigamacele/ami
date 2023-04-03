@@ -12,17 +12,14 @@ export default function Stats({ data }: { data: any }) {
     <div className="bg-neutral-900 w-40 h-full rounded flex flex-col text-sm p-4 gap-2">
       <IndividualStat data={humanFormat(data.format)} title="Format" />
       {data.type === 'ANIME' ? (
-        <IndividualStat data={data.episodes ?? '?'} title="Episodes" />
+        <IndividualStat data={data.episodes} title="Episodes" />
       ) : (
-        <IndividualStat data={data.chapters ?? '?'} title="Chapters" />
+        <IndividualStat data={data.chapters} title="Chapters" />
       )}
       {data.type === 'ANIME' ? (
         <IndividualStat data={`${data.duration} mins`} title="Duration" />
       ) : (
-        <IndividualStat
-          data={data.volumes ? data.volumes : '?'}
-          title="Volumes"
-        />
+        <IndividualStat data={data.volumes} title="Volumes" />
       )}
       <IndividualStat data={humanMediaStatus(data.status)} title="Status" />
       <IndividualStat
@@ -31,12 +28,14 @@ export default function Stats({ data }: { data: any }) {
         }, ${data.startDate.year}`}
         title="Start date"
       />
-      <IndividualStat
-        data={`${convertToMonth(data.endDate.month).slice(0, 3)} ${
-          data.endDate.day
-        }, ${data.endDate.year}`}
-        title="End date"
-      />
+      {data.endDate.year ? (
+        <IndividualStat
+          data={`${convertToMonth(data.endDate.month).slice(0, 3)} ${
+            data.endDate.day
+          }, ${data.endDate.year}`}
+          title="End date"
+        />
+      ) : null}
       {data.type === 'ANIME' ? (
         <div className="flex flex-col gap-2">
           <IndividualStat data={humanSeason(data.season)} title="Season" />

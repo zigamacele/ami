@@ -1,16 +1,30 @@
-import EditMedia from '@/lib/components/EditMedia';
 import { GetBannerImage } from '@/lib/components/GetBannerImage';
 import AnimeMangaSwitch from '@/lib/components/Home/AnimeMangaSwitch';
 import ListCategory from '@/lib/components/List/ListCategory';
 import StatusSelector from '@/lib/components/List/StatusSelector';
 import Navbar from '@/lib/components/Navbar';
 import { inProgress } from '@/lib/graphql/query/inProgress';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function List() {
   const [type, setType] = useState('ANIME');
   const [status, setStatus] = useState('ALL');
   const [hoverBackground, setHoverBackground] = useState('');
+
+  useEffect(() => {
+    const listStatus =
+      typeof window !== 'undefined'
+        ? localStorage.getItem('listStatus') || 'ALL'
+        : 'ALL';
+
+    const viewerType =
+      typeof window !== 'undefined'
+        ? localStorage.getItem('viewerType') || 'ANIME'
+        : 'ANIME';
+
+    setStatus(listStatus);
+    setType(viewerType);
+  }, []);
 
   return (
     <div>

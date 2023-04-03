@@ -16,15 +16,26 @@ export default function Browse() {
   const [hoverBackground, setHoverBackground] = useState('');
   const [hoverTag, setHoverTag] = useState(false);
 
+  const viewerScoreFormat =
+    typeof window !== 'undefined'
+      ? localStorage.getItem('viewerScoreFormat') || 'POINT_100'
+      : 'POINT_100';
+
   const variables = {
     type: type,
     search: userInput,
+    format: viewerScoreFormat,
   };
 
-  const [result] = useQuery({
+  const [result, reexecuteQuery] = useQuery({
     query: browse,
     variables: variables,
   });
+
+  const refresh = () => {
+    reexecuteQuery({ requestPolicy: 'cache-and-network' });
+  };
+
   const { data, fetching, error } = result;
   console.log(data);
 
@@ -65,6 +76,7 @@ export default function Browse() {
                 key={media.id}
                 media={media}
                 setHoverBackground={setHoverBackground}
+                refresh={refresh}
               />
             ))}
           </div>

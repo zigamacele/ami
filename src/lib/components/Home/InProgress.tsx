@@ -43,7 +43,7 @@ export default function InProgress({
                 key={media.media.title.romaji}
                 onMouseEnter={() => setHoverBackground(media.media.bannerImage)}
                 onMouseLeave={() => setHoverBackground('')}
-                className="relative cursor-pointer"
+                className="relative cursor-pointer fade-in-fast"
               >
                 {media.media.nextAiringEpisode ? (
                   <div className="absolute bg-neutral-900 z-10 top-1 right-1 py-1 px-2 rounded-full text-[10px]">

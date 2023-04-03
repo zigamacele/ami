@@ -15,10 +15,11 @@ export default function EditMedia({
   console.log('POPUP', popupMedia);
   return (
     <div
-      onClick={() => {
+      onClick={(e) => {
+        e.preventDefault();
         setShowPopup(false);
       }}
-      className="h-full w-full fixed bg-neutral-900/90 z-50 flex justify-center items-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+      className="h-full fade-in-fast w-full fixed bg-neutral-900/90 z-50 flex justify-center items-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
     >
       <div
         onClick={(e) => {

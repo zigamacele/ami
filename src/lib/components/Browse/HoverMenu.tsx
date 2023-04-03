@@ -13,17 +13,23 @@ export default function HoverMenu({
   media,
   setShowMenu,
   showMenu,
+  refresh,
 }: {
   media: any;
   setShowMenu: Function;
   showMenu: Boolean;
+  refresh: Function;
 }) {
   const [showPopup, setShowPopup] = useState(false);
 
   return (
     <div className="absolute bottom-7 right-1">
       {showPopup ? (
-        <EditMedia setShowPopup={setShowPopup} popupMedia={media} />
+        <EditMedia
+          setShowPopup={setShowPopup}
+          popupMedia={media}
+          refresh={refresh}
+        />
       ) : null}
       <div
         onClick={(e) => {

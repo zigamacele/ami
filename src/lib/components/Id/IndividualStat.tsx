@@ -12,7 +12,7 @@ export default function IndividualStat({
       {!Array.isArray(data) ? (
         <div className="flex flex-col gap-0.5">
           <span className="font-medium opacity-80">{title}</span>
-          <span className="text-xs opacity-60">{data}</span>
+          <span className="text-xs opacity-60">{data ?? '?'}</span>
         </div>
       ) : (
         <div className="flex flex-col gap-0.5">

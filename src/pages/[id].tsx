@@ -1,6 +1,7 @@
 import EditMedia from '@/lib/components/EditMedia';
 import { GetBannerImage } from '@/lib/components/GetBannerImage';
 import Characters from '@/lib/components/Id/Characters';
+import Description from '@/lib/components/Id/Description';
 import RelatedInfo from '@/lib/components/Id/RelatedInfo';
 import Staff from '@/lib/components/Id/Staff';
 import Stats from '@/lib/components/Id/Stats';
@@ -8,7 +9,6 @@ import Navbar from '@/lib/components/Navbar';
 import { addToFavorites } from '@/lib/graphql/query/mutations/addToFavorites';
 import { singleMediaInfo } from '@/lib/graphql/query/singleMediaInfo';
 import { addedToFavorites, humanStatus } from '@/lib/helpers/anilistResponse';
-import { Markup } from 'interweave';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
@@ -18,7 +18,6 @@ import { ChevronDownIcon, HeartIcon } from '@heroicons/react/24/solid';
 
 export default function Id() {
   const router = useRouter();
-  const [readMore, setReadMode] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const [popupMedia, setPopupMedia] = useState({});
   const [favoriteResult, updateResult] = useMutation(addToFavorites);
@@ -30,7 +29,6 @@ export default function Id() {
 
   const variables = {
     mediaId: router.query.id,
-    // mediaId: router.query.id,
     format: viewerScoreFormat,
   };
 
@@ -114,19 +112,11 @@ export default function Id() {
                 />
               </div>
             </div>
-            <div className="self-end flex flex-col gap-4">
-              <span className="opacity-80 text-lg">
+            <div className="mt-[7.8em] flex flex-col gap-4">
+              <span className="opacity-80 text-lg truncate w-[30em]">
                 {data.Media.title.romaji}
               </span>
-              <Markup
-                content={
-                  !readMore
-                    ? data.Media.description.slice(0, 250)
-                    : data.Media.description
-                }
-                className="text-xs opacity-50 w-[40em] mb-1"
-              />
-              {/* <span className="text-xs">{data.Media.description}</span> */}
+              <Description desc={data.Media.description} />
             </div>
           </div>
           <div className="flex gap-4 mt-4">

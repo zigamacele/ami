@@ -1,7 +1,7 @@
 import { gql } from 'urql';
 
 export const browse = gql`
-  query ($type: MediaType, $search: String) {
+  query ($type: MediaType, $search: String, $format: ScoreFormat) {
     Page(page: 1, perPage: 48) {
       media(
         sort: [SCORE_DESC, ID]
@@ -11,12 +11,15 @@ export const browse = gql`
       ) {
         id
         status
+        type
         mediaListEntry {
-          score
+          score(format: $format)
+          id
           progress
           progressVolumes
           repeat
           notes
+          status
           startedAt {
             year
             month

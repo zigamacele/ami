@@ -8,8 +8,7 @@ import { allTimePopular } from '@/lib/graphql/query/allTimePopular';
 import { inProgress } from '@/lib/graphql/query/inProgress';
 import { top100 } from '@/lib/graphql/query/top100';
 import { trendingNow } from '@/lib/graphql/query/trendingNow';
-import moment from 'moment';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 //title query type(anime, manga)
 //         season: SPRING
@@ -18,6 +17,15 @@ import { useState } from 'react';
 export default function Home() {
   const [type, setType] = useState('ANIME');
   const [hoverBackground, setHoverBackground] = useState('');
+
+  useEffect(() => {
+    const viewerType =
+      typeof window !== 'undefined'
+        ? localStorage.getItem('viewerType') || 'ANIME'
+        : 'ANIME';
+
+    setType(viewerType);
+  }, []);
 
   return (
     <div className="flex flex-col mb-5">

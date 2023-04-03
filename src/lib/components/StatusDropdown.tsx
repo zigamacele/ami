@@ -1,16 +1,25 @@
 import { ThemeProvider } from '@emotion/react';
-import { ChevronDownIcon } from '@heroicons/react/24/solid';
+import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/solid';
 import Button from '@mui/material/Button';
+import Fade from '@mui/material/Fade';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { useMutation } from 'urql';
 import { addToList } from '../graphql/query/mutations/addToList';
-import { addedToList } from '../helpers/anilistResponse';
+import { addedToList, humanType } from '../helpers/anilistResponse';
 import { dropdownTheme } from '../theme/MUI';
 
-export default function StatusDropdown({ media }: { media: any }) {
+export default function StatusDropdown({
+  media,
+  setMedia,
+  setShowPopup,
+}: {
+  media: any;
+  setMedia: Function;
+  setShowPopup: Function;
+}) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -45,7 +54,11 @@ export default function StatusDropdown({ media }: { media: any }) {
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
       >
-        <ChevronDownIcon className="h-4 w-4 text-neutral-200 bg-black/80 backdrop-blur-md rounded" />
+        {!anchorEl ? (
+          <ChevronDownIcon className="h-4 w-4 text-neutral-200 bg-black/80 backdrop-blur-md rounded" />
+        ) : (
+          <ChevronUpIcon className="h-4 w-4 text-neutral-200 bg-black/80 backdrop-blur-md rounded" />
+        )}
       </Button>
       <Menu
         id="basic-menu"
@@ -55,6 +68,7 @@ export default function StatusDropdown({ media }: { media: any }) {
         MenuListProps={{
           'aria-labelledby': 'basic-button',
         }}
+        TransitionComponent={Fade}
       >
         <MenuItem
           onClick={() => {
@@ -84,7 +98,7 @@ export default function StatusDropdown({ media }: { media: any }) {
               },
             }}
           >
-            Add to Watching
+            Add to {humanType(media.type)}ing
           </MenuItem>
         ) : null}
         {media.status === 'FINISHED' ? (
@@ -105,7 +119,11 @@ export default function StatusDropdown({ media }: { media: any }) {
         ) : null}
         <hr className="opacity-10" />
         <MenuItem
-          onClick={handleClose}
+          onClick={() => {
+            handleClose();
+            setMedia(media);
+            setShowPopup(true);
+          }}
           sx={{
             ':hover': {
               bgcolor: '#262626',

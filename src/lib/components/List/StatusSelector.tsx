@@ -18,7 +18,10 @@ export default function StatusSelector({
         ALL
       </span>
       <span
-        onClick={() => setStatus('CURRENT')}
+        onClick={() => {
+          setStatus('CURRENT');
+          localStorage.setItem('listStatus', 'CURRENT');
+        }}
         className={`${
           status === 'CURRENT' ? null : 'opacity-30'
         } cursor-pointer`}
@@ -26,7 +29,10 @@ export default function StatusSelector({
         {type === 'ANIME' ? 'WATCHING' : 'READING'}
       </span>
       <span
-        onClick={() => setStatus('PAUSED')}
+        onClick={() => {
+          setStatus('PAUSED');
+          localStorage.setItem('listStatus', 'PAUSED');
+        }}
         className={`${
           status === 'PAUSED' ? null : 'opacity-30'
         } cursor-pointer`}
@@ -34,7 +40,10 @@ export default function StatusSelector({
         PAUSED
       </span>
       <span
-        onClick={() => setStatus('DROPPED')}
+        onClick={() => {
+          setStatus('DROPPED');
+          localStorage.setItem('listStatus', 'DROPPED');
+        }}
         className={`${
           status === 'DROPPED' ? null : 'opacity-30'
         } cursor-pointer`}
@@ -42,7 +51,10 @@ export default function StatusSelector({
         DROPPED
       </span>
       <span
-        onClick={() => setStatus('PLANNING')}
+        onClick={() => {
+          setStatus('PLANNING');
+          localStorage.setItem('listStatus', 'PLANNING');
+        }}
         className={`${
           status === 'PLANNING' ? null : 'opacity-30'
         } cursor-pointer`}
@@ -50,7 +62,10 @@ export default function StatusSelector({
         PLANNING
       </span>
       <span
-        onClick={() => setStatus('COMPLETED')}
+        onClick={() => {
+          setStatus('COMPLETED');
+          localStorage.setItem('listStatus', 'COMPLETED');
+        }}
         className={`${
           status === 'COMPLETED' ? null : 'opacity-30'
         } cursor-pointer`}

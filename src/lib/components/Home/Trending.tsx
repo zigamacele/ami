@@ -1,3 +1,4 @@
+import EditMedia from '@/lib/components/EditMedia';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { gql, useQuery } from 'urql';
@@ -15,24 +16,43 @@ export default function Trending({
   setHoverBackground: Function;
 }) {
   const [hoverTitle, setHoverTitle] = useState('');
+  const [popupMedia, setPopupMedia] = useState({});
+  const [showPopup, setShowPopup] = useState(false);
+
   const router = useRouter();
+
+  const viewerScoreFormat =
+    typeof window !== 'undefined'
+      ? localStorage.getItem('viewerScoreFormat') || 'POINT_100'
+      : 'POINT_100';
 
   const variables = {
     type: type,
+    format: viewerScoreFormat,
   };
 
-  const [result] = useQuery({
+  const [result, reexecuteQuery] = useQuery({
     query: query,
     variables: variables,
   });
   const { data, fetching, error } = result;
-  console.log(data);
+
+  const refresh = () => {
+    reexecuteQuery({ requestPolicy: 'cache-and-network' });
+  };
 
   if (fetching) return <div>fetching</div>;
   if (error) return <div>error</div>;
 
   return (
     <div className="flex flex-col ml-24 mt-4 gap-2">
+      {showPopup ? (
+        <EditMedia
+          popupMedia={popupMedia}
+          setShowPopup={setShowPopup}
+          refresh={refresh}
+        />
+      ) : null}
       <div className="flex justify-between items-center">
         <span className="font-semibold text-sm">{title}</span>
         <span className="font-medium text-xs opacity-50 cursor-not-allowed">
@@ -56,7 +76,11 @@ export default function Trending({
           >
             {hoverTitle === media.title.romaji ? (
               <div className="absolute top-[-0.1em] left-[-1.2em] fade-in-fast">
-                <StatusDropdown media={media} />
+                <StatusDropdown
+                  media={media}
+                  setMedia={setPopupMedia}
+                  setShowPopup={setShowPopup}
+                />
               </div>
             ) : null}
             <img
