@@ -51,7 +51,7 @@ export default function Browse() {
         <div className="flex flex-col gap-3 mt-4">
           <SearchComponent userInput={userInput} setUserInput={setUserInput} />
           {userInput === '' ? null : (
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 fade-in-fast">
               <TagIcon className="h-5 w-5 text-zinc-400" />
               <div
                 onMouseEnter={() => {

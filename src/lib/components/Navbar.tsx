@@ -43,15 +43,13 @@ export default function Navbar() {
   const { data, fetching, error } = result;
   if (fetching)
     return (
-      <span className="w-10 h-10 bg-neutral-700 rounded-full animate-pulse"></span>
+      <span className="bg-neutral-900/80 backdrop-blur-lg z-50 h-96 rounded-3xl w-[4.5em] fixed mx-3 my-2 animate-pulse flex justify-center">
+        <div className="h-10 w-10 rounded-full bg-neutral-800 mt-4"></div>
+      </span>
     );
 
   return (
-    <nav className="fixed z-10 rounded-3xl mx-3 my-2 bg-neutral-900/80 backdrop-blur-lg p-4 w-18 flex flex-col gap-4 items-center">
-      {/* <span className="text-4xl bg-neutral-800 rounded-full p-1 text-center hover:animate-spin">
-        🐶
-      </span> */}
-
+    <nav className="fixed z-10 rounded-3xl mx-3 my-2 bg-neutral-900/80 backdrop-blur-lg p-4 flex flex-col gap-4 items-center fade-in-fast">
       <Image
         src={data.Viewer.avatar.large}
         alt="Picture of the author"
@@ -59,9 +57,6 @@ export default function Navbar() {
         height={500}
         className="w-10 h-10 rounded-full borders bg-neutral-700 object-cover"
       />
-
-      {/* <div>{viewer.name || viewer.payload.name}</div> */}
-
       <div className="flex flex-col items-center justify-between h-96 pb-2 text-neutral-700">
         <div className="flex flex-col gap-2 ">
           <ToolTip title="Home" position="right-start">

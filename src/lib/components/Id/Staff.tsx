@@ -10,7 +10,7 @@ export default function Staff({ data }: { data: any }) {
         {data.edges.map((media, index) => (
           <div
             key={media.node.name.full + media.role}
-            className="flex bg-neutral-900 rounded pr-32"
+            className="flex bg-neutral-900 rounded pr-32 fade-in-fast"
           >
             <img
               src={media.node.image.large}

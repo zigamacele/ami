@@ -36,7 +36,7 @@ export const GetBannerImage = ({
   // dispatch(update(data.Viewer));
 
   return (
-    <header className="flex w-screen bg-neutral-900 h-32 justify-end items-end relative">
+    <header className="flex w-screen bg-neutral-900 h-32 justify-end items-end relative fade-in-slow">
       <div className="absolute opacity-30 w-full h-32 bg-gradient-to-t from-neutral-900 via-neutral-900 top-0"></div>
       {hoverBackground === '' || !hoverBackground ? (
         <div>

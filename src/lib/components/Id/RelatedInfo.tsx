@@ -8,9 +8,12 @@ export default function RelatedInfo({ data }: { data: any }) {
       <span className="text-xs font-medium opacity-80">Relations</span>
       <div className="flex text-[10px] overflow-x-scroll w-[56em] gap-4 h-20">
         {data.nodes.map((media, index) => (
-          <div key={media.id} className="flex bg-neutral-900 rounded pr-32">
+          <div
+            key={media.id}
+            className="flex bg-neutral-900 rounded pr-32 fade-in-fast"
+          >
             <img
-              onClick={() => router.push(`/${media.id}`)}
+              onClick={() => router.push(`/id/${media.id}`)}
               src={media.coverImage.large}
               className="h-20 w-14 object-cover rounded-l cursor-pointer"
             />
@@ -20,7 +23,7 @@ export default function RelatedInfo({ data }: { data: any }) {
                   {data.edges[index].relationType}
                 </span>
                 <span
-                  onClick={() => router.push(`/${media.id}`)}
+                  onClick={() => router.push(`/id/${media.id}`)}
                   className="w-24 truncate text-xs cursor-pointer"
                 >
                   {media.title.romaji}

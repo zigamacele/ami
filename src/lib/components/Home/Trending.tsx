@@ -72,7 +72,7 @@ export default function Trending({
               setHoverBackground('');
               setHoverTitle('');
             }}
-            className="relative"
+            className="relative hover:opacity-80 fade-in-fast"
           >
             {hoverTitle === media.title.romaji ? (
               <div className="absolute top-[-0.1em] left-[-1.2em] fade-in-fast">
@@ -84,7 +84,7 @@ export default function Trending({
               </div>
             ) : null}
             <img
-              onClick={() => router.push(`/${media.id}`)}
+              onClick={() => router.push(`/id/${media.id}`)}
               src={media.coverImage.large}
               alt={media.title.romaji}
               className="h-32 w-24 object-cover rounded cursor-pointer"

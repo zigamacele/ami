@@ -31,7 +31,7 @@ export default function Top100({
   if (error) return <div>error</div>;
 
   return (
-    <div className="flex flex-col ml-24 mt-4 gap-2">
+    <div className="flex flex-col ml-24 mt-4 gap-2 fade-in-fast">
       <div className="flex justify-between items-center">
         <span className="font-semibold text-sm">{title}</span>
         <span className="font-medium text-xs opacity-50 cursor-not-allowed">
@@ -43,7 +43,7 @@ export default function Top100({
         {data.Page.media.map((media, index) => (
           <div
             key={index}
-            className="flex gap-4"
+            className="flex gap-4 fade-in-fast hover:opacity-80"
             onMouseEnter={() => setHoverBackground(media.bannerImage)}
             onMouseLeave={() => setHoverBackground('')}
           >
@@ -54,14 +54,14 @@ export default function Top100({
             <div className="bg-neutral-900 rounded p-2 flex justify-between w-full">
               <div className="flex gap-2">
                 <img
-                  onClick={() => router.push(`/${media.id}`)}
+                  onClick={() => router.push(`/id/${media.id}`)}
                   src={media.coverImage.large}
                   alt={media.title.romaji}
                   className="h-16 w-10 object-cover rounded cursor-pointer"
                 />
                 <div className="flex flex-col gap-2 justify-center">
                   <span
-                    onClick={() => router.push(`/${media.id}`)}
+                    onClick={() => router.push(`/id/${media.id}`)}
                     className="font-medium text-sm truncate w-60 cursor-pointer"
                   >
                     {media.title.romaji}
@@ -75,7 +75,7 @@ export default function Top100({
                             ? media.coverImage.color
                             : '#737373',
                         }}
-                        className={`px-2 rounded-full text-neutral-900 font-medium `}
+                        className="px-2 rounded-full text-neutral-900 font-medium"
                       >
                         {genre.toLowerCase()}
                       </div>

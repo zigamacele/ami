@@ -39,11 +39,11 @@ export default function InProgress({
           if (media.status === 'CURRENT')
             return (
               <div
-                onClick={() => router.push(`/${media.media.id}`)}
+                onClick={() => router.push(`/id/${media.media.id}`)}
                 key={media.media.title.romaji}
                 onMouseEnter={() => setHoverBackground(media.media.bannerImage)}
                 onMouseLeave={() => setHoverBackground('')}
-                className="relative cursor-pointer fade-in-fast"
+                className="relative cursor-pointer fade-in-fast from-black hover:from-neutral-500"
               >
                 {media.media.nextAiringEpisode ? (
                   <div className="absolute bg-neutral-900 z-10 top-1 right-1 py-1 px-2 rounded-full text-[10px]">
@@ -70,7 +70,7 @@ export default function InProgress({
                     </span>
                   </div>
                 </div>
-                <div className="absolute opacity-30 w-full h-20 bg-gradient-to-t from-black top-0 rounded"></div>
+                <div className="absolute opacity-30 w-full h-20 bg-gradient-to-t top-0 rounded"></div>
                 <img
                   src={
                     media.media.bannerImage

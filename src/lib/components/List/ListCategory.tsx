@@ -56,7 +56,9 @@ export default function ListCategory({
           refresh={refresh}
         />
       ) : null}
-      <span className="font-semibold text-sm text-left ml-8">{title}</span>
+      <span className="font-semibold text-sm text-left ml-8 fade-in-fast">
+        {title}
+      </span>
       <div className="flex flex-col bg-neutral-900 p-2 rounded">
         <div className="flex justify-between p-2 font-medium text-sm">
           <div className="flex gap-1">

@@ -25,7 +25,7 @@ export default function IndividualMedia({
         setIsHovering(false);
         setHoverBackground('');
       }}
-      className="flex flex-col gap-1 relative"
+      className="flex flex-col gap-1 relative fade-in-fast"
     >
       {isHovering ? (
         <HoverMenu
@@ -36,7 +36,7 @@ export default function IndividualMedia({
         />
       ) : null}
       <img
-        onClick={() => router.push(`/${media.id}`)}
+        onClick={() => router.push(`/id/${media.id}`)}
         src={media.coverImage.large}
         className="h-52 w-36 object-cover rounded cursor-pointer"
         alt={media.id}
@@ -48,7 +48,7 @@ export default function IndividualMedia({
           ) : null}
         </div>
         <span
-          onClick={() => router.push(`/${media.id}`)}
+          onClick={() => router.push(`/id/${media.id}`)}
           className="w-32 truncate opacity-70 text-sm cursor-pointer"
         >
           {media.title.romaji}

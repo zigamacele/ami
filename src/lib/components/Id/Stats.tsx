@@ -9,7 +9,7 @@ import IndividualStat from './IndividualStat';
 
 export default function Stats({ data }: { data: any }) {
   return (
-    <div className="bg-neutral-900 w-40 h-full rounded flex flex-col text-sm p-4 gap-2">
+    <div className="bg-neutral-900 w-40 h-full rounded flex flex-col text-sm p-4 gap-2 mb-6 fade-in-fast">
       <IndividualStat data={humanFormat(data.format)} title="Format" />
       {data.type === 'ANIME' ? (
         <IndividualStat data={data.episodes} title="Episodes" />

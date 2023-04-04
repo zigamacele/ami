@@ -10,7 +10,7 @@ import { addToFavorites } from '@/lib/graphql/query/mutations/addToFavorites';
 import { singleMediaInfo } from '@/lib/graphql/query/singleMediaInfo';
 import { addedToFavorites, humanStatus } from '@/lib/helpers/anilistResponse';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { useMutation, useQuery } from 'urql';
 
@@ -65,10 +65,10 @@ export default function Id() {
       <div className="flex flex-col">
         <Navbar />
         <GetBannerImage hoverBackground={data.Media.bannerImage} />
-        <div
+        {/* <div
           style={{ zIndex: '-1' }}
           className="absolute w-full top-0 h-[20em] bg-neutral-900/60 rounded-b z-0"
-        ></div>
+        ></div> */}
         {showPopup ? (
           <EditMedia
             setShowPopup={setShowPopup}
@@ -76,14 +76,14 @@ export default function Id() {
             refresh={refresh}
           />
         ) : null}
-        <div className="flex flex-col absolute left-[6em] top-10 gap-3 mb-10">
-          <div className="flex gap-4">
-            <div className="flex flex-col gap-2">
+        <div className="flex flex-col absolute top-10 gap-3 mb-10">
+          <div className="flex gap-4 w-screen">
+            <div className="absolute flex flex-col ml-24 gap-2 fade-in-fast">
               <img
                 onClick={refresh}
                 src={data.Media.coverImage.large}
                 alt="Picture of the author"
-                className="w-40 object-cover rounded"
+                className="w-40 h-60 object-cover rounded"
               />
               <div className="flex items-center justify-between">
                 <div
@@ -112,14 +112,14 @@ export default function Id() {
                 />
               </div>
             </div>
-            <div className="mt-[7.8em] flex flex-col gap-4">
-              <span className="opacity-80 text-lg truncate w-[30em]">
+            <div className="mt-[5.5em] pt-12 pb-4 flex flex-col gap-4 bg-neutral-900/60 pl-[17.5em] w-full">
+              <span className="opacity-80 text-lg truncate w-[30em] fade-in-slow">
                 {data.Media.title.romaji}
               </span>
               <Description desc={data.Media.description} />
             </div>
           </div>
-          <div className="flex gap-4 mt-4">
+          <div className="flex gap-4 mt-4 ml-24">
             <Stats data={data.Media} />
             <div className="flex flex-col gap-4">
               <RelatedInfo data={data.Media.relations} />
@@ -135,6 +135,7 @@ export default function Id() {
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
                     title="Embedded youtube"
+                    className="fade-in-fast"
                   />
                 </div>
               ) : null}

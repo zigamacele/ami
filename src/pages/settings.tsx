@@ -30,7 +30,10 @@ export default function Settings() {
               Logout
             </span>
             <span
-              onClick={() => router.push('/')}
+              onClick={() => {
+                localStorage.clear();
+                router.push('/');
+              }}
               className="bg-neutral-700 px-4 py-1 rounded hover:bg-neutral-600 cursor-pointer"
             >
               Update User

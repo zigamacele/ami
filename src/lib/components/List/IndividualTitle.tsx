@@ -28,7 +28,7 @@ export default function IndividualTitle({
         setIsHovering(false);
         setHoverBackground('');
       }}
-      className="flex items-center justify-between hover:bg-neutral-700 rounded p-2 text-sm"
+      className="flex items-center justify-between hover:bg-neutral-700 rounded p-2 text-sm fade-in-fast"
     >
       <div className="flex items-center gap-2">
         {!isHovering ? (
@@ -49,7 +49,7 @@ export default function IndividualTitle({
           </div>
         )}
         <span
-          onClick={() => router.push(`/${media.media.id}`)}
+          onClick={() => router.push(`/id/${media.media.id}`)}
           className="truncate w-64 text-base cursor-pointer"
         >
           {media.media.title.romaji}

@@ -51,7 +51,7 @@ export default function EditMedia({
             className="w-24 h-32 rounded object-cover"
             alt={popupMedia.title.romaji}
           />
-          <span className="mt-16">{popupMedia.title.romaji}</span>
+          <span className="self-end">{popupMedia.title.romaji}</span>
         </div>
         <div className="mt-16 ml-8 text-xs">
           <Inputs

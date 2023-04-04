@@ -35,9 +35,8 @@ export default function Index() {
 
   useEffect(() => {
     if (!checkCookies) router.push('/login');
-    if (checkCookies && data) {
+    if (checkCookies && data && !localStorage.getItem('viewerId')) {
       refresh();
-      console.log('VIEWER UPDATED');
       localStorage.setItem('viewerName', data.Viewer.name);
       localStorage.setItem('viewerId', data.Viewer.id);
       localStorage.setItem('viewerAvatar', data.Viewer.avatar.large);
@@ -46,6 +45,11 @@ export default function Index() {
         'viewerScoreFormat',
         data.Viewer.mediaListOptions.scoreFormat
       );
+    }
+    if (checkCookies && data && localStorage.getItem('viewerId')) {
+      refresh();
+      console.log('VIEWER UPDATED');
+
       router.push('/home');
     }
   }, [data]);

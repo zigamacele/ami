@@ -10,7 +10,7 @@ export default function Characters({ data }: { data: any }) {
         {data.edges.slice(0, 6).map((media, index) => (
           <div
             key={data.nodes[index].name.full}
-            className="flex bg-neutral-900 rounded justify-between min-w-[25.5em]"
+            className="flex bg-neutral-900 rounded justify-between min-w-[25.5em] fade-in-fast"
           >
             <div className="flex">
               <img

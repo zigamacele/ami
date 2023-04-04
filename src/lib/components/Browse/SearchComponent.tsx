@@ -8,7 +8,7 @@ export default function SearchComponent({
   setUserInput: any;
 }) {
   return (
-    <div className="flex flex-col text-zinc-400 shadow-md">
+    <div className="flex flex-col text-zinc-400 shadow-md fade-in-fast">
       <div
         onClick={(e) => e.stopPropagation()}
         className="flex items-center gap-4  h-9 rounded px-4  bg-neutral-700"
