@@ -25,7 +25,7 @@ export default function IndividualMedia({
         setIsHovering(false);
         setHoverBackground('');
       }}
-      className="flex flex-col gap-1 relative fade-in-fast"
+      className="flex flex-col gap-1 relative fade-in-fast hover:text-white"
     >
       {isHovering ? (
         <HoverMenu
@@ -49,7 +49,7 @@ export default function IndividualMedia({
         </div>
         <span
           onClick={() => router.push(`/id/${media.id}`)}
-          className="w-32 truncate opacity-70 text-sm cursor-pointer"
+          className="w-32 truncate opacity-60 text-sm cursor-pointer"
         >
           {media.title.romaji}
         </span>

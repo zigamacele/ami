@@ -7,15 +7,16 @@ export default function RelatedInfo({ data }: { data: any }) {
     <div className="flex flex-col gap-2">
       <span className="text-xs font-medium opacity-80">Relations</span>
       <div className="flex text-[10px] overflow-x-scroll w-[56em] gap-4 h-20">
-        {data.nodes.map((media, index) => (
+        {data.nodes.map((media: any, index: number) => (
           <div
             key={media.id}
-            className="flex bg-neutral-900 rounded pr-32 fade-in-fast"
+            className="flex bg-neutral-900 rounded pr-32 fade-in-fast hover:opacity-80"
           >
             <img
               onClick={() => router.push(`/id/${media.id}`)}
               src={media.coverImage.large}
               className="h-20 w-14 object-cover rounded-l cursor-pointer"
+              alt={media.title.romaji}
             />
             <div className="flex flex-col justify-between p-2">
               <div className="flex flex-col gap-1">

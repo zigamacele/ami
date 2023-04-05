@@ -1,21 +1,20 @@
-import { useRouter } from 'next/router';
 import React from 'react';
 
 export default function Characters({ data }: { data: any }) {
-  const router = useRouter();
   return (
     <div className="flex flex-col gap-2">
       <span className="text-xs font-medium opacity-80">Characters</span>
       <div className="flex text-[10px] flex-wrap w-[56em] gap-4 h-20">
-        {data.edges.slice(0, 6).map((media, index) => (
+        {data.edges.slice(0, 6).map((media: any, index: number) => (
           <div
             key={data.nodes[index].name.full}
-            className="flex bg-neutral-900 rounded justify-between min-w-[25.5em] fade-in-fast"
+            className="flex bg-neutral-900 rounded justify-between min-w-[25.5em] fade-in-fast hover:opacity-80"
           >
             <div className="flex">
               <img
                 src={media.node.image.large}
                 className="h-20 object-cover rounded-l cursor-not-allowed"
+                alt={data.nodes[index].name.full}
               />
               <div className="flex flex-col justify-between p-2">
                 <div className="flex flex-col gap-1">
@@ -43,6 +42,7 @@ export default function Characters({ data }: { data: any }) {
                 <img
                   src={media.voiceActors[0].image.large}
                   className="h-20 object-cover rounded-r cursor-not-allowed"
+                  alt={media.voiceActors[0].name.full}
                 />
               </div>
             ) : null}

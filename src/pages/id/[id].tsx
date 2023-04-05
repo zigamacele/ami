@@ -90,9 +90,9 @@ export default function Id() {
                   onClick={() => {
                     setShowPopup(true);
                   }}
-                  className="flex items-center justify-center w-[7.5em] gap-2 bg-neutral-600 rounded py-1 cursor-pointer"
+                  className="flex items-center justify-between w-[7.5em] gap-2 bg-neutral-600 hover:bg-neutral-500 rounded cursor-pointer"
                 >
-                  <span className="text-sm ">
+                  <span className="text-sm pl-3">
                     {data.Media.mediaListEntry
                       ? humanStatus(
                           data.Media.mediaListEntry.status,
@@ -100,7 +100,7 @@ export default function Id() {
                         )
                       : 'Add to List'}
                   </span>
-                  <ChevronDownIcon className="w-4 h-4" />
+                  <ChevronDownIcon className="w-7 h-7 rounded-r bg-neutral-500 p-2" />
                 </div>
                 <HeartIcon
                   onClick={submitFavorite}
@@ -108,7 +108,7 @@ export default function Id() {
                     data.Media.isFavourite
                       ? 'text-neutral-200/60'
                       : 'text-neutral-200'
-                  } rounded p-1.5 cursor-pointer bg-red-500`}
+                  } rounded p-1.5 cursor-pointer bg-red-500 hover:bg-red-600`}
                 />
               </div>
             </div>

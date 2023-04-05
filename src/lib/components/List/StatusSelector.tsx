@@ -12,12 +12,6 @@ export default function StatusSelector({
   return (
     <div className="flex items-center absolute right-36 top-1 text-xs z-10 bg-neutral-900/80 backdrop-blur-md px-2 py-1 rounded-full gap-2 fade-in-fast">
       <span
-        onClick={() => setStatus('ALL')}
-        className={`${status === 'ALL' ? null : 'opacity-30'} cursor-pointer`}
-      >
-        ALL
-      </span>
-      <span
         onClick={() => {
           setStatus('CURRENT');
           localStorage.setItem('listStatus', 'CURRENT');

@@ -5,7 +5,7 @@ import React from 'react';
 export default function MediaNotification({ notif }: { notif: any }) {
   const router = useRouter();
   return (
-    <div className="flex justify-between w-[53em] text-sm bg-neutral-900 p-2 rounded fade-in-fast">
+    <div className="flex justify-between w-[53em] text-sm bg-neutral-900 p-2 rounded fade-in-fast hover:opacity-80">
       <div>
         <div className="flex items-center gap-3">
           <img

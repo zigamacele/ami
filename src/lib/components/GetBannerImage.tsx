@@ -1,8 +1,4 @@
-import Image from 'next/image';
-import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { gql, useQuery } from 'urql';
-import { update } from '../redux/viewerSlice';
 
 const getViewer = gql`
   query {
@@ -22,7 +18,6 @@ export const GetBannerImage = ({
 }: {
   hoverBackground: string;
 }) => {
-  // const dispatch = useDispatch();
   const [result] = useQuery({
     query: getViewer,
   });
@@ -30,10 +25,6 @@ export const GetBannerImage = ({
   const { data, fetching, error } = result;
   if (fetching)
     return <span className="w-screen h-32 bg-neutral-700 animate-pulse"></span>;
-
-  // console.log('VIEWER', data);
-
-  // dispatch(update(data.Viewer));
 
   return (
     <header className="flex w-screen bg-neutral-900 h-32 justify-end items-end relative fade-in-slow">

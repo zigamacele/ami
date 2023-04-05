@@ -11,8 +11,6 @@ export default function Description({ desc }: { desc: string }) {
   useEffect(() => {
     setReadMore(false);
     if (ref.current && ref.current.clientHeight > maxHeight) {
-      console.log('ref', ref);
-      console.log('ref.current', ref.current);
       setIsOverflowing(true);
     } else {
       setIsOverflowing(false);

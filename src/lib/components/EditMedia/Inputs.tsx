@@ -126,13 +126,13 @@ export default function Inputs({
     <section className="flex flex-wrap gap-3">
       <span
         onClick={submitEditedMedia}
-        className="absolute top-32 right-2 text-xs bg-neutral-600 px-3 py-1.5 rounded cursor-pointer"
+        className="absolute top-32 right-2 text-xs bg-neutral-600 hover:bg-neutral-500 px-3 py-1.5 rounded cursor-pointer"
       >
         Done
       </span>
       <span
         onClick={submitDeleteMedia}
-        className="absolute right-2 bottom-2 text-xs bg-neutral-900 px-3 py-1.5 rounded cursor-pointer"
+        className="absolute right-2 bottom-2 text-xs bg-neutral-900 hover:bg-neutral-700 px-3 py-1.5 rounded cursor-pointer"
       >
         Delete
       </span>

@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import React from 'react';
+import draco from '../../public/draco.png';
 import logo from '../lib/assets/anilist.svg';
 
 export default function Login() {

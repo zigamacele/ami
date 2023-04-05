@@ -8,14 +8,14 @@ import { useEffect, useState } from 'react';
 
 export default function List() {
   const [type, setType] = useState('ANIME');
-  const [status, setStatus] = useState('ALL');
+  const [status, setStatus] = useState('CURRENT');
   const [hoverBackground, setHoverBackground] = useState('');
 
   useEffect(() => {
     const listStatus =
       typeof window !== 'undefined'
-        ? localStorage.getItem('listStatus') || 'ALL'
-        : 'ALL';
+        ? localStorage.getItem('listStatus') || 'CURRENT'
+        : 'CURRENT';
 
     const viewerType =
       typeof window !== 'undefined'
@@ -35,7 +35,7 @@ export default function List() {
         <Navbar />
         <GetBannerImage hoverBackground={hoverBackground} />
         <div className="flex flex-col ml-24 mr-4 mt-2">
-          {status === 'ALL' || status === 'CURRENT' ? (
+          {status === 'CURRENT' ? (
             <ListCategory
               query={inProgress}
               type={type}
@@ -44,7 +44,7 @@ export default function List() {
               setHoverBackground={setHoverBackground}
             />
           ) : null}
-          {status === 'ALL' || status === 'PAUSED' ? (
+          {status === 'PAUSED' ? (
             <ListCategory
               query={inProgress}
               type={type}
@@ -53,7 +53,7 @@ export default function List() {
               setHoverBackground={setHoverBackground}
             />
           ) : null}
-          {status === 'ALL' || status === 'DROPPED' ? (
+          {status === 'DROPPED' ? (
             <ListCategory
               query={inProgress}
               type={type}
@@ -62,7 +62,7 @@ export default function List() {
               setHoverBackground={setHoverBackground}
             />
           ) : null}
-          {status === 'ALL' || status === 'PLANNING' ? (
+          {status === 'PLANNING' ? (
             <ListCategory
               query={inProgress}
               type={type}
@@ -71,7 +71,7 @@ export default function List() {
               setHoverBackground={setHoverBackground}
             />
           ) : null}
-          {status === 'ALL' || status === 'COMPLETED' ? (
+          {status === 'COMPLETED' ? (
             <ListCategory
               query={inProgress}
               type={type}

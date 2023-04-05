@@ -1,9 +1,7 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { gql, useQuery } from 'urql';
-import { RootState } from '../store';
 import ToolTip from './Navbar/Tooltip';
 
 import {
@@ -33,9 +31,6 @@ const getViewer = gql`
 export default function Navbar() {
   const router = useRouter();
 
-  // const viewer = useSelector((state: RootState) => state.viewer.value);
-  // console.log(viewer);
-
   const [result] = useQuery({
     query: getViewer,
   });
@@ -49,13 +44,13 @@ export default function Navbar() {
     );
 
   return (
-    <nav className="fixed z-10 rounded-3xl mx-3 my-2 bg-neutral-900/80 backdrop-blur-lg p-4 flex flex-col gap-4 items-center fade-in-fast">
+    <nav className="fixed z-10 rounded-3xl mx-3 my-2 bg-neutral-900/80 backdrop-blur-lg p-4 flex flex-col gap-4 items-center">
       <Image
         src={data.Viewer.avatar.large}
         alt="Picture of the author"
         width={500}
         height={500}
-        className="w-10 h-10 rounded-full borders bg-neutral-700 object-cover"
+        className="w-10 h-10 rounded-full borders bg-neutral-700 object-cover hover:animate-spin cursor-pointer"
       />
       <div className="flex flex-col items-center justify-between h-96 pb-2 text-neutral-700">
         <div className="flex flex-col gap-2 ">
@@ -94,7 +89,7 @@ export default function Navbar() {
               className="relative hover:text-neutral-500"
             >
               {data.Viewer.unreadNotificationCount === 0 ? null : (
-                <div className="absolute top-[-5px] right-[-5px] bg-rose-600 border border-neutral-900 cursor-pointer w-4 h-4 rounded-full flex justify-center items-center text-white text-xs pb-0.5">
+                <div className="absolute top-[-5px] right-[-5px] bg-rose-600 border border-neutral-900 cursor-pointer w-4 h-4 rounded-full flex justify-center items-center text-white text-xs">
                   {data.Viewer.unreadNotificationCount}
                 </div>
               )}

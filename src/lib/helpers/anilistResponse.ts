@@ -80,5 +80,6 @@ export const humanMediaStatus = (status: string) => {
 };
 
 export const humanSeason = (season: string) => {
+  if (!season) return '?';
   return _.startCase(season.toLocaleLowerCase());
 };
