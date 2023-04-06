@@ -2,6 +2,7 @@ import EditMedia from '@/lib/components/EditMedia';
 import { GetBannerImage } from '@/lib/components/GetBannerImage';
 import Characters from '@/lib/components/Id/Characters';
 import Description from '@/lib/components/Id/Description';
+import IdSkeleton from '@/lib/components/Id/IdSkeleton';
 import RelatedInfo from '@/lib/components/Id/RelatedInfo';
 import Staff from '@/lib/components/Id/Staff';
 import Stats from '@/lib/components/Id/Stats';
@@ -43,7 +44,7 @@ export default function Id() {
 
   const { data, fetching, error } = result;
 
-  if (fetching) return <div>fetching</div>;
+  if (fetching) return <IdSkeleton />;
   if (error) return <div>error</div>;
 
   console.log(data);
@@ -53,22 +54,28 @@ export default function Id() {
       data.Media.type === 'ANIME'
         ? { animeId: data.Media.id }
         : { mangaId: data.Media.id };
+    const loading = toast.loading('Please wait...');
     updateResult(variables).then((result) =>
-      toast.success(
-        addedToFavorites(data.Media.title.romaji, data.Media.isFavourite)
-      )
+      toast.update(loading, {
+        render: addedToFavorites(
+          data.Media.title.romaji,
+          data.Media.isFavourite
+        ),
+        type: 'success',
+        isLoading: false,
+        autoClose: 3000,
+      })
     );
   };
+  console.log('1', data.Media.relations);
+  console.log('2', data.Media.staff);
+  console.log('3', data.Media.characters);
 
   return (
     <div>
       <div className="flex flex-col">
         <Navbar />
         <GetBannerImage hoverBackground={data.Media.bannerImage} />
-        {/* <div
-          style={{ zIndex: '-1' }}
-          className="absolute w-full top-0 h-[20em] bg-neutral-900/60 rounded-b z-0"
-        ></div> */}
         {showPopup ? (
           <EditMedia
             setShowPopup={setShowPopup}
@@ -122,11 +129,19 @@ export default function Id() {
           <div className="flex gap-4 mt-4 ml-24">
             <Stats data={data.Media} />
             <div className="flex flex-col gap-4">
-              <RelatedInfo data={data.Media.relations} />
-              <Staff data={data.Media.staff} />
-              <Characters data={data.Media.characters} />
-              {data.Media.trailer ? (
-                <div className="flex flex-col gap-2 text-xs font-medium mt-48 mb-5">
+              {data.Media.relations.edges.length > 0 && (
+                <RelatedInfo data={data.Media.relations} />
+              )}
+              {data.Media.staff.edges.length > 0 && (
+                <Staff data={data.Media.staff} />
+              )}
+              {data.Media.characters.edges.length > 0 && (
+                <div className="h-[18.7em]">
+                  <Characters data={data.Media.characters} />
+                </div>
+              )}
+              {data.Media.trailer && (
+                <div className="flex flex-col gap-2 text-xs font-medium mb-5">
                   <div className="opacity-80">Trailer</div>
                   <iframe
                     width="525"
@@ -138,7 +153,7 @@ export default function Id() {
                     className="fade-in-fast"
                   />
                 </div>
-              ) : null}
+              )}
             </div>
           </div>
         </div>

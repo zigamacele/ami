@@ -37,9 +37,6 @@ export default function Browse() {
   };
 
   const { data, fetching, error } = result;
-  console.log(data);
-
-  console.log('ZIGA DATA', data);
 
   return (
     <section className="flex flex-col">
@@ -48,12 +45,7 @@ export default function Browse() {
       <GetBannerImage hoverBackground={hoverBackground} />
       <div className="flex flex-col items-center justify-center ml-20">
         <div className="flex flex-col gap-3 mt-4">
-          {data && (
-            <SearchComponent
-              userInput={userInput}
-              setUserInput={setUserInput}
-            />
-          )}
+          <SearchComponent userInput={userInput} setUserInput={setUserInput} />
           {userInput === '' ? null : (
             <div className="flex items-center gap-2 fade-in-fast">
               <TagIcon className="h-5 w-5 text-zinc-400" />

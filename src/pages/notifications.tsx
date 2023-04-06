@@ -1,6 +1,7 @@
 import { GetBannerImage } from '@/lib/components/GetBannerImage';
 import Navbar from '@/lib/components/Navbar';
 import MediaNotification from '@/lib/components/Notifications/MediaNotification';
+import NotificationsSkeleton from '@/lib/components/Notifications/NotificationsSkeleton';
 import UserNotification from '@/lib/components/Notifications/UserNotification';
 import { Notification } from '@/lib/graphql/query/notification';
 import { useState } from 'react';
@@ -19,7 +20,7 @@ export default function Notifications() {
   const userNotif = ['ACTIVITY_MESSAGE', 'ACTIVITY_LIKE', 'FOLLOWING'];
   const mediaNotif = ['AIRING', 'RELATED_MEDIA_ADDITION', 'MEDIA_DATA_CHANGE'];
 
-  if (fetching) return <div>fetching</div>;
+  if (fetching) return <NotificationsSkeleton />;
   if (error) return <div>error</div>;
 
   return (

@@ -6,11 +6,11 @@ export default function RelatedInfo({ data }: { data: any }) {
   return (
     <div className="flex flex-col gap-2">
       <span className="text-xs font-medium opacity-80">Relations</span>
-      <div className="flex text-[10px] overflow-x-scroll w-[56em] gap-4 h-20">
+      <div className="flex text-[10px] overflow-auto w-[56em] gap-4 h-20">
         {data.nodes.map((media: any, index: number) => (
           <div
             key={media.id}
-            className="flex bg-neutral-900 rounded pr-32 fade-in-fast hover:opacity-80"
+            className="flex bg-neutral-900 rounded w-64 fade-in-fast shrink-0 hover:opacity-80 gap-10="
           >
             <img
               onClick={() => router.push(`/id/${media.id}`)}

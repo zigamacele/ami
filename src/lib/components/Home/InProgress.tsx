@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import { useMutation, useQuery } from 'urql';
+import InProgressSkeleton from './InProgress/InProgressSkeleton';
 
 export default function InProgress({
   type,
@@ -33,34 +34,22 @@ export default function InProgress({
     variables: variables,
   });
   const { data, fetching, error } = result;
-  console.log(result);
-
   const [resultMutation, update] = useMutation(updateProgress);
 
   const submit = () => {
     const variables = { mediaId: hovering.id, progress: hovering.progress + 1 };
+    const loading = toast.loading('Please wait...');
     update(variables).then((result) => {
-      console.log(result);
-      toast.success(
-        `${result.data.SaveMediaListEntry.media.title.romaji} list entry updated`
-      );
+      toast.update(loading, {
+        render: `${result.data.SaveMediaListEntry.media.title.romaji} list entry updated`,
+        type: 'success',
+        isLoading: false,
+        autoClose: 3000,
+      });
     });
   };
 
-  if (fetching)
-    return (
-      <div className=" mt-6 flex flex-col rounded-full gap-2 fade-in-fast">
-        <div className="self-end w-32 h-2.5 bg-neutral-900 rounded-full animate-pulse "></div>
-        <div className="flex flex-col gap-2">
-          {[...Array(5)].map((x, index) => (
-            <div
-              key={index}
-              className="w-[13.5em] rounded h-20 bg-neutral-900 animate-pulse "
-            ></div>
-          ))}
-        </div>
-      </div>
-    );
+  if (fetching) return <InProgressSkeleton />;
   if (error) return <div>error</div>;
   return (
     <div className="flex flex-col gap-2 mt-4">

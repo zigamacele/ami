@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import React from 'react';
 import { useQuery } from 'urql';
+import Top100Skeleton from './Top100/Top100Skeleton';
 
 import { FaceSmileIcon } from '@heroicons/react/24/outline';
 
@@ -27,22 +28,7 @@ export default function Top100({
   });
   const { data, fetching, error } = result;
 
-  if (fetching)
-    return (
-      <div className="ml-24 mt-6 flex flex-col rounded-full gap-2 fade-in-fast">
-        <div className="flex justify-between">
-          <div className="w-32 h-2.5 bg-neutral-900 rounded-full animate-pulse"></div>
-          <div className="w-20 h-2.5 bg-neutral-900 rounded-full animate-pulse"></div>
-        </div>
-        <div className="flex flex-col gap-2">
-          {[...Array(10)].map((x, index) => (
-            <div key={index} className="flex items-center gap-3.5">
-              <div className="rounded h-20 w-full bg-neutral-900 animate-pulse"></div>
-            </div>
-          ))}
-        </div>
-      </div>
-    );
+  if (fetching) return <Top100Skeleton />;
   if (error) return <div>error</div>;
 
   return (

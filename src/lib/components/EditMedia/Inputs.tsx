@@ -103,8 +103,14 @@ export default function Inputs({
         },
       }),
     };
+    const loading = toast.loading('Please wait...');
     updateEdit(variables).then((result) => {
-      toast.success(`${media.title.romaji} list entry updated`);
+      toast.update(loading, {
+        render: `${media.title.romaji} list entry updated`,
+        type: 'success',
+        isLoading: false,
+        autoClose: 3000,
+      });
       setShowPopup(false);
     });
   };
@@ -114,8 +120,14 @@ export default function Inputs({
       const variables = {
         deleteMediaListEntryId: media.mediaListEntry.id,
       };
+      const loading = toast.loading('Please wait...');
       updateDelete(variables).then((result) => {
-        toast.success(`${media.title.romaji} removed from your list`);
+        toast.update(loading, {
+          render: `${media.title.romaji} removed from your list`,
+          type: 'success',
+          isLoading: false,
+          autoClose: 3000,
+        });
         refresh();
         setShowPopup(false);
       });

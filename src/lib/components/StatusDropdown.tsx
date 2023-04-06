@@ -33,15 +33,19 @@ export default function StatusDropdown({
 
   const submit = (status: string) => {
     const variables = { mediaId: media.id, status: status };
+    const loading = toast.loading('Please wait...');
     update(variables).then((result) =>
-      toast.success(
-        `${
+      toast.update(loading, {
+        render: `${
           result.data.SaveMediaListEntry.media.title.romaji
         } added to ${addedToList(
           result.data.SaveMediaListEntry.media.type,
           result.data.SaveMediaListEntry.status
-        )}`
-      )
+        )}`,
+        type: 'success',
+        isLoading: false,
+        autoClose: 3000,
+      })
     );
   };
 

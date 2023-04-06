@@ -10,7 +10,7 @@ export default function Staff({ data }: { data: any }) {
         {data.edges.map((media: any, index: number) => (
           <div
             key={media.node.name.full + media.role}
-            className="flex bg-neutral-900 rounded pr-32 fade-in-fast hover:opacity-80"
+            className="flex bg-neutral-900 rounded w-64 shrink-0 fade-in-fast hover:opacity-80"
           >
             <img
               src={media.node.image.large}
