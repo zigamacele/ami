@@ -44,10 +44,31 @@ export const browse = gql`
         title {
           romaji
         }
+        startDate {
+          year
+          month
+          day
+        }
+        endDate {
+          year
+          month
+          day
+        }
         bannerImage
         coverImage {
           color
           large
+        }
+        nextAiringEpisode {
+          airingAt
+          timeUntilAiring
+          episode
+          mediaId
+        }
+        studios {
+          nodes {
+            name
+          }
         }
       }
     }

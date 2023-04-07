@@ -82,12 +82,12 @@ export default function InProgress({
                     <PlusCircleIcon />
                   </div>
                 )}
-                {media.media.nextAiringEpisode ? (
+                {media.media.nextAiringEpisode && (
                   <div className="absolute bg-neutral-900 z-10 top-1 right-1 py-1 px-2 rounded-full text-[10px]">
                     {`EP ${media.media.nextAiringEpisode.episode}: 
                     ${timeFromNow(media.media.nextAiringEpisode.airingAt)}`}
                   </div>
-                ) : null}
+                )}
                 <div className="absolute z-10 text-white top-11 rounded-r-full text-[11px] pr-2 pl-1">
                   Progress: {media.progress}/
                   {type === 'ANIME'
@@ -100,16 +100,17 @@ export default function InProgress({
                 </div>
                 <div className="absolute text-sm z-10 text-white bottom-0.5 left-1 font-medium flex flex-col">
                   <div className="flex items-center gap-1">
-                    {media.media.status === 'RELEASING' ? (
-                      <div className="bg-blue-500 h-2 w-2 rounded-full"></div>
-                    ) : null}
+                    {media.media.status === 'RELEASING' && (
+                      <div className="bg-green-500 h-2 w-2 rounded-full">
+                        <div className=" bg-green-500 h-2 w-2 rounded-full animate-ping"></div>
+                      </div>
+                    )}
                     <span className="truncate w-40">
                       {media.media.title.romaji}
                     </span>
                   </div>
                 </div>
-                <div className="absolute opacity-30 w-full h-20 bg-gradient-to-t top-0 rounded"></div>
-                <div className="absolute opacity-30 w-full h-20 bg-gradient-to-t top-0 rounded"></div>
+                <div className="absolute opacity-60 w-full h-20 bg-gradient-to-t top-0 rounded"></div>
                 <img
                   src={
                     media.media.bannerImage

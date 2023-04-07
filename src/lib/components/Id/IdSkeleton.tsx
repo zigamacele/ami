@@ -16,7 +16,7 @@ export default function IdSkeleton() {
         <div className="absolute ml-[18em] mt-[11.5em] flex flex-col gap-6">
           <div className=" w-60 h-3 bg-neutral-600 animate-pulse rounded-full"></div>
           <div className="flex flex-col gap-3">
-            <div className=" w-80 h-2 bg-neutral-600 animate-pulse rounded-full"></div>
+            <div className=" w-96 h-2 bg-neutral-600 animate-pulse rounded-full"></div>
             <div className=" w-96 h-2 bg-neutral-600 animate-pulse rounded-full"></div>
             <div className=" w-96 h-2 bg-neutral-600 animate-pulse rounded-full"></div>
             <div className=" w-96 h-2 bg-neutral-600 animate-pulse rounded-full"></div>
@@ -33,7 +33,7 @@ export default function IdSkeleton() {
         </div>
         <div>
           <div className="flex flex-col gap-2 mt-7">
-            <div className=" w-24 h-2 bg-neutral-900 animate-pulse rounded-full"></div>
+            <div className=" w-40 h-2 bg-neutral-900 animate-pulse rounded-full"></div>
             <div className="flex gap-3">
               {[...Array(3)].map((x, index) => (
                 <div
@@ -44,7 +44,7 @@ export default function IdSkeleton() {
             </div>
           </div>
           <div className="flex flex-col gap-2 mt-6">
-            <div className=" w-20 h-2 bg-neutral-900 animate-pulse rounded-full"></div>
+            <div className=" w-40 h-2 bg-neutral-900 animate-pulse rounded-full"></div>
             <div className="flex gap-3">
               {[...Array(3)].map((x, index) => (
                 <div
@@ -55,7 +55,7 @@ export default function IdSkeleton() {
             </div>
           </div>
           <div className="flex flex-col gap-2 mt-6">
-            <div className=" w-36 h-2 bg-neutral-900 animate-pulse rounded-full"></div>
+            <div className=" w-40 h-2 bg-neutral-900 animate-pulse rounded-full"></div>
             <div className="flex gap-3 flex-wrap">
               {[...Array(6)].map((x, index) => (
                 <div

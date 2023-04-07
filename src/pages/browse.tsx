@@ -77,7 +77,7 @@ export default function Browse() {
             </div>
           </div>
         )}
-        {data && (
+        {data && !fetching && (
           <div className="flex flex-wrap gap-6  my-4 px-4 items-start justify-start ml-10">
             {data.Page.media.map((media: any) => (
               <IndividualMedia

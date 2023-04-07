@@ -15,7 +15,6 @@ export default function Notifications() {
     // variables: variables,
   });
   const { data, fetching, error } = result;
-  console.log(data);
 
   const userNotif = ['ACTIVITY_MESSAGE', 'ACTIVITY_LIKE', 'FOLLOWING'];
   const mediaNotif = ['AIRING', 'RELATED_MEDIA_ADDITION', 'MEDIA_DATA_CHANGE'];

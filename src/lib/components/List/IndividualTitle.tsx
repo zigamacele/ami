@@ -28,8 +28,13 @@ export default function IndividualTitle({
         setIsHovering(false);
         setHoverBackground('');
       }}
-      className="flex items-center justify-between hover:bg-neutral-700 rounded p-2 text-sm fade-in-fast"
+      className="flex items-center justify-between hover:bg-neutral-700 pl-4 rounded p-2 text-sm fade-in-fast relative"
     >
+      {!isHovering && media.media.status === 'RELEASING' && (
+        <div className="absolute left-[-1px] h-2.5 w-2.5 rounded-full bg-green-500 ">
+          <div className="h-2.5 w-2.5 rounded-full bg-green-500 animate-ping"></div>
+        </div>
+      )}
       <div className="flex items-center gap-2">
         {!isHovering ? (
           <img

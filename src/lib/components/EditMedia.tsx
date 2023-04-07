@@ -12,7 +12,6 @@ export default function EditMedia({
   setShowPopup: Function;
   popupMedia: any;
 }) {
-  console.log('POPUP', popupMedia);
   return (
     <div
       onClick={(e) => {

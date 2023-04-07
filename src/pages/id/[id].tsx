@@ -47,8 +47,6 @@ export default function Id() {
   if (fetching) return <IdSkeleton />;
   if (error) return <div>error</div>;
 
-  console.log(data);
-
   const submitFavorite = () => {
     const variables =
       data.Media.type === 'ANIME'
@@ -67,9 +65,6 @@ export default function Id() {
       })
     );
   };
-  console.log('1', data.Media.relations);
-  console.log('2', data.Media.staff);
-  console.log('3', data.Media.characters);
 
   return (
     <div>
