@@ -128,6 +128,7 @@ export default function Inputs({
           isLoading: false,
           autoClose: 3000,
         });
+        localStorage.setItem('refreshInProgress', 'refresh');
         refresh();
         setShowPopup(false);
       });

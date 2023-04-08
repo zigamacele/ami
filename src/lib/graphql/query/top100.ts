@@ -1,8 +1,8 @@
 import { gql } from 'urql';
 
 export const top100 = gql`
-  query ($type: MediaType) {
-    Page(page: 1, perPage: 10) {
+  query ($type: MediaType, $perPage: Int, $page: Int) {
+    Page(page: $page, perPage: $perPage) {
       media(sort: [SCORE_DESC, ID], isAdult: false, type: $type) {
         id
         status

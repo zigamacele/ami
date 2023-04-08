@@ -10,16 +10,20 @@ export default function Top100({
   query,
   title,
   setHoverBackground,
+  perPage,
 }: {
   type: string;
   query: any;
   title: string;
+  perPage: number;
   setHoverBackground: Function;
 }) {
   const router = useRouter();
+  const { asPath } = router;
 
   const variables = {
     type: type,
+    perPage: perPage,
   };
 
   const [result] = useQuery({
@@ -28,19 +32,26 @@ export default function Top100({
   });
   const { data, fetching, error } = result;
 
-  if (fetching) return <Top100Skeleton />;
+  if (fetching) return asPath === '/home' ? <Top100Skeleton /> : null;
   if (error) return <div>error</div>;
 
   return (
     <div className="flex flex-col ml-24 mt-4 gap-2 fade-in-fast">
       <div className="flex justify-between items-center">
         <span className="font-semibold text-sm">{title}</span>
-        <span className="font-medium text-xs opacity-50 cursor-not-allowed">
+        <span
+          onClick={() => router.push(`/browse/top100`)}
+          className="font-medium text-xs opacity-50 hover:opacity-70 cursor-pointer"
+        >
           View All
         </span>
       </div>
 
-      <div className="flex flex-col gap-2 text-xs">
+      <div
+        className={`flex flex-col gap-2 text-xs ${
+          asPath === '/browse' && 'w-[62em]'
+        }`}
+      >
         {data.Page.media.map((media: any, index: number) => (
           <div
             key={index}
@@ -68,19 +79,21 @@ export default function Top100({
                     {media.title.romaji}
                   </span>
                   <div className="flex gap-1 text-[10px]">
-                    {media.genres.slice(0, 3).map((genre: string) => (
-                      <div
-                        key={genre}
-                        style={{
-                          backgroundColor: media.coverImage.color
-                            ? media.coverImage.color
-                            : '#737373',
-                        }}
-                        className="px-2 rounded-full text-neutral-900 font-medium"
-                      >
-                        {genre.toLowerCase()}
-                      </div>
-                    ))}
+                    {media.genres
+                      .slice(0, asPath === '/browse' ? 8 : 3)
+                      .map((genre: string) => (
+                        <div
+                          key={genre}
+                          style={{
+                            backgroundColor: media.coverImage.color
+                              ? media.coverImage.color
+                              : '#737373',
+                          }}
+                          className="px-2 rounded-full text-neutral-900 font-medium"
+                        >
+                          {genre.toLowerCase()}
+                        </div>
+                      ))}
                   </div>
                 </div>
               </div>

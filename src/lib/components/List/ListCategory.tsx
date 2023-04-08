@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { gql, useQuery } from 'urql';
 import EditMedia from '../EditMedia';
 import IndividualTitle from './IndividualTitle';
@@ -44,6 +44,10 @@ export default function ListCategory({
   const refresh = () => {
     reexecuteQuery({ requestPolicy: 'cache-and-network' });
   };
+
+  useEffect(() => {
+    if (data) refresh();
+  }, []);
 
   const { data, fetching, error } = result;
   if (fetching) return <ListCategorySkeleton type={type} />;

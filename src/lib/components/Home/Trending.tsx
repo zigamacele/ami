@@ -5,15 +5,34 @@ import { gql, useQuery } from 'urql';
 import StatusDropdown from '../StatusDropdown';
 import TrendingSkeleton from './Trending/TrendingSkeleton';
 
+export const dotStatus = (status: string) => {
+  if (status === 'CURRENT')
+    return (
+      <div className="w-2.5 h-2.5 rounded-full shrink-0 bg-blue-500"></div>
+    );
+
+  if (status === 'PLANNING')
+    return (
+      <div className="w-2.5 h-2.5 rounded-full shrink-0 bg-yellow-500"></div>
+    );
+  if (status === 'COMPLETED')
+    return (
+      <div className="w-2.5 h-2.5 rounded-full shrink-0 bg-lime-500"></div>
+    );
+  return <div className="w-2.5 h-2.5 rounded-full shrink-0 bg-red-500"></div>;
+};
+
 export default function Trending({
   type,
   query,
   title,
+  perPage,
   setHoverBackground,
 }: {
   type: string;
   query: any;
   title: string;
+  perPage: number;
   setHoverBackground: Function;
 }) {
   const [hoverTitle, setHoverTitle] = useState('');
@@ -21,6 +40,7 @@ export default function Trending({
   const [showPopup, setShowPopup] = useState(false);
 
   const router = useRouter();
+  const { asPath } = router;
 
   const viewerScoreFormat =
     typeof window !== 'undefined'
@@ -30,6 +50,7 @@ export default function Trending({
   const variables = {
     type: type,
     format: viewerScoreFormat,
+    perPage: perPage,
   };
 
   const [result, reexecuteQuery] = useQuery({
@@ -42,7 +63,7 @@ export default function Trending({
     reexecuteQuery({ requestPolicy: 'cache-and-network' });
   };
 
-  if (fetching) return <TrendingSkeleton />;
+  if (fetching) return asPath === '/home' ? <TrendingSkeleton /> : null;
   if (error) return <div>error</div>;
 
   return (
@@ -56,7 +77,13 @@ export default function Trending({
       ) : null}
       <div className="flex justify-between items-center">
         <span className="font-semibold text-sm">{title}</span>
-        <span className="font-medium text-xs opacity-50 cursor-not-allowed">
+        <span
+          onClick={() => {
+            if (title === 'TRENDING NOW') router.push(`/browse/trending`);
+            if (title === 'ALL TIME POPULAR') router.push(`/browse/popular`);
+          }}
+          className="font-medium text-xs opacity-50 hover:opacity-70 cursor-pointer"
+        >
           View All
         </span>
       </div>
@@ -88,8 +115,16 @@ export default function Trending({
               onClick={() => router.push(`/id/${media.id}`)}
               src={media.coverImage.large}
               alt={media.title.romaji}
-              className="h-32 w-24 object-cover rounded cursor-pointer"
+              className={`${
+                asPath === '/browse' ? 'h-48 w-36' : 'h-32 w-24'
+              } object-cover rounded cursor-pointer`}
             />
+            {asPath === '/browse' && (
+              <div className="flex items-center mt-1 w-32 truncate text-sm cursor-pointer gap-1.5">
+                {media.mediaListEntry && dotStatus(media.mediaListEntry.status)}
+                <div className="opacity-60">{media.title.romaji}</div>
+              </div>
+            )}
           </div>
         ))}
       </div>

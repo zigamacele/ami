@@ -25,7 +25,7 @@ export default function MediaPopup({
         setIsHovering(false);
       }}
       className={`absolute rounded-lg flex flex-col justify-between bg-neutral-900/90 backdrop-blur-md h-32 w-72 z-50 top-2 fade-in-fast px-5 py-4 ${
-        positionX > 470 ? 'left-[-18em]' : 'right-[-18em] '
+        positionX > 470 ? 'left-[-18.8em]' : 'right-[-18.8em] '
       }`}
     >
       {positionX < 470 ? (

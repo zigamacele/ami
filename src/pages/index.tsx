@@ -1,3 +1,4 @@
+import LinearProgress from '@mui/material/LinearProgress';
 import { getCookie, hasCookie } from 'cookies-next';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
@@ -54,5 +55,10 @@ export default function Index() {
     }
   }, [data]);
 
-  if (fetching) return <div className="animate-spin">(￣～￣;)</div>;
+  if (fetching)
+    return (
+      <div className="w-screen">
+        <LinearProgress color="inherit" />
+      </div>
+    );
 }

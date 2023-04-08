@@ -1,22 +1,16 @@
 import { Extended } from '@/lib/components/Browse/Extended';
 import IndividualMedia from '@/lib/components/Browse/IndividualMedia';
-import PopularSection from '@/lib/components/Browse/PopularSection';
 import SearchComponent from '@/lib/components/Browse/SearchComponent';
 import { GetBannerImage } from '@/lib/components/GetBannerImage';
 import AnimeMangaSwitch from '@/lib/components/Home/AnimeMangaSwitch';
-import Top100 from '@/lib/components/Home/Top100';
 import Navbar from '@/lib/components/Navbar';
-import { allTimePopular } from '@/lib/graphql/query/allTimePopular';
 import { browse } from '@/lib/graphql/query/browse';
-import { top100 } from '@/lib/graphql/query/top100';
+import { trendingNow } from '@/lib/graphql/query/trendingNow';
 import { TagIcon, XMarkIcon } from '@heroicons/react/24/solid';
 import React, { useState } from 'react';
 import { useQuery } from 'urql';
 
-import Trending from '@/lib/components/Home/Trending';
-import { trendingNow } from '@/lib/graphql/query/trendingNow';
-
-export default function Browse() {
+export default function BrowsePath() {
   const [userInput, setUserInput] = useState('');
   const [type, setType] = useState('ANIME');
   const [loading, setLoading] = useState('ANIME');
@@ -103,7 +97,16 @@ export default function Browse() {
         </div>
       </section>
       {userInput.length === 0 && (
-        <PopularSection type={type} setHoverBackground={setHoverBackground} />
+        <div className="flex items-center justify-center mr-3">
+          <Extended
+            type={type}
+            format={viewerScoreFormat}
+            setHoverBackground={setHoverBackground}
+            perPage={20}
+            query={trendingNow}
+            title="TRENDING"
+          />
+        </div>
       )}
     </div>
   );

@@ -10,10 +10,6 @@ import { top100 } from '@/lib/graphql/query/top100';
 import { trendingNow } from '@/lib/graphql/query/trendingNow';
 import { useEffect, useState } from 'react';
 
-//title query type(anime, manga)
-//         season: SPRING
-//         seasonYear: 2023
-
 export default function Home() {
   const [type, setType] = useState('ANIME');
   const [hoverBackground, setHoverBackground] = useState('');
@@ -37,18 +33,21 @@ export default function Home() {
           <Trending
             type={type}
             query={trendingNow}
+            perPage={5}
             title="TRENDING NOW"
             setHoverBackground={setHoverBackground}
           />
           <Trending
             type={type}
             query={allTimePopular}
+            perPage={5}
             title="ALL TIME POPULAR"
             setHoverBackground={setHoverBackground}
           />
           <Top100
             type={type}
             query={top100}
+            perPage={10}
             title={`TOP 100 ${type}`}
             setHoverBackground={setHoverBackground}
           />

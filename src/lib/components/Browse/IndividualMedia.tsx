@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import { dotStatus } from '../Home/Trending';
 import HoverMenu from './HoverMenu';
 import MediaPopup from './MediaPopup/MediaPopup';
 
@@ -52,11 +53,9 @@ export default function IndividualMedia({
         className="h-52 w-36 object-cover rounded cursor-pointer"
         alt={media.id}
       />
-      <div className="flex">
-        <div className="flex items-center gap-1">
-          {media.status === 'RELEASING' ? (
-            <div className="bg-blue-500 h-2 w-2 rounded-full mr-1"></div>
-          ) : null}
+      <div className="flex items-center gap-1.5">
+        <div className="">
+          {media.mediaListEntry && dotStatus(media.mediaListEntry.status)}
         </div>
         <span
           onClick={() => router.push(`/id/${media.id}`)}

@@ -2,7 +2,7 @@ import { updateProgress } from '@/lib/graphql/query/mutations/updateProgress';
 import { timeFromNow } from '@/lib/helpers/moment';
 import { PlusCircleIcon } from '@heroicons/react/24/solid';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { useMutation, useQuery } from 'urql';
 import InProgressSkeleton from './InProgress/InProgressSkeleton';
@@ -29,7 +29,7 @@ export default function InProgress({
     type: type,
   };
 
-  const [result] = useQuery({
+  const [result, reexecuteQuery] = useQuery({
     query: query,
     variables: variables,
   });
@@ -48,6 +48,24 @@ export default function InProgress({
       });
     });
   };
+
+  const refresh = () => {
+    reexecuteQuery({ requestPolicy: 'cache-and-network' });
+  };
+
+  useEffect(() => {
+    if (data) refresh();
+  }, []);
+
+  const refreshInProgress =
+    typeof window !== 'undefined'
+      ? localStorage.getItem('refreshInProgress') || ''
+      : '';
+
+  useEffect(() => {
+    if (refreshInProgress === 'refresh') refresh();
+    localStorage.removeItem('refreshInProgress');
+  }, [refreshInProgress]);
 
   if (fetching) return <InProgressSkeleton />;
   if (error) return <div>error</div>;
