@@ -1,20 +1,19 @@
 import { Extended } from '@/lib/components/Browse/Extended';
+import { ExtendedTop100 } from '@/lib/components/Browse/ExtendedTop100';
 import IndividualMedia from '@/lib/components/Browse/IndividualMedia';
 import PopularSection from '@/lib/components/Browse/PopularSection';
 import SearchComponent from '@/lib/components/Browse/SearchComponent';
 import { GetBannerImage } from '@/lib/components/GetBannerImage';
 import AnimeMangaSwitch from '@/lib/components/Home/AnimeMangaSwitch';
-import Top100 from '@/lib/components/Home/Top100';
 import Navbar from '@/lib/components/Navbar';
 import { allTimePopular } from '@/lib/graphql/query/allTimePopular';
 import { browse } from '@/lib/graphql/query/browse';
 import { top100 } from '@/lib/graphql/query/top100';
+import { trendingNow } from '@/lib/graphql/query/trendingNow';
 import { TagIcon, XMarkIcon } from '@heroicons/react/24/solid';
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { useQuery } from 'urql';
-
-import Trending from '@/lib/components/Home/Trending';
-import { trendingNow } from '@/lib/graphql/query/trendingNow';
 
 export default function Browse() {
   const [userInput, setUserInput] = useState('');
@@ -22,6 +21,9 @@ export default function Browse() {
   const [loading, setLoading] = useState('ANIME');
   const [hoverBackground, setHoverBackground] = useState('');
   const [hoverTag, setHoverTag] = useState(false);
+
+  const router = useRouter();
+  const { asPath } = router;
 
   const viewerScoreFormat =
     typeof window !== 'undefined'
@@ -102,8 +104,39 @@ export default function Browse() {
           )}
         </div>
       </section>
-      {userInput.length === 0 && (
+      {userInput.length === 0 && ''}
+      {asPath === '/browse' && (
         <PopularSection type={type} setHoverBackground={setHoverBackground} />
+      )}
+      {asPath === '/browse/trending' && (
+        <Extended
+          type={type}
+          format={viewerScoreFormat}
+          setHoverBackground={setHoverBackground}
+          perPage={20}
+          query={trendingNow}
+          title="TRENDING"
+        />
+      )}
+      {asPath === '/browse/popular' && (
+        <Extended
+          type={type}
+          format={viewerScoreFormat}
+          setHoverBackground={setHoverBackground}
+          perPage={20}
+          query={allTimePopular}
+          title="ALL TIME POPULAR"
+        />
+      )}
+      {asPath === '/browse/top100' && (
+        <Extended
+          type={type}
+          format={viewerScoreFormat}
+          setHoverBackground={setHoverBackground}
+          perPage={10}
+          query={top100}
+          title={`TOP 100 ${type.toUpperCase()}`}
+        />
       )}
     </div>
   );
