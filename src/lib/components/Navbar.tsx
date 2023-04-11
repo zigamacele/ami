@@ -68,7 +68,7 @@ export default function Navbar() {
           </ToolTip>
           <ToolTip title="Seasonal" position="right-start">
             <CalendarDaysIcon
-              onClick={() => router.push('/list')}
+              onClick={() => router.push('/seasonal')}
               className="h-6 w-6  text-neural-700 cursor-pointer hover:text-neutral-500"
             />
           </ToolTip>
