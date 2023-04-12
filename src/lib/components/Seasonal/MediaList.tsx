@@ -47,10 +47,21 @@ export default function MediaList({
               alt={media.title.romaji}
             />
             <div className="absolute flex p-1 w-44 truncate top-16 left-[7.4em] text-[10px]">
-              <div className="flex flex-col gap-0.5">
+              <div className="flex flex-col">
                 <span className="text-sm opacity-80">{media.title.romaji}</span>
                 <span className="opacity-60">{media.title.native}</span>
               </div>
+            </div>
+            <div className="absolute flex p-1 w-44 truncate top-[12.8em] left-[9.2em] text-[8px] gap-1">
+              {media.genres.slice(0, 3).map((genre) => (
+                <span
+                  key={`${media.title.romaji}_${genre}`}
+                  style={{ backgroundColor: media.coverImage.color }}
+                  className="text-neutral-900 font-semibold px-1 rounded-full"
+                >
+                  {genre}
+                </span>
+              ))}
             </div>
 
             <img

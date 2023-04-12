@@ -3,25 +3,24 @@ import Navbar from '@/lib/components/Navbar';
 import Controller from '@/lib/components/Seasonal/Controller';
 import MediaList from '@/lib/components/Seasonal/MediaList';
 import View from '@/lib/components/Seasonal/View';
+import FormatSelector from '@/lib/components/Seasonal/formatSelector';
 import { seasonalMedia } from '@/lib/graphql/query/seasonalMedia';
 import { currentAnimeSeason } from '@/lib/helpers/moment';
 import dayjs from 'dayjs';
 import React, { useEffect, useState } from 'react';
 import { useQuery } from 'urql';
 
-// WINTER
-// SPRING
-// SUMMER
-// FALL
-
 export default function Seasonal() {
   const [hoverBackground, setHoverBackground] = useState('');
   const [currentYear, setCurrentYear] = useState(dayjs().year());
   const [currentMonth, setCurrentMonth] = useState(dayjs().month());
   const [selectedMedia, setSelectedMedia] = useState();
+  const [format, setFormat] = useState('TV');
+
   const variables = {
     season: currentAnimeSeason(currentMonth),
     seasonYear: currentYear,
+    format: format,
   };
 
   const [result, reexecuteQuery] = useQuery({
@@ -48,9 +47,15 @@ export default function Seasonal() {
     <div className="flex flex-col">
       <Navbar />
       <GetBannerImage hoverBackground={hoverBackground} />
+      <FormatSelector format={format} setFormat={setFormat} />
       <div className="flex ml-24 gap-3">
         <div className="flex flex-col">
-          <Controller />
+          <Controller
+            currentMonth={currentMonth}
+            setCurrentMonth={setCurrentMonth}
+            currentYear={currentYear}
+            setCurrentYear={setCurrentYear}
+          />
           <MediaList
             data={data}
             setHoverBackground={setHoverBackground}
