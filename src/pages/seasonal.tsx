@@ -44,7 +44,7 @@ export default function Seasonal() {
   if (error) return <div>error</div>;
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col relative h-fit">
       <Navbar />
       <GetBannerImage hoverBackground={hoverBackground} />
       <FormatSelector format={format} setFormat={setFormat} />
@@ -62,7 +62,7 @@ export default function Seasonal() {
             setSelectedMedia={setSelectedMedia}
           />
         </div>
-        <View data={selectedMedia} />
+        <View data={selectedMedia} refresh={refresh} />
       </div>
     </div>
   );

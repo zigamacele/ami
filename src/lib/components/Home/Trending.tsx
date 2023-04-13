@@ -5,7 +5,7 @@ import { gql, useQuery } from 'urql';
 import StatusDropdown from '../StatusDropdown';
 import TrendingSkeleton from './Trending/TrendingSkeleton';
 
-export const dotStatus = (status: string) => {
+export const dotStatus = (status: string | null) => {
   if (status === 'CURRENT')
     return (
       <div className="w-2.5 h-2.5 rounded-full shrink-0 bg-blue-500"></div>
@@ -68,13 +68,13 @@ export default function Trending({
 
   return (
     <div className="flex flex-col ml-24 mt-4 gap-2">
-      {showPopup ? (
+      {showPopup && (
         <EditMedia
           popupMedia={popupMedia}
           setShowPopup={setShowPopup}
           refresh={refresh}
         />
-      ) : null}
+      )}
       <div className="flex justify-between items-center">
         <span className="font-semibold text-sm">{title}</span>
         <span
@@ -102,7 +102,7 @@ export default function Trending({
             }}
             className="relative hover:opacity-80 fade-in-fast"
           >
-            {hoverTitle === media.title.romaji ? (
+            {hoverTitle === media.title.romaji && (
               <div className="absolute top-[-0.1em] left-[-1.2em] fade-in-fast">
                 <StatusDropdown
                   media={media}
@@ -110,7 +110,7 @@ export default function Trending({
                   setShowPopup={setShowPopup}
                 />
               </div>
-            ) : null}
+            )}
             <img
               onClick={() => router.push(`/id/${media.id}`)}
               src={media.coverImage.large}

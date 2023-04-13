@@ -1,4 +1,5 @@
 import { Markup } from 'interweave';
+import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
 
 export default function Description({ desc }: { desc: string }) {
@@ -7,10 +8,11 @@ export default function Description({ desc }: { desc: string }) {
   const [isOverflowing, setIsOverflowing] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const maxHeight = 96;
+  const { pathname } = useRouter();
 
   useEffect(() => {
     setReadMore(false);
-    if (ref.current && ref.current.clientHeight > maxHeight) {
+    if (ref.current && ref.current.clientHeight >= maxHeight) {
       setIsOverflowing(true);
     } else {
       setIsOverflowing(false);
@@ -20,11 +22,19 @@ export default function Description({ desc }: { desc: string }) {
   return (
     <div>
       {readMore ? (
-        <div className="opacity-60 hover:opacity-70 w-[40em] text-xs break-words fade-in-fast">
+        <div
+          className={`opacity-60 hover:opacity-70 ${
+            pathname.includes('id') && 'w-[40em]'
+          } text-xs break-words fade-in-fast`}
+        >
           <Markup content={desc} />
         </div>
       ) : (
-        <div className="w-[40em] text-xs break-words text-ellipsis overflow-hidden h-24 relative">
+        <div
+          className={`${
+            pathname.includes('id') && 'w-[40em]'
+          } text-xs break-words text-ellipsis overflow-hidden h-24 relative`}
+        >
           <div>
             {isOverflowing && isHovering && (
               <div

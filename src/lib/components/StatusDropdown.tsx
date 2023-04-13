@@ -48,7 +48,6 @@ export default function StatusDropdown({
       })
     );
   };
-
   return (
     <ThemeProvider theme={dropdownTheme}>
       <Button

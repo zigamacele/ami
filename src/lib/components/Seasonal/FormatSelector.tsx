@@ -8,7 +8,7 @@ export default function FormatSelector({
   setFormat: Function;
 }) {
   return (
-    <div className="flex items-center absolute right-2 top-1 text-xs z-10 bg-neutral-900/80 backdrop-blur-md px-2 py-1 rounded-full gap-2 fade-in-fast">
+    <div className="flex items-center static right-2 top-1 text-xs z-10 bg-neutral-900/80 backdrop-blur-md px-2 py-1 rounded-full gap-2 fade-in-fast">
       <span
         onClick={() => {
           setFormat('TV');
@@ -23,7 +23,7 @@ export default function FormatSelector({
         }}
         className={`${format === 'MOVIE' ? null : 'opacity-30'} cursor-pointer`}
       >
-        Movies
+        MOVIES
       </span>
       <span
         onClick={() => {
@@ -33,7 +33,7 @@ export default function FormatSelector({
           format === 'SPECIAL' ? null : 'opacity-30'
         } cursor-pointer`}
       >
-        Specials
+        SPECIALS
       </span>
       <span
         onClick={() => {

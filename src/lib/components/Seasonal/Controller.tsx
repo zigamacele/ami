@@ -14,9 +14,21 @@ export default function Controller({
   setCurrentMonth: Function;
   setCurrentYear: Function;
 }) {
-  const nextSeason = () => {};
+  const nextSeason = () => {
+    if (currentMonth + 3 <= 11) setCurrentMonth(currentMonth + 3);
+    else {
+      setCurrentMonth(0);
+      setCurrentYear(currentYear + 1);
+    }
+  };
 
-  const prevSeason = () => {};
+  const prevSeason = () => {
+    if (currentMonth - 3 >= 0) setCurrentMonth(currentMonth - 3);
+    else {
+      setCurrentMonth(11);
+      setCurrentYear(currentYear - 1);
+    }
+  };
 
   return (
     <div className="flex relative items-end h-14 mb-3">

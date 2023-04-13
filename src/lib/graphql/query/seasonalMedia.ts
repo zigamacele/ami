@@ -3,6 +3,7 @@ import { gql } from 'urql';
 export const seasonalMedia = gql`
   query (
     $format: MediaFormat
+    $scoreFormat: ScoreFormat
     $perPage: Int
     $page: Int
     $season: MediaSeason
@@ -41,6 +42,12 @@ export const seasonalMedia = gql`
         genres
         duration
         averageScore
+        rankings {
+          allTime
+          rank
+          season
+          context
+        }
         popularity
         type
         nextAiringEpisode {
@@ -48,6 +55,11 @@ export const seasonalMedia = gql`
           timeUntilAiring
           episode
           mediaId
+        }
+        trailer {
+          id
+          site
+          thumbnail
         }
         title {
           romaji
@@ -59,6 +71,7 @@ export const seasonalMedia = gql`
           color
         }
         mediaListEntry {
+          score(format: $scoreFormat)
           id
           progress
           progressVolumes

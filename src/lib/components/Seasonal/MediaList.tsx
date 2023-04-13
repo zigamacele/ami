@@ -14,7 +14,7 @@ export default function MediaList({
   const [hovering, setHovering] = useState({ id: '', progress: '' });
   return (
     <div>
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-3 h-[26em] overflow-scroll">
         {data.Page.media.map((media: any) => (
           <div
             // onClick={() => router.push(`/id/${media.media.id}`)}
@@ -40,7 +40,7 @@ export default function MediaList({
               </div>
             )}
             <div className="absolute text-sm z-10 text-white bottom-0.5 left-1 font-medium flex flex-col"></div>
-            <div className="absolute opacity-60 w-full h-16 bg-gradient-to-t top-0 rounded"></div>
+            <div className="absolute opacity-60 w-full h-16 bg-gradient-to-t top-0 rounded-t"></div>
             <img
               src={media.coverImage.large}
               className="w-16 h-24 rounded object-cover absolute bottom-2 left-2"
