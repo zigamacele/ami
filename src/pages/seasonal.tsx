@@ -1,9 +1,10 @@
 import { GetBannerImage } from '@/lib/components/GetBannerImage';
 import Navbar from '@/lib/components/Navbar';
 import Controller from '@/lib/components/Seasonal/Controller';
+import FormatSelector from '@/lib/components/Seasonal/FormatSelector';
 import MediaList from '@/lib/components/Seasonal/MediaList';
+import SeasonalSkeleton from '@/lib/components/Seasonal/SeasonalSkeleton';
 import View from '@/lib/components/Seasonal/View';
-import FormatSelector from '@/lib/components/Seasonal/formatSelector';
 import { seasonalMedia } from '@/lib/graphql/query/seasonalMedia';
 import { currentAnimeSeason } from '@/lib/helpers/moment';
 import dayjs from 'dayjs';
@@ -29,22 +30,23 @@ export default function Seasonal() {
   });
 
   const refresh = () => {
+    setSelectedMedia(undefined);
     reexecuteQuery({ requestPolicy: 'network-only' });
   };
 
   const { data, fetching, error } = result;
 
-  useEffect(() => {
-    if (!selectedMedia && data) setSelectedMedia(data.Page.media[0]);
-  }, [data]);
+  // useEffect(() => {
+  //   if (!selectedMedia && data) setSelectedMedia(data.Page.media[0]);
+  // }, [data]);
 
   console.log(data);
 
-  if (fetching) return <div>fetching</div>;
+  if (fetching && !data) return <SeasonalSkeleton />;
   if (error) return <div>error</div>;
 
   return (
-    <div className="flex flex-col relative h-fit">
+    <div className="flex flex-col relative">
       <Navbar />
       <GetBannerImage hoverBackground={hoverBackground} />
       <FormatSelector format={format} setFormat={setFormat} />
@@ -62,7 +64,7 @@ export default function Seasonal() {
             setSelectedMedia={setSelectedMedia}
           />
         </div>
-        <View data={selectedMedia} refresh={refresh} />
+        {selectedMedia && <View data={selectedMedia} refresh={refresh} />}
       </div>
     </div>
   );

@@ -51,11 +51,17 @@ export default function StatusDropdown({
   return (
     <ThemeProvider theme={dropdownTheme}>
       <Button
+        disableRipple
         id="basic-button"
         aria-controls={open ? 'basic-menu' : undefined}
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
+        sx={{
+          '&:hover': {
+            backgroundColor: 'transparent',
+          },
+        }}
       >
         {!anchorEl ? (
           <ChevronDownIcon className="h-4 w-4 text-neutral-200 bg-black/80 backdrop-blur-md rounded" />

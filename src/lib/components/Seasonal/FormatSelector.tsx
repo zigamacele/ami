@@ -8,7 +8,7 @@ export default function FormatSelector({
   setFormat: Function;
 }) {
   return (
-    <div className="flex items-center static right-2 top-1 text-xs z-10 bg-neutral-900/80 backdrop-blur-md px-2 py-1 rounded-full gap-2 fade-in-fast">
+    <div className="flex items-center absolute right-2 top-1 text-xs z-10 bg-neutral-900/80 backdrop-blur-md px-2 py-1 rounded-full gap-2 fade-in-fast">
       <span
         onClick={() => {
           setFormat('TV');

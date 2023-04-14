@@ -14,7 +14,7 @@ export default function MediaList({
   const [hovering, setHovering] = useState({ id: '', progress: '' });
   return (
     <div>
-      <div className="flex flex-col gap-3 h-[26em] overflow-scroll">
+      <div className="flex flex-wrap gap-3 h-[35em] overflow-scroll">
         {data.Page.media.map((media: any) => (
           <div
             // onClick={() => router.push(`/id/${media.media.id}`)}

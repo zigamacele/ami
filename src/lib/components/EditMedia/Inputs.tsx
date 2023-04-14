@@ -112,6 +112,7 @@ export default function Inputs({
         autoClose: 3000,
       });
       setShowPopup(false);
+      refresh();
     });
   };
 
