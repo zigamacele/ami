@@ -1,6 +1,6 @@
 import EditMedia from '@/lib/components/EditMedia';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { gql, useQuery } from 'urql';
 import StatusDropdown from '../StatusDropdown';
 import TrendingSkeleton from './Trending/TrendingSkeleton';
@@ -59,9 +59,15 @@ export default function Trending({
   });
   const { data, fetching, error } = result;
 
+  const viewerTitleLanguage =
+    typeof window !== 'undefined' &&
+    localStorage.getItem('viewerTitleLanguage');
+
   const refresh = () => {
     reexecuteQuery({ requestPolicy: 'cache-and-network' });
   };
+
+  useEffect(() => refresh(), []);
 
   if (fetching) return asPath === '/home' ? <TrendingSkeleton /> : null;
   if (error) return <div>error</div>;
@@ -94,7 +100,7 @@ export default function Trending({
             key={index}
             onMouseEnter={() => {
               setHoverBackground(media.bannerImage);
-              setHoverTitle(media.title.romaji);
+              setHoverTitle(media.title.userPreferred);
             }}
             onMouseLeave={() => {
               setHoverBackground('');
@@ -102,7 +108,7 @@ export default function Trending({
             }}
             className="relative hover:opacity-80 fade-in-fast"
           >
-            {hoverTitle === media.title.romaji && (
+            {hoverTitle === media.title.userPreferred && (
               <div className="absolute top-[-0.1em] left-[-1.2em] fade-in-fast">
                 <StatusDropdown
                   media={media}
@@ -114,7 +120,7 @@ export default function Trending({
             <img
               onClick={() => router.push(`/id/${media.id}`)}
               src={media.coverImage.large}
-              alt={media.title.romaji}
+              alt={media.title.userPreferred}
               className={`${
                 asPath === '/browse' ? 'h-48 w-36' : 'h-32 w-24'
               } object-cover rounded cursor-pointer`}
@@ -122,7 +128,7 @@ export default function Trending({
             {asPath === '/browse' && (
               <div className="flex items-center mt-1 w-32 truncate text-sm cursor-pointer gap-1.5">
                 {media.mediaListEntry && dotStatus(media.mediaListEntry.status)}
-                <div className="opacity-60">{media.title.romaji}</div>
+                <div className="opacity-60">{media.title.userPreferred}</div>
               </div>
             )}
           </div>

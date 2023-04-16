@@ -62,7 +62,7 @@ export const seasonalMedia = gql`
           thumbnail
         }
         title {
-          romaji
+          userPreferred
           native
         }
         bannerImage

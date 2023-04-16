@@ -14,14 +14,14 @@ import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
 import { ThemeProvider } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs, { Dayjs } from 'dayjs';
 import _ from 'lodash';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { useMutation } from 'urql';
 
@@ -72,10 +72,6 @@ export default function Inputs({
     checkIfMediaHasDate(media.mediaListEntry, 'completedAt')
   );
 
-  useEffect(() => {
-    console.log(score);
-  }, [score]);
-
   const viewerScoreFormat =
     typeof window !== 'undefined'
       ? localStorage.getItem('viewerScoreFormat') || 'POINT_100'
@@ -116,7 +112,7 @@ export default function Inputs({
     const loading = toast.loading('Please wait...');
     updateEdit(variables).then((result) => {
       toast.update(loading, {
-        render: `${media.title.romaji} list entry updated`,
+        render: `${media.title.userPreferred} list entry updated`,
         type: 'success',
         isLoading: false,
         autoClose: 3000,
@@ -134,7 +130,7 @@ export default function Inputs({
       const loading = toast.loading('Please wait...');
       updateDelete(variables).then((result) => {
         toast.update(loading, {
-          render: `${media.title.romaji} removed from your list`,
+          render: `${media.title.userPreferred} removed from your list`,
           type: 'success',
           isLoading: false,
           autoClose: 3000,

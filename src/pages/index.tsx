@@ -16,6 +16,9 @@ const getViewer = gql`
       mediaListOptions {
         scoreFormat
       }
+      options {
+        titleLanguage
+      }
     }
   }
 `;
@@ -42,6 +45,10 @@ export default function Index() {
       localStorage.setItem('viewerId', data.Viewer.id);
       localStorage.setItem('viewerAvatar', data.Viewer.avatar.large);
       localStorage.setItem('viewerBanner', data.Viewer.bannerImage);
+      localStorage.setItem(
+        'viewerTitleLanguage',
+        data.Viewer.options.titleLanguage
+      );
       localStorage.setItem(
         'viewerScoreFormat',
         data.Viewer.mediaListOptions.scoreFormat

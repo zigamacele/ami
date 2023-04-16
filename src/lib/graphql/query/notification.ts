@@ -12,7 +12,7 @@ export const Notification = gql`
           createdAt
           media {
             title {
-              romaji
+              userPreferred
             }
             id
             coverImage {
@@ -26,7 +26,7 @@ export const Notification = gql`
           createdAt
           media {
             title {
-              romaji
+              userPreferred
             }
             id
             coverImage {
@@ -40,7 +40,7 @@ export const Notification = gql`
           createdAt
           media {
             title {
-              romaji
+              userPreferred
             }
             id
             coverImage {

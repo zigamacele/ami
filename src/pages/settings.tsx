@@ -1,49 +1,48 @@
+'use client';
 import { GetBannerImage } from '@/lib/components/GetBannerImage';
 import Navbar from '@/lib/components/Navbar';
+import Selectors from '@/lib/components/Settings/Selectors';
+import UpdateUser from '@/lib/components/Settings/UpdateUser';
 import GitHubIcon from '@mui/icons-material/GitHub';
-import { deleteCookie } from 'cookies-next';
-import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Settings() {
   const [type, setType] = useState('ANIME');
-  const [hoverBackground, setHoverBackground] = useState('');
-  const router = useRouter();
+  const [viewerName, setViewerName] = useState<string | null>('');
 
-  function logout() {
-    deleteCookie('access_token');
-    localStorage.clear();
-    router.push('/auth');
-  }
+  const [hoverBackground, setHoverBackground] = useState('');
+
+  useEffect(() => {
+    setViewerName(localStorage.getItem('viewerName'));
+  }, []);
+
   return (
     <div>
       <div className="flex flex-col mb-5">
         <Navbar />
         <GetBannerImage hoverBackground={hoverBackground} />
-        <div className="flex flex-col ml-24 mr-4 mt-4 gap-4">
-          <span className="font-semibold text-sm">SETTINGS</span>
-          <div className="flex gap-4">
-            <span
-              onClick={logout}
-              className="bg-neutral-700 px-4 py-1 rounded hover:bg-neutral-600 cursor-pointer flex items-center"
-            >
-              Logout
-            </span>
-            <span
-              onClick={() => {
-                localStorage.clear();
-                router.push('/');
-              }}
-              className="bg-neutral-700 px-4 py-1 rounded hover:bg-neutral-600 cursor-pointer flex items-center"
-            >
-              Update User
-            </span>
-            <span className="bg-neutral-700 px-1 rounded cursor-pointer hover:bg-neutral-600 flex items-center">
-              <GitHubIcon fontSize="medium" />
-            </span>
+        <div className="flex flex-col ml-24 mr-4 mt-4 gap-2">
+          <span className="font-semibold text-sm ml-3">ACCOUNT</span>
+          <div className="flex flex-col gap-4 bg-neutral-700/30 p-3  rounded">
+            <div>
+              <span className="opacity-60">Logged in as </span>
+              <span className="opacity-80 cursor-not-allowed">
+                {viewerName}
+              </span>
+            </div>
+            <UpdateUser />
+          </div>
+        </div>
+        <div className="flex flex-col ml-24 mr-4 mt-4 gap-2">
+          <span className="font-semibold text-sm ml-3">LISTS</span>
+          <div className="flex flex-col gap-4 bg-neutral-700/30 p-3 rounded">
+            <Selectors />
           </div>
         </div>
       </div>
+      <span className="bg-neutral-700 px-1 rounded cursor-pointer hover:bg-neutral-600 flex items-center">
+        <GitHubIcon fontSize="medium" />
+      </span>
     </div>
   );
 }

@@ -38,7 +38,7 @@ export default function EditMedia({
             <img
               src={popupMedia.bannerImage}
               className="w-full rounded-t h-40 opacity-70 object-cover"
-              alt={popupMedia.title.romaji}
+              alt={popupMedia.title.userPreferred}
             />
           ) : (
             <div className="w-full h-40"></div>
@@ -48,9 +48,9 @@ export default function EditMedia({
           <img
             src={popupMedia.coverImage.large}
             className="w-24 h-32 rounded object-cover"
-            alt={popupMedia.title.romaji}
+            alt={popupMedia.title.userPreferred}
           />
-          <span className="self-end">{popupMedia.title.romaji}</span>
+          <span className="self-end">{popupMedia.title.userPreferred}</span>
         </div>
         <div className="mt-16 ml-8 text-xs">
           <Inputs

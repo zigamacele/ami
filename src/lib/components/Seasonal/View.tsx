@@ -28,7 +28,7 @@ export default function View({
           </div>
           <img
             src={data.bannerImage ?? data.coverImage.large}
-            alt={data.title.romaji}
+            alt={data.title.userPreferred}
             className="w-full rounded h-24 object-cover"
           />
           {showPopup && (
@@ -46,14 +46,16 @@ export default function View({
             onClick={() => router.push(`/id/${data.id}`)}
             className="flex flex-col gap-0.5 cursor-pointer hover:text-neutral-100"
           >
-            <div className="opacity-80 text-sm w-72">{data.title.romaji}</div>
+            <div className="opacity-80 text-sm w-72">
+              {data.title.userPreferred}
+            </div>
             <div className="opacity-60">{data.title.native}</div>
           </div>
           <div className="flex flex-col gap-2">
             <div className="flex h-4 gap-1 text-[10px]">
               {data.genres.slice(0, 3).map((genre) => (
                 <span
-                  key={`${data.title.romaji}_${genre}`}
+                  key={`${data.title.userPreferred}_${genre}`}
                   style={{ backgroundColor: data.coverImage.color }}
                   className="text-neutral-900 font-semibold px-1.5 rounded-full"
                 >

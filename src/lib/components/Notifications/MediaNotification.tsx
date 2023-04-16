@@ -11,7 +11,7 @@ export default function MediaNotification({ notif }: { notif: any }) {
           <img
             onClick={() => router.push(`/id/${notif.media.id}`)}
             src={notif.media.coverImage.large}
-            alt={notif.media.title.romaji}
+            alt={notif.media.title.userPreferred}
             className="w-10 h-14 object-cover rounded cursor-pointer"
           />
           {notif.type !== 'AIRING' ? (
@@ -21,7 +21,7 @@ export default function MediaNotification({ notif }: { notif: any }) {
                   onClick={() => router.push(`/id/${notif.media.id}`)}
                   className="opacity-80 cursor-pointer"
                 >
-                  {notif.media.title.romaji}
+                  {notif.media.title.userPreferred}
                 </p>
                 <p className="opacity-60">{notif.context}</p>
               </div>
@@ -36,7 +36,7 @@ export default function MediaNotification({ notif }: { notif: any }) {
                 onClick={() => router.push(`/id/${notif.media.id}`)}
                 className="opacity-80 cursor-pointer"
               >
-                {notif.media.title.romaji}
+                {notif.media.title.userPreferred}
               </span>
               <span className="opacity-60">{notif.contexts[2]}</span>
             </div>

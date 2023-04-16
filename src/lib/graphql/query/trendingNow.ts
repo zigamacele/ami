@@ -32,7 +32,7 @@ export const trendingNow = gql`
         popularity
         type
         title {
-          romaji
+          userPreferred
         }
         bannerImage
         coverImage {

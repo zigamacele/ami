@@ -17,7 +17,11 @@ export default function Stats({ data }: { data: any }) {
         <IndividualStat data={data.chapters} title="Chapters" />
       )}
       {data.type === 'ANIME' ? (
-        <IndividualStat data={`${data.duration} mins`} title="Duration" />
+        <>
+          {data.duration && (
+            <IndividualStat data={`${data.duration} mins`} title="Duration" />
+          )}
+        </>
       ) : (
         <IndividualStat data={data.volumes} title="Volumes" />
       )}

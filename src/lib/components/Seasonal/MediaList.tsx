@@ -20,7 +20,7 @@ export default function MediaList({
         {data.Page.media.map((media: any) => (
           <div
             // onClick={() => router.push(`/id/${media.media.id}`)}
-            key={media.title.romaji}
+            key={media.title.userPreferred}
             onClick={() => setSelectedMedia(media)}
             onMouseEnter={() => {
               setHoverBackground(media.bannerImage);
@@ -46,11 +46,13 @@ export default function MediaList({
             <img
               src={media.coverImage.large}
               className="w-16 h-24 rounded object-cover absolute bottom-2 left-2"
-              alt={media.title.romaji}
+              alt={media.title.userPreferred}
             />
             <div className="absolute flex p-1 w-44 truncate top-16 left-[7.4em] text-[10px]">
               <div className="flex flex-col">
-                <span className="text-sm opacity-80">{media.title.romaji}</span>
+                <span className="text-sm opacity-80">
+                  {media.title.userPreferred}
+                </span>
                 <span className="opacity-60">{media.title.native}</span>
               </div>
             </div>
@@ -59,7 +61,7 @@ export default function MediaList({
             >
               {media.genres.slice(0, 3).map((genre) => (
                 <span
-                  key={`${media.title.romaji}_${genre}`}
+                  key={`${media.title.userPreferred}_${genre}`}
                   style={{ backgroundColor: media.coverImage.color }}
                   className="text-neutral-900 font-semibold px-1 rounded-full"
                 >
@@ -75,7 +77,7 @@ export default function MediaList({
               className={`${
                 selectedMedia ? 'w-64' : 'w-[46.5em]'
               } rounded-t h-16 object-cover bottom-0`}
-              alt={media.title.romaji}
+              alt={media.title.userPreferred}
             />
             <div
               className={`h-16 ${

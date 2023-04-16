@@ -15,6 +15,7 @@ import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { useMutation, useQuery } from 'urql';
 
+import { HeartIcon as HeartIconOutline } from '@heroicons/react/24/outline';
 import { ChevronDownIcon, HeartIcon } from '@heroicons/react/24/solid';
 
 export default function Id() {
@@ -44,7 +45,7 @@ export default function Id() {
 
   const { data, fetching, error } = result;
 
-  if (fetching) return <IdSkeleton />;
+  if (fetching && !data) return <IdSkeleton />;
   if (error) return <div>error</div>;
 
   const submitFavorite = () => {
@@ -56,7 +57,7 @@ export default function Id() {
     updateResult(variables).then((result) =>
       toast.update(loading, {
         render: addedToFavorites(
-          data.Media.title.romaji,
+          data.Media.title.userPreferred,
           data.Media.isFavourite
         ),
         type: 'success',
@@ -104,19 +105,22 @@ export default function Id() {
                   </span>
                   <ChevronDownIcon className="w-7 h-7 rounded-r bg-neutral-500 p-2" />
                 </div>
-                <HeartIcon
-                  onClick={submitFavorite}
-                  className={`w-7 h-7 ${
-                    data.Media.isFavourite
-                      ? 'text-neutral-200/60'
-                      : 'text-neutral-200'
-                  } rounded p-1.5 cursor-pointer bg-red-500 hover:bg-red-600`}
-                />
+                {data.Media.isFavourite ? (
+                  <HeartIcon
+                    onClick={submitFavorite}
+                    className={`w-7 h-7 rounded p-1.5 cursor-pointer bg-red-500 hover:bg-red-600`}
+                  />
+                ) : (
+                  <HeartIconOutline
+                    onClick={submitFavorite}
+                    className={`w-7 h-7 rounded p-1.5 cursor-pointer bg-red-500 hover:bg-red-600`}
+                  />
+                )}
               </div>
             </div>
             <div className="mt-[5.5em] pt-12 pb-4 flex flex-col gap-4 bg-neutral-900/60 pl-[17.5em] w-full">
               <span className="opacity-80 text-lg truncate w-[30em] fade-in-slow">
-                {data.Media.title.romaji}
+                {data.Media.title.userPreferred}
               </span>
               <Description desc={data.Media.description} />
             </div>

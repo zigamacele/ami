@@ -81,7 +81,7 @@ export default function ListCategory({
         </div>
         {data.Page.mediaList.map((media: any) => (
           <IndividualTitle
-            key={media.media.title.romaji}
+            key={media.media.title.userPreferred}
             media={media}
             type={type}
             setHoverBackground={setHoverBackground}

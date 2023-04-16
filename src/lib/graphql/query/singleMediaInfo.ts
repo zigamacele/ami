@@ -55,7 +55,7 @@ export const singleMediaInfo = gql`
         }
       }
       title {
-        romaji
+        userPreferred
       }
       bannerImage
       coverImage {
@@ -69,7 +69,7 @@ export const singleMediaInfo = gql`
             large
           }
           title {
-            romaji
+            userPreferred
           }
           type
           status
@@ -100,7 +100,7 @@ export const singleMediaInfo = gql`
                 large
               }
               title {
-                romaji
+                userPreferred
               }
             }
           }

@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useQuery } from 'urql';
 import Top100Skeleton from './Top100/Top100Skeleton';
 
@@ -26,11 +26,19 @@ export default function Top100({
     perPage: perPage,
   };
 
-  const [result] = useQuery({
+  const [result, reexecuteQuery] = useQuery({
     query: query,
     variables: variables,
   });
   const { data, fetching, error } = result;
+
+  const refresh = () => {
+    reexecuteQuery({ requestPolicy: 'cache-and-network' });
+  };
+
+  useEffect(() => refresh(), []);
+
+  if (fetching) return asPath === '/home' ? <Top100Skeleton /> : null;
 
   if (fetching) return asPath === '/home' ? <Top100Skeleton /> : null;
   if (error) return <div>error</div>;
@@ -68,7 +76,7 @@ export default function Top100({
                 <img
                   onClick={() => router.push(`/id/${media.id}`)}
                   src={media.coverImage.large}
-                  alt={media.title.romaji}
+                  alt={media.title.userPreferred}
                   className="h-16 w-10 object-cover rounded cursor-pointer"
                 />
                 <div className="flex flex-col gap-2 justify-center">
@@ -76,7 +84,7 @@ export default function Top100({
                     onClick={() => router.push(`/id/${media.id}`)}
                     className="font-medium text-sm truncate w-60 cursor-pointer"
                   >
-                    {media.title.romaji}
+                    {media.title.userPreferred}
                   </span>
                   <div className="flex gap-1 text-[10px]">
                     {media.genres

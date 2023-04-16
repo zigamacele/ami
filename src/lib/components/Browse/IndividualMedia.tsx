@@ -61,7 +61,7 @@ export default function IndividualMedia({
           onClick={() => router.push(`/id/${media.id}`)}
           className="w-32 truncate opacity-60 text-sm cursor-pointer"
         >
-          {media.title.romaji}
+          {media.title.userPreferred}
         </span>
       </div>
     </div>

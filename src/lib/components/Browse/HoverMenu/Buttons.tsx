@@ -19,7 +19,7 @@ export default function Buttons({ media }: { media: any }) {
     update(variables).then((result) =>
       toast.update(loading, {
         render: `${
-          result.data.SaveMediaListEntry.media.title.romaji
+          result.data.SaveMediaListEntry.media.title.userPreferred
         } added to ${addedToList(
           result.data.SaveMediaListEntry.media.type,
           result.data.SaveMediaListEntry.status

@@ -24,7 +24,7 @@ export const editMedia = gql`
       media {
         type
         title {
-          romaji
+          userPreferred
         }
       }
     }

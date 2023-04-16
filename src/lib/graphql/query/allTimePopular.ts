@@ -32,7 +32,7 @@ export const allTimePopular = gql`
         popularity
         type
         title {
-          romaji
+          userPreferred
         }
         bannerImage
         coverImage {

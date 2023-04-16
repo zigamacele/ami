@@ -38,10 +38,11 @@ export default function InProgress({
 
   const submit = () => {
     const variables = { mediaId: hovering.id, progress: hovering.progress + 1 };
+    setHovering({ ...hovering, progress: hovering.progress + 1 });
     const loading = toast.loading('Please wait...');
     update(variables).then((result) => {
       toast.update(loading, {
-        render: `${result.data.SaveMediaListEntry.media.title.romaji} list entry updated`,
+        render: `${result.data.SaveMediaListEntry.media.title.userPreferred} list entry updated`,
         type: 'success',
         isLoading: false,
         autoClose: 3000,
@@ -78,7 +79,7 @@ export default function InProgress({
             return (
               <div
                 onClick={() => router.push(`/id/${media.media.id}`)}
-                key={media.media.title.romaji}
+                key={media.media.title.userPreferred}
                 onMouseEnter={() => {
                   setHoverBackground(media.media.bannerImage);
                   setHovering({ id: media.media.id, progress: media.progress });
@@ -124,7 +125,7 @@ export default function InProgress({
                       </div>
                     )}
                     <span className="truncate w-40">
-                      {media.media.title.romaji}
+                      {media.media.title.userPreferred}
                     </span>
                   </div>
                 </div>
@@ -136,7 +137,7 @@ export default function InProgress({
                       : media.media.coverImage.large
                   }
                   className="w-[13.5em] rounded h-20 object-cover"
-                  alt={media.media.title.romaji}
+                  alt={media.media.title.userPreferred}
                 />
               </div>
             );

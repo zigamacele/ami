@@ -125,7 +125,7 @@ export const Extended = ({
                         <img
                           onClick={() => router.push(`/id/${media.id}`)}
                           src={media.coverImage.large}
-                          alt={media.title.romaji}
+                          alt={media.title.userPreferred}
                           className="h-16 w-10 object-cover rounded cursor-pointer"
                         />
                         <div className="flex flex-col gap-2 justify-center">
@@ -133,7 +133,7 @@ export const Extended = ({
                             onClick={() => router.push(`/id/${media.id}`)}
                             className="font-medium text-sm truncate w-60 cursor-pointer"
                           >
-                            {media.title.romaji}
+                            {media.title.userPreferred}
                           </span>
                           <div className="flex gap-1 text-[10px]">
                             {media.genres.slice(0, 8).map((genre: string) => (
@@ -200,7 +200,7 @@ export const Extended = ({
                     key={index}
                     onMouseEnter={() => {
                       setHoverBackground(media.bannerImage);
-                      setHoverTitle(media.title.romaji);
+                      setHoverTitle(media.title.userPreferred);
                     }}
                     onMouseLeave={() => {
                       setHoverBackground('');
@@ -208,7 +208,7 @@ export const Extended = ({
                     }}
                     className="relative hover:opacity-80 fade-in-fast mt-2"
                   >
-                    {/* {hoverTitle === media.title.romaji ? (
+                    {/* {hoverTitle === media.title.userPreferred ? (
                       <div className="absolute top-[-0.1em] left-[-1.2em] fade-in-fast">
                         <StatusDropdown
                           media={media}
@@ -220,14 +220,16 @@ export const Extended = ({
                     <img
                       onClick={() => router.push(`/id/${media.id}`)}
                       src={media.coverImage.large}
-                      alt={media.title.romaji}
+                      alt={media.title.userPreferred}
                       className={`h-48 w-[8.8em] object-cover rounded cursor-pointer`}
                     />
 
                     <div className="flex items-center mt-1 w-32 truncate text-sm cursor-pointer gap-1.5">
                       {media.mediaListEntry &&
                         dotStatus(media.mediaListEntry.status)}
-                      <div className="opacity-60">{media.title.romaji}</div>
+                      <div className="opacity-60">
+                        {media.title.userPreferred}
+                      </div>
                     </div>
                   </div>
                 ))}

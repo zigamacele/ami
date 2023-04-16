@@ -55,7 +55,7 @@ export default function IndividualTitle({
           <img
             src={media.media.coverImage.large}
             className="w-12 rounded h-12 object-cover"
-            alt={media.media.title.romaji}
+            alt={media.media.title.userPreferred}
           />
         ) : (
           <div
@@ -72,7 +72,7 @@ export default function IndividualTitle({
           onClick={() => router.push(`/id/${media.media.id}`)}
           className="truncate w-64 text-base cursor-pointer"
         >
-          {media.media.title.romaji}
+          {media.media.title.userPreferred}
         </span>
       </div>
       <div className="flex gap-2">

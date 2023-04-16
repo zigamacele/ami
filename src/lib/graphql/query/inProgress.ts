@@ -83,7 +83,7 @@ export const inProgress = gql`
             }
           }
           title {
-            romaji
+            userPreferred
           }
           bannerImage
           coverImage {

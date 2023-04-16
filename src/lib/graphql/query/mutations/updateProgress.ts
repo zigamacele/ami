@@ -8,7 +8,7 @@ export const updateProgress = gql`
       media {
         type
         title {
-          romaji
+          userPreferred
         }
       }
     }

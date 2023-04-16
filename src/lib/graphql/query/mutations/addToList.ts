@@ -8,7 +8,7 @@ export const addToList = gql`
       media {
         type
         title {
-          romaji
+          userPreferred
         }
       }
     }

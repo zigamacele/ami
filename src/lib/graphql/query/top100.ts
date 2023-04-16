@@ -20,7 +20,7 @@ export const top100 = gql`
         averageScore
         popularity
         title {
-          romaji
+          userPreferred
         }
         bannerImage
         coverImage {

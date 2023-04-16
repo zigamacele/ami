@@ -16,7 +16,7 @@ export default function RelatedInfo({ data }: { data: any }) {
               onClick={() => router.push(`/id/${media.id}`)}
               src={media.coverImage.large}
               className="h-20 w-14 object-cover rounded-l cursor-pointer"
-              alt={media.title.romaji}
+              alt={media.title.userPreferred}
             />
             <div className="flex flex-col justify-between p-2">
               <div className="flex flex-col gap-1">
@@ -27,7 +27,7 @@ export default function RelatedInfo({ data }: { data: any }) {
                   onClick={() => router.push(`/id/${media.id}`)}
                   className="w-24 truncate text-xs cursor-pointer"
                 >
-                  {media.title.romaji}
+                  {media.title.userPreferred}
                 </span>
               </div>
               <div className="flex opacity-60 w-28">

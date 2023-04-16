@@ -42,7 +42,7 @@ export const browse = gql`
         averageScore
         popularity
         title {
-          romaji
+          userPreferred
         }
         startDate {
           year
