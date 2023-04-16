@@ -5,16 +5,18 @@ import { useState } from 'react';
 export default function MediaList({
   data,
   setHoverBackground,
+  selectedMedia,
   setSelectedMedia,
 }: {
   data: any;
   setHoverBackground: Function;
+  selectedMedia: any;
   setSelectedMedia: Function;
 }) {
   const [hovering, setHovering] = useState({ id: '', progress: '' });
   return (
     <div>
-      <div className="flex flex-wrap gap-3 h-[35em] overflow-scroll">
+      <div className="flex flex-col gap-3 h-[35em] overflow-scroll mb-4">
         {data.Page.media.map((media: any) => (
           <div
             // onClick={() => router.push(`/id/${media.media.id}`)}
@@ -52,7 +54,9 @@ export default function MediaList({
                 <span className="opacity-60">{media.title.native}</span>
               </div>
             </div>
-            <div className="absolute flex p-1 w-44 truncate top-[12.8em] left-[9.2em] text-[8px] gap-1">
+            <div
+              className={`absolute flex p-1 w-44 truncate top-[12.8em] left-[9.2em] text-[8px] gap-1`}
+            >
               {media.genres.slice(0, 3).map((genre) => (
                 <span
                   key={`${media.title.romaji}_${genre}`}
@@ -68,10 +72,16 @@ export default function MediaList({
               src={
                 media.bannerImage ? media.bannerImage : media.coverImage.large
               }
-              className="w-64 rounded-t h-16 object-cover bottom-0"
+              className={`${
+                selectedMedia ? 'w-64' : 'w-[46.5em]'
+              } rounded-t h-16 object-cover bottom-0`}
               alt={media.title.romaji}
             />
-            <div className="h-16 w-64 bg-neutral-900 rounded-b"></div>
+            <div
+              className={`h-16 ${
+                selectedMedia ? 'w-64' : 'w-[46.5em]'
+              } bg-neutral-900 rounded-b`}
+            ></div>
           </div>
         ))}
       </div>

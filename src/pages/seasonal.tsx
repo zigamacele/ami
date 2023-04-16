@@ -40,8 +40,6 @@ export default function Seasonal() {
   //   if (!selectedMedia && data) setSelectedMedia(data.Page.media[0]);
   // }, [data]);
 
-  console.log(data);
-
   if (fetching && !data) return <SeasonalSkeleton />;
   if (error) return <div>error</div>;
 
@@ -61,6 +59,7 @@ export default function Seasonal() {
           <MediaList
             data={data}
             setHoverBackground={setHoverBackground}
+            selectedMedia={selectedMedia}
             setSelectedMedia={setSelectedMedia}
           />
         </div>

@@ -8,7 +8,7 @@ export const editMedia = gql`
     $repeat: Int
     $startedAt: FuzzyDateInput
     $completedAt: FuzzyDateInput
-    $scoreRaw: Int
+    $score: Float
   ) {
     SaveMediaListEntry(
       mediaId: $mediaId
@@ -17,7 +17,7 @@ export const editMedia = gql`
       repeat: $repeat
       startedAt: $startedAt
       completedAt: $completedAt
-      scoreRaw: $scoreRaw
+      score: $score
     ) {
       id
       status

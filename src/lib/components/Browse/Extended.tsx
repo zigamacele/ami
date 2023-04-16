@@ -44,7 +44,7 @@ export const Extended = ({
   });
 
   const refresh = () => {
-    console.log('REFRESH');
+    // setStorage([]);
     reexecuteQuery({ requestPolicy: 'network-only' });
   };
 
@@ -80,7 +80,6 @@ export const Extended = ({
             <InfiniteScroll
               dataLength={storage.length}
               next={() => {
-                console.log('NEXT');
                 setPage(page + 1);
                 refresh();
               }}
@@ -90,7 +89,7 @@ export const Extended = ({
                   {[...Array(1)].map((x, index) => (
                     <div
                       key={index}
-                      className="flex ml-[8.7em] items-center gap-3.5"
+                      className="flex ml-[9em] items-center gap-3.5"
                     >
                       <div className="rounded h-20 w-[43em] bg-neutral-900 animate-pulse"></div>
                     </div>
@@ -175,13 +174,12 @@ export const Extended = ({
             <InfiniteScroll
               dataLength={storage.length}
               next={() => {
-                console.log('NEXT');
                 setPage(page + 1);
                 refresh();
               }}
               hasMore={true}
               loader={
-                <div className="flex gap-2 ml-[5.8em] mt-2">
+                <div className="flex gap-2 ml-[6em] mt-2">
                   {[...Array(5)].map((x, index) => (
                     <div
                       key={index}
@@ -210,7 +208,7 @@ export const Extended = ({
                     }}
                     className="relative hover:opacity-80 fade-in-fast mt-2"
                   >
-                    {hoverTitle === media.title.romaji ? (
+                    {/* {hoverTitle === media.title.romaji ? (
                       <div className="absolute top-[-0.1em] left-[-1.2em] fade-in-fast">
                         <StatusDropdown
                           media={media}
@@ -218,7 +216,7 @@ export const Extended = ({
                           setShowPopup={setShowPopup}
                         />
                       </div>
-                    ) : null}
+                    ) : null} */}
                     <img
                       onClick={() => router.push(`/id/${media.id}`)}
                       src={media.coverImage.large}

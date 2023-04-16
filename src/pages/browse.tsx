@@ -1,5 +1,4 @@
 import { Extended } from '@/lib/components/Browse/Extended';
-import { ExtendedTop100 } from '@/lib/components/Browse/ExtendedTop100';
 import IndividualMedia from '@/lib/components/Browse/IndividualMedia';
 import PopularSection from '@/lib/components/Browse/PopularSection';
 import SearchComponent from '@/lib/components/Browse/SearchComponent';

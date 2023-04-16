@@ -1,5 +1,8 @@
-import { humanFormat } from '@/lib/helpers/anilistResponse';
+import { humanFormat, scoreFormat } from '@/lib/helpers/anilistResponse';
 import { EllipsisHorizontalIcon } from '@heroicons/react/24/solid';
+import SentimentSatisfiedIcon from '@mui/icons-material/SentimentSatisfied';
+import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
+import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
@@ -18,6 +21,18 @@ export default function IndividualTitle({
 }) {
   const router = useRouter();
   const [isHovering, setIsHovering] = useState(false);
+
+  const viewerScoreFormat =
+    typeof window !== 'undefined'
+      ? localStorage.getItem('viewerScoreFormat') || 'POINT_100'
+      : 'POINT_100';
+
+  const scoreFormatSmiley = (score: number) => {
+    if (score === 0) return <div></div>;
+    if (score === 1) return <SentimentVeryDissatisfiedIcon />;
+    if (score === 2) return <SentimentSatisfiedIcon />;
+    if (score === 3) return <SentimentSatisfiedAltIcon />;
+  };
   return (
     <div
       onMouseEnter={() => {
@@ -62,7 +77,11 @@ export default function IndividualTitle({
       </div>
       <div className="flex gap-2">
         <span className="w-10 text-center">
-          {media.score === 0 ? '' : media.score}
+          {viewerScoreFormat !== 'POINT_3' ? (
+            <div>{media.score === 0 ? '' : media.score}</div>
+          ) : (
+            scoreFormatSmiley(media.score)
+          )}
         </span>
         <span className="w-20 text-center">
           {media.progress}/

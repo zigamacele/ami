@@ -9,10 +9,15 @@ import {
   ScoreFormat,
 } from '@/lib/helpers/anilistResponse';
 import { inputsTheme } from '@/lib/theme/MUI';
+import SentimentSatisfiedIcon from '@mui/icons-material/SentimentSatisfied';
+import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
+import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
 import { ThemeProvider } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs, { Dayjs } from 'dayjs';
 import _ from 'lodash';
@@ -38,6 +43,7 @@ export default function Inputs({
   const [score, setScore] = useState(
     checkIfMediaHasAttribute(media.mediaListEntry, 'score')
   );
+
   const [progress, setProgress] = useState<Number>(
     checkIfMediaHasAttribute(media.mediaListEntry, 'progress')
   );
@@ -66,6 +72,10 @@ export default function Inputs({
     checkIfMediaHasDate(media.mediaListEntry, 'completedAt')
   );
 
+  useEffect(() => {
+    console.log(score);
+  }, [score]);
+
   const viewerScoreFormat =
     typeof window !== 'undefined'
       ? localStorage.getItem('viewerScoreFormat') || 'POINT_100'
@@ -87,7 +97,7 @@ export default function Inputs({
       status: status,
       progress: progress,
       repeat: rewatch,
-      scoreRaw: score,
+      score: score,
       ...(updateStartedAt && {
         startedAt: {
           year: dayjs(startDate).year(),
@@ -171,25 +181,42 @@ export default function Inputs({
             </div>
             <div className="flex flex-col w-48 gap-1">
               <span className="opacity-60">Score</span>
-              <TextField
-                className="bg-neutral-900/80 rounded"
-                id="outlined-basic"
-                type="number"
-                variant="outlined"
-                value={score.toString()}
-                onChange={(e) => {
-                  let value = Number(e.target.value);
-                  if (value < 0) value = 0;
-                  // if (value > 100) value = 100;
-                  // limits max value depending on users scoreformat prefrance
-                  if (
-                    viewerScoreFormat !== null &&
-                    value > scoreFormat[viewerScoreFormat as ScoreFormat]
-                  )
-                    value = scoreFormat[viewerScoreFormat as ScoreFormat];
-                  setScore(value);
-                }}
-              />
+              {viewerScoreFormat !== 'POINT_3' ? (
+                <TextField
+                  className="bg-neutral-900/80 rounded"
+                  id="outlined-basic"
+                  type="number"
+                  variant="outlined"
+                  value={score.toString()}
+                  onChange={(e) => {
+                    let value = Number(e.target.value);
+                    if (value < 0) value = 0;
+                    if (
+                      viewerScoreFormat !== null &&
+                      value > scoreFormat[viewerScoreFormat as ScoreFormat]
+                    )
+                      value = scoreFormat[viewerScoreFormat as ScoreFormat];
+                    setScore(value);
+                  }}
+                />
+              ) : (
+                <ToggleButtonGroup
+                  value={score}
+                  exclusive
+                  onChange={(event, nextValue) => setScore(nextValue)}
+                  className="h-14 w-[11.9rem] bg-neutral-900"
+                >
+                  <ToggleButton value={3} aria-label="3">
+                    <SentimentSatisfiedAltIcon className="mx-2" />
+                  </ToggleButton>
+                  <ToggleButton value={2} aria-label="2">
+                    <SentimentSatisfiedIcon className="mx-2" />
+                  </ToggleButton>
+                  <ToggleButton value={1} aria-label="3">
+                    <SentimentVeryDissatisfiedIcon className="mx-2" />
+                  </ToggleButton>
+                </ToggleButtonGroup>
+              )}
             </div>
             <div className="flex flex-col w-48 gap-1">
               <span className="opacity-60">Progress</span>

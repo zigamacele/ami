@@ -94,7 +94,7 @@ export default function View({
           </span>
         )}
         {data.trailer && (
-          <div className="flex flex-col gap-2 text-xs font-medium mt-4 mb-2">
+          <div className="flex flex-col gap-2 text-xs font-medium mt-4">
             <div className="opacity-80">Trailer</div>
             <iframe
               width="470"
