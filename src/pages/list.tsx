@@ -1,8 +1,8 @@
-import { GetBannerImage } from '@/lib/components/GetBannerImage';
+import { GetBannerImage } from '@/lib/layouts/GetBannerImage';
 import AnimeMangaSwitch from '@/lib/components/Home/AnimeMangaSwitch';
 import ListCategory from '@/lib/components/List/ListCategory';
 import StatusSelector from '@/lib/components/List/StatusSelector';
-import Navbar from '@/lib/components/Navbar';
+import Navbar from '@/lib/layouts/Navbar';
 import { inProgress } from '@/lib/graphql/query/inProgress';
 import { useEffect, useState } from 'react';
 

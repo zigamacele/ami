@@ -3,9 +3,9 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { useQuery } from 'urql';
-import EditMedia from '../EditMedia';
+import EditMedia from '../../layouts/EditMedia';
+import StatusDropdown from '../../layouts/StatusDropdown';
 import { dotStatus } from '../Home/Trending';
-import StatusDropdown from '../StatusDropdown';
 
 export const Extended = ({
   type,
@@ -23,7 +23,7 @@ export const Extended = ({
   setHoverBackground: Function;
 }) => {
   const [page, setPage] = useState(1);
-  const [storage, setStorage] = useState([]);
+  const [storage, setStorage] = useState<any>([]);
   const [hoverTitle, setHoverTitle] = useState('');
   const [popupMedia, setPopupMedia] = useState({});
   const [showPopup, setShowPopup] = useState(false);
@@ -103,7 +103,7 @@ export const Extended = ({
               }
             >
               <div className="flex flex-wrap justify-center gap-2 ml-20">
-                {storage.map((media: any, index) => (
+                {storage.map((media: any, index: number) => (
                   <div
                     key={index}
                     className="flex gap-4 fade-in-fast hover:opacity-80"
@@ -195,7 +195,7 @@ export const Extended = ({
               }
             >
               <div className="flex flex-wrap justify-center gap-2 ml-20">
-                {storage.map((media: any, index) => (
+                {storage.map((media: any, index: number) => (
                   <div
                     key={index}
                     onMouseEnter={() => {

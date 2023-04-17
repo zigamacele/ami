@@ -1,6 +1,6 @@
 'use client';
-import { GetBannerImage } from '@/lib/components/GetBannerImage';
-import Navbar from '@/lib/components/Navbar';
+import { GetBannerImage } from '@/lib/layouts/GetBannerImage';
+import Navbar from '@/lib/layouts/Navbar';
 import Selectors from '@/lib/components/Settings/Selectors';
 import UpdateUser from '@/lib/components/Settings/UpdateUser';
 import GitHubIcon from '@mui/icons-material/GitHub';

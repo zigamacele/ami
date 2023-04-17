@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { gql, useQuery } from 'urql';
-import EditMedia from '../EditMedia';
+import EditMedia from '../../layouts/EditMedia';
 import IndividualTitle from './IndividualTitle';
 import ListCategorySkeleton from './ListCategory/ListCategorySkeleton';
 

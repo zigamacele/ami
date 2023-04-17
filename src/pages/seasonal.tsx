@@ -1,5 +1,5 @@
-import { GetBannerImage } from '@/lib/components/GetBannerImage';
-import Navbar from '@/lib/components/Navbar';
+import { GetBannerImage } from '@/lib/layouts/GetBannerImage';
+import Navbar from '@/lib/layouts/Navbar';
 import Controller from '@/lib/components/Seasonal/Controller';
 import FormatSelector from '@/lib/components/Seasonal/FormatSelector';
 import MediaList from '@/lib/components/Seasonal/MediaList';

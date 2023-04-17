@@ -1,4 +1,4 @@
-import EditMedia from '@/lib/components/EditMedia';
+import EditMedia from '@/lib/layouts/EditMedia';
 import {
   CalendarIcon,
   CheckIcon,

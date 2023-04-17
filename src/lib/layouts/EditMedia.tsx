@@ -1,5 +1,5 @@
 import React from 'react';
-import Inputs from './EditMedia/Inputs';
+import Inputs from '../components/EditMedia/Inputs';
 
 import { XMarkIcon } from '@heroicons/react/24/solid';
 

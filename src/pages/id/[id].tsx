@@ -1,12 +1,12 @@
-import EditMedia from '@/lib/components/EditMedia';
-import { GetBannerImage } from '@/lib/components/GetBannerImage';
+import EditMedia from '@/lib/layouts/EditMedia';
+import { GetBannerImage } from '@/lib/layouts/GetBannerImage';
 import Characters from '@/lib/components/Id/Characters';
 import Description from '@/lib/components/Id/Description';
 import IdSkeleton from '@/lib/components/Id/IdSkeleton';
 import RelatedInfo from '@/lib/components/Id/RelatedInfo';
 import Staff from '@/lib/components/Id/Staff';
 import Stats from '@/lib/components/Id/Stats';
-import Navbar from '@/lib/components/Navbar';
+import Navbar from '@/lib/layouts/Navbar';
 import { addToFavorites } from '@/lib/graphql/query/mutations/addToFavorites';
 import { singleMediaInfo } from '@/lib/graphql/query/singleMediaInfo';
 import { addedToFavorites, humanStatus } from '@/lib/helpers/anilistResponse';

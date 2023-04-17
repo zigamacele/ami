@@ -71,7 +71,7 @@ export default function InProgress({
   if (fetching) return <InProgressSkeleton />;
   if (error) return <div>error</div>;
   return (
-    <div className="flex flex-col gap-2 mt-4">
+    <div className="flex flex-col gap-2 mt-4 h-[78.5em] overflow-scroll">
       <span className="font-semibold text-sm text-right">IN PROGRESS</span>
       <div className="flex flex-col gap-2">
         {data.Page.mediaList.map((media: any) => {

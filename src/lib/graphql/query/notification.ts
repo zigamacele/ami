@@ -3,7 +3,7 @@ import { gql } from 'urql';
 export const Notification = gql`
   query {
     Page(page: 1, perPage: 50) {
-      notifications {
+      notifications(resetNotificationCount: true) {
         ... on AiringNotification {
           type
           animeId

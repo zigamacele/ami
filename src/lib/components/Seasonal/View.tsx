@@ -1,9 +1,9 @@
 import { FaceSmileIcon, StarIcon } from '@heroicons/react/24/outline';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import EditMedia from '../EditMedia';
+import EditMedia from '../../layouts/EditMedia';
+import StatusDropdown from '../../layouts/StatusDropdown';
 import Description from '../Id/Description';
-import StatusDropdown from '../StatusDropdown';
 
 export default function View({
   data,
@@ -15,6 +15,7 @@ export default function View({
   const [showPopup, setShowPopup] = useState(false);
   const [popupMedia, setPopupMedia] = useState({});
   const router = useRouter();
+  console.log(data);
   return (
     <div className="bg-[#1c1c1c] w-full fade-in-fast">
       <div className="flex flex-col gap-2 p-2">
@@ -53,7 +54,7 @@ export default function View({
           </div>
           <div className="flex flex-col gap-2">
             <div className="flex h-4 gap-1 text-[10px]">
-              {data.genres.slice(0, 3).map((genre) => (
+              {data.genres.slice(0, 3).map((genre: string) => (
                 <span
                   key={`${data.title.userPreferred}_${genre}`}
                   style={{ backgroundColor: data.coverImage.color }}
@@ -64,22 +65,18 @@ export default function View({
               ))}
             </div>
             <div className="flex  gap-2.5 justify-end">
-              {data.rankings[data.rankings.length > 0] && (
-                <div>
-                  <div className="flex gap-2 items-center">
+              {data.rankings && (
+                <div className="flex flex-col gap-0.5">
+                  <div className="flex gap-2 items-center justify-end">
                     <StarIcon className="h-5 w-5 text-yellow-500" />
-                    <span className="font-bold">
-                      #{data.rankings[data.rankings.length - 1].rank}
-                    </span>
+                    <span className="font-bold">#{data.rankings[0].rank}</span>
                   </div>
-                  <span className="opacity-60">
-                    {data.rankings[data.rankings.length - 1].context}
-                  </span>
+                  <span className="opacity-60">most popular</span>
                 </div>
               )}
               {data.averageScore && (
-                <div>
-                  <div className="flex gap-2 items-center">
+                <div className="flex flex-col gap-0.5">
+                  <div className="flex gap-2 items-center justify-end">
                     <FaceSmileIcon className="h-5 w-5 text-lime-500" />
                     <span className="font-bold">{data.averageScore}%</span>
                   </div>

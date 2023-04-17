@@ -36,10 +36,6 @@ export default function Selectors() {
     setViewerTitleLanguage(localStorage.getItem('viewerTitleLanguage'));
   }, []);
 
-  useEffect(() => {
-    console.log(viewerScoreFormat);
-  }, [viewerScoreFormat]);
-
   return (
     <ThemeProvider theme={inputsTheme}>
       <div className="flex gap-2">

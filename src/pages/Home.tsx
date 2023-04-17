@@ -1,9 +1,9 @@
-import { GetBannerImage } from '@/lib/components/GetBannerImage';
+import { GetBannerImage } from '@/lib/layouts/GetBannerImage';
 import AnimeMangaSwitch from '@/lib/components/Home/AnimeMangaSwitch';
 import InProgress from '@/lib/components/Home/InProgress';
 import Top100 from '@/lib/components/Home/Top100';
 import Trending from '@/lib/components/Home/Trending';
-import Navbar from '@/lib/components/Navbar';
+import Navbar from '@/lib/layouts/Navbar';
 import { allTimePopular } from '@/lib/graphql/query/allTimePopular';
 import { inProgress } from '@/lib/graphql/query/inProgress';
 import { top100 } from '@/lib/graphql/query/top100';

@@ -1,8 +1,8 @@
-import EditMedia from '@/lib/components/EditMedia';
+import EditMedia from '@/lib/layouts/EditMedia';
 import { useRouter } from 'next/router';
 import React, { useEffect, useMemo, useState } from 'react';
 import { gql, useQuery } from 'urql';
-import StatusDropdown from '../StatusDropdown';
+import StatusDropdown from '../../layouts/StatusDropdown';
 import TrendingSkeleton from './Trending/TrendingSkeleton';
 
 export const dotStatus = (status: string | null) => {

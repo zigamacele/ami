@@ -59,7 +59,7 @@ export default function MediaList({
             <div
               className={`absolute flex p-1 w-44 truncate top-[12.8em] left-[9.2em] text-[8px] gap-1`}
             >
-              {media.genres.slice(0, 3).map((genre) => (
+              {media.genres.slice(0, 3).map((genre: string) => (
                 <span
                   key={`${media.title.userPreferred}_${genre}`}
                   style={{ backgroundColor: media.coverImage.color }}

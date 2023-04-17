@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { gql, useQuery } from 'urql';
-import ToolTip from './Navbar/Tooltip';
+import ToolTip from '../components/Navbar/Tooltip';
 
 import {
   BellIcon,
@@ -30,12 +30,18 @@ const getViewer = gql`
 
 export default function Navbar() {
   const router = useRouter();
+  const { asPath } = router;
 
-  const [result] = useQuery({
+  const [result, reexecuteQuery] = useQuery({
     query: getViewer,
   });
 
   const { data, fetching, error } = result;
+
+  useEffect(() => {
+    reexecuteQuery({ requestPolicy: 'cache-and-network' });
+  }, [asPath]);
+
   if (fetching)
     return (
       <span className="bg-neutral-900/80 backdrop-blur-lg z-50 h-96 rounded-3xl w-[4.5em] fixed mx-3 my-2 animate-pulse flex justify-center">
@@ -50,7 +56,7 @@ export default function Navbar() {
         alt="Picture of the author"
         width={500}
         height={500}
-        className="w-10 h-10 rounded-full borders bg-neutral-700 object-cover hover:animate-spin cursor-pointer"
+        className="w-10 h-10 rounded-full borders bg-neutral-700 object-cover cursor-not-allowed"
       />
       <div className="flex flex-col items-center justify-between h-96 pb-2 text-neutral-700">
         <div className="flex flex-col gap-2 ">
